@@ -1,0 +1,16 @@
+<div class="relative w-80 h-96 mx-auto perspective-1000">
+    @for (img of images(); track img; let i = $index) {
+    <div 
+        [class]="getCardClasses(i, activeIndex())"
+        class="absolute inset-0 w-full h-full transition-all duration-500 ease-out shadow-2xl rounded-2xl border-4 border-cream bg-cream overflow-hidden origin-bottom"
+    >
+        <img 
+        [ngSrc]="img"
+        fill
+        alt="Gallery image {{ i + 1 }}"
+        class="object-cover pointer-events-none select-none"
+        />
+    </div>
+    }
+
+</div>

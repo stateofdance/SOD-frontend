@@ -4,7 +4,14 @@
 
 @font-face {
     font-family: "EurostileExtended";
-    src: url("/public/fonts/EurostileExtendedBlack.ttf") format('truetype');
+    src: url("/fonts/EurostileExtendedBlack.ttf") format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Hanson";
+    src: url("/fonts/Hanson-Bold.ttf") format('truetype');
     font-weight: bold;
     font-style: normal;
 }
@@ -12,4 +19,10 @@
 @theme {
     --font-eurostile: "EurostileExtended", sans-serif;
     --font-open-sans: "Open Sans", sans-serif;
+    --font-hanson: "Hanson", sans-serif;
+    --color-gold: #deb060;
+    --color-violet: #7357ff;
+    --color-dark-violet: #270934;
+    --color-pink-violet: #741B9A;
+    --color-cream: #FFF0DC;
 }

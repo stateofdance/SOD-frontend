@@ -1,5 +1,8 @@
-
 .hero-section {
-    height: 200vh;
-    background-color: aqua;
+    height: 100%;
+    background-color: gray;
+}
+
+.story-content {
+    height: 50vh;
 }

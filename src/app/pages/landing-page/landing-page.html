@@ -1,5 +1,68 @@
-<div class="hero-section">
-    <div class="intro">
-        
+<div class="hero-section relative">
+
+    <img 
+    class="absolute inset-0 h-screen object-cover w-full"
+    src="/images/intro_bg.jpg" alt="background"
+    >
+
+    <div class="absolute inset-0 bg-linear-to-t from-dark-violet from-50% to-[rgba(0,0,0,0.65)]"></div>
+
+    <div class="intro px-15 flex relative z-10 h-screen">
+        <div class="flex w-full  my-auto">
+            <div class="content w-7/10">
+                <h1 class="font-hanson font-extrabold text-6xl text-white">
+                    WE DON'T JUST<br>TEACH <span class="text-gold">MOVEMENT,</span>
+                    <br>WE INSPIRE<br><span class="text-violet">TRANSFORMATION</span>
+                </h1>
+                <div class="w-4/5 font-open-sans text-white mt-5">
+                    <p>
+                        <span class="font-bold">State of Dance (SOD)</span> is more than a studio — it's a creative space where passion unites and every dancer, of all ages, is welcome to grow. It’s a place to discover your rhythm, build confidence, and perform with purpose. 
+                    </p>
+                    <p class="mt-4">
+                        From foundational technique to stage-ready performances, SOD is where meaningful dancing begins and a craft full of artistry is forged. 
+                    </p>
+                    <p class="mt-4">At SOD, movement meets meaning — and every step creates a story.</p>
+                </div>
+                <div class="flex mt-10">
+                    <button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-45 bg-linear-to-r from-gold to-pink-violet">BOOK A CLASS</button>
+                    <button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-65 ml-10">PROJECT UNDERGROUND</button>
+                </div>
+            </div>
+            <img 
+            class="w-25 z-15 mt-auto ml-auto"
+            src="/images/large_diamond.png" alt="Diamond"
+            >
+        </div>
     </div>
+
+    <div class="story px-15 relative z-10 mt-25">
+        <div class="flex">
+            <h2 class="font-hanson font-bold text-5xl text-white mt-auto mb-auto mx-4 w-140">Our <span class="text-gold">Story</span></h2>
+            <hr class="w-full bg-white rounded-xs h-0.75 my-auto">
+            <img src="/images/diamond.png" alt="diamond" class="w-15 -translate-x-1">
+        </div>
+        <div class="flex">
+            <app-stack-carousel 
+            class="block w-6/10 py-20 overflow-hidden"
+            [images]="['/images/carousel/image_1.png', '/images/carousel/image_2.png', '/images/intro_bg.jpg']"
+            ></app-stack-carousel>
+            <div class="flex flex-col w-4/10 px-15 mr-5">
+                <img src="/images/SOD_Logo_FA-16.png" alt="SOD_Logo">
+                <hr class="w-30 bg-white rounded-xs h-1 mx-auto">
+                <div class="story-content mt-5 overscroll-contain overflow-hidden p-2">
+                    <p class="font-open-sans text-white text-base text-center">
+                        A premier dance institution founded on passion, artistry, and excellence. Established by renowned dancer and choreographer Kervin Mendiola, the studio began as a vision to create a space where dancers of all ages could express themselves, grow with confidence, and find purpose through movement.
+                    </p>
+                    <p class="font-open-sans text-white text-base text-center my-10">
+                        From its humble beginnings to its elegant studios in Quezon City, BGC, and Manila, State of Dance has become a home for aspiring and professional dancers alike. We offer dance classes for kids, teens, and adults, private training, recital programs, studio rentals, and professional performance services for corporate and special events.
+                    </p>
+                    <p class="font-open-sans text-white text-base text-center">
+                        Each class and performance is crafted to go beyond technique — cultivating artistry, discipline, and self-expression. At State of Dance, we don’t just teach choreography; we shape character, build confidence, and celebrate the elegance of transformation.
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
 </div>
