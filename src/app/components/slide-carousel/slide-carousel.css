@@ -1,0 +1,30 @@
+
+
+.card #overlay {
+    opacity: 50%;
+}
+
+.card #overlay.center {
+    opacity: 0;
+}
+
+@keyframes imgUp {
+    from {transform: translateY(0);}
+    to {transform: translateY(-25%);}
+}
+@keyframes imgDown {
+    from {transform: translateY(-25%);}
+    to {transform: translateY(0);}
+}
+
+.card #img {
+    animation-name: imgDown;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
+
+.card #img.center {
+    animation-name: imgUp;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
