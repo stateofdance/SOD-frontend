@@ -21,28 +21,48 @@ export class SlideCarousel implements OnInit, OnDestroy {
   coaches:Coach[] = [
     {
       name: "Kervin Mendiola",
-      class: "Kids Class",
-      image: "/images/coaches/coach_1.png"
+      class: "Kids, Revibe, Flowtion",
+      image: "/images/coaches/coach_1.jpg"
     },
     {
-      name: "Kervin Mendiola",
-      class: "Kids Class",
-      image: "/images/coaches/coach_1.png"
+      name: "Gabriel Aguilar",
+      class: "Kids, Nubiets, Swag Attack",
+      image: "/images/coaches/coach_8.png"
     },
     {
-      name: "Kervin Mendiola",
-      class: "Kids Class",
-      image: "/images/coaches/coach_1.png"
+      name: "Carlette Peronilla",
+      class: "Pop Trends, Revibe",
+      image: "/images/coaches/coach_3.jpg"
     },
     {
-      name: "Kervin Mendiola",
-      class: "Kids Class",
-      image: "/images/coaches/coach_1.png"
+      name: "Emman Aguilar",
+      class: "Kids",
+      image: "/images/coaches/coach_7.png"
     },
     {
-      name: "Kervin",
-      class: "Kids Class",
-      image: "/images/coaches/coach_1.png"
+      name: "Katta Labnao",
+      class: "K-Pop, Kids",
+      image: "/images/coaches/coach_9.JPG"
+    },
+    {
+      name: "Renzo Suson",
+      class: "Kids",
+      image: "/images/coaches/coach_2.jpg"
+    },
+    {
+      name: "Ish Rivera",
+      class: "Femma Soultry",
+      image: "/images/coaches/coach_6.png"
+    },
+    {
+      name: "Kevin Cezar Samson",
+      class: "Kids",
+      image: "/images/coaches/coach_4.jpg"
+    },
+    {
+      name: "Seyah Singson",
+      class: "Power Femme",
+      image: "/images/coaches/coach_5.jpg"
     }
   ]
 

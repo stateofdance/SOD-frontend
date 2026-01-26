@@ -22,47 +22,47 @@ export class LandingPage {
     {
       name: "Kids Class",
       img: "/images/class/kids_class.png",
-      description: "Teach your kids how to move their body!"
+      description: "A beginner dance class that focuses on fundamentals and basic movements using fun and exciting K-Pop and pop music."
     },
     {
-      name: "Kids Class",
-      img: "/images/class/kids_class.png",
-      description: "Teach your kids how to move their body!"
+      name: "K-Pop",
+      img: "/images/class/kpop_class.png",
+      description: "A beginner to intermediate dance class that focuses on learning your favorite original K-Pop choreographies, detail by detail."
     },
     {
-      name: "Kids Class",
-      img: "/images/class/kids_class.png",
-      description: "Teach your kids how to move their body!"
+      name: "Revibe",
+      img: "/images/class/revibe_class.png",
+      description: "A beginner-friendly dance class where you can groove to your favorite 70’s, 80’s, 90’s, and 2000’s hits!"
     },
     {
-      name: "Kids Class",
-      img: "/images/class/kids_class.png",
-      description: "Teach your kids how to move their body!"
+      name: "Flowtion",
+      img: "/images/class/flowtion_class.png",
+      description: "An intermediate to advanced dance class that focuses on musicality, technique, and a deeper understanding of the art of dance."
     },
     {
-      name: "Kids Class",
-      img: "/images/class/kids_class.png",
-      description: "Teach your kids how to move their body!"
+      name: "Pop Trend",
+      img: "/images/class/pop_class.png",
+      description: "A beginner to intermediate dance class that focuses on releasing energy through trendy and powerful choreography."
     },
     {
-      name: "Kids Class",
-      img: "/images/class/kids_class.png",
-      description: "Teach your kids how to move their body!"
+      name: "Swag Attack",
+      img: "/images/class/swag_class.png",
+      description: "An intermediate to advanced dance class that highlights coolness, groove, and pure swag."
     },
     {
-      name: "Kids Class",
-      img: "/images/class/kids_class.png",
-      description: "Teach your kids how to move their body!"
+      name: "Femme Soultry",
+      img: "/images/class/soultry_class.png",
+      description: "A beginner to intermediate dance class that focuses on sexiness, confidence, and hotness in every move."
     },
     {
-      name: "Kids Class",
-      img: "/images/class/kids_class.png",
-      description: "Teach your kids how to move their body!"
+      name: "Nubiets",
+      img: "/images/class/nubiets_class.png",
+      description: "A beginner dance class that focuses on fundamentals and basic movements."
     },
     {
-      name: "Kids Class",
-      img: "/images/class/kids_class.png",
-      description: "Teach your kids how to move their body!"
+      name: "Power Femme",
+      img: "/images/class/power_class.png",
+      description: "A beginner to intermediate dance class that celebrates boldness, confidence, and power."
     }
   ]
 
