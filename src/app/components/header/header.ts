@@ -1,9 +1,10 @@
-import { NgClass } from '@angular/common';
+import { NgClass, Location } from '@angular/common';
 import { Component, HostListener, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [NgClass],
+  imports: [NgClass, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
@@ -13,6 +14,15 @@ export class Header {
   events_show = signal(false);
   bookings_show = signal(false);
   show_all = signal(false);
+  currentUrl : string;
+
+  constructor(private location: Location) {
+    this.currentUrl = this.location.path();
+  }
+
+  getCurrentPath() : string {
+    return this.location.path();
+  }
   
   @HostListener('window:scroll')
   onWindowScroll() {

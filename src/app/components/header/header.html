@@ -1,7 +1,7 @@
-<div #my_header class="navigation fixed w-full p-5 z-20" [ngClass]="{'scrolled': isScrolled}">
+<div #my_header class="navigation fixed w-full p-5 z-20" [ngClass]="{'scrolled': isScrolled || getCurrentPath().length > 2}">
     <div class="flex mx-5 justify-between">
         <div class="flex flex-col w-fit">
-            <img src="/images/header_logo.png" alt="SOD-Brand-Logo" class="w-70">
+            <a routerLink="/"><img src="/images/header_logo.png" alt="SOD-Brand-Logo" class="w-70"></a>
             <p class="drop-down h-full w-80 text-white mt-5 text-justify font-open-sans text-sm", [ngClass]="{'show-all':show_all()}">
                 At State of Dance, we don’t just teach choreography; we shape character, build confidence, and celebrate the elegance of transformation. We don’t just teach movement—we inspire transformation.
             </p>
@@ -10,16 +10,16 @@
             <div class="nav-bar flex">
                 <div class="flex flex-col mr-3 w-35 relative h-full text-white">
                     <p class="font-eurostile font-bold text-base p-2 h-11 cursor-pointer" (click)="classes_show.set(!classes_show())">CLASSES</p>
-                    <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':classes_show(), 'scrolled':isScrolled, 'show-all':show_all()}">
+                    <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':classes_show(), 'scrolled':isScrolled || getCurrentPath().length > 2, 'show-all':show_all()}">
                         <li class="p-0.5 link">Types of Classes</li>
                         <li class="p-0.5 link">Class Schedule</li>
                         <li class="p-0.5 link">Project Underground</li>
                     </ul>
                 </div>
-                <p class="font-eurostile text-white font-bold text-base p-2 mx-3 w-35 h-11 cursor-pointer">COACHES</p>
+                <a routerLink="/coaches" class="font-eurostile text-white font-bold text-base p-2 mx-3 w-35 h-11 cursor-pointer">COACHES</a>
                 <div class="flex flex-col mx-3 w-35 relative text-white h-full">
                     <p class="font-eurostile font-bold text-base p-2 h-11 cursor-pointer" (click)="events_show.set(!events_show())">EVENTS</p>
-                    <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':events_show(), 'scrolled':isScrolled, 'show-all':show_all()}">
+                    <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':events_show(), 'scrolled':isScrolled || getCurrentPath().length > 2, 'show-all':show_all()}">
                         <li class="p-0.5 link">Dancer Events Profile</li>
                         <li class="p-0.5 link">Events History</li>
                     </ul>
@@ -30,7 +30,7 @@
             <div class="flex">
                 <div class="flex flex-col w-fit relative text-white">
                     <button class="font-eurostile font-bold text-base p-1 border border-white w-35 h-11 cursor-pointer" (click)="bookings_show.set(!bookings_show())">BOOKING</button>
-                    <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':bookings_show(), 'scrolled':isScrolled, 'show-all':show_all()}">
+                    <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':bookings_show(), 'scrolled':isScrolled || getCurrentPath().length > 2, 'show-all':show_all()}">
                         <li class="p-0.5 link">Book a Class</li>
                         <li class="p-0.5 link">Rent our Studio</li>
                     </ul>
