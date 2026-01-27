@@ -6,6 +6,14 @@
     background-color: black;
 }
 
+.nav-bar img.show {
+    transform: rotate(180deg);
+}
+
+.nav-bar img.show-all {
+    transform: rotate(180deg);
+}
+
 .drop-down {
     display: none;
 }
