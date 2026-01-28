@@ -1,1 +1,75 @@
-<p>class-booking-page works!</p>
+<div class="h-fit p-10 pt-35 bg-dark-violet flex flex-col">
+    <h1 class="text-white font-hanson text-5xl text-center">Book a <span class="text-gold">Class</span></h1>
+
+    <div class="form mt-15">
+        <div class="flex items-center justify-between">
+            <div class="flex">
+                <select name="branch" id="branch" class="border border-white rounded-xs text-white text-xl p-2 w-55 uppercase">
+                    <option value="binondo" class="uppercase bg-dark-violet">Binondo Studio</option>
+                    <option value="quezon" class="uppercase bg-dark-violet">Quezon Studio</option>
+                </select>
+                <select name="coach" id="coach" class="border border-white rounded-xs text-white text-xl p-2 w-55 mx-5 uppercase">
+                    <option value="all" class="uppercase bg-dark-violet">All Coaches</option>
+                </select>
+                <select name="class" id="class" class="border border-white rounded-xs text-white text-xl p-2 w-55 uppercase">
+                    <option value="all" class="uppercase bg-dark-violet">All Class Types</option>
+                </select>
+            </div>
+            <h3 class="font-lexend text-white text-xl">*EACH SESSION LASTS 1.5 HRS</h3>
+        </div>
+        <div class="flex p-3 bg-amber-50 justify-between items-center mt-10">
+            <img src="/images/booking/next_btn.png" alt="next button" class="w-10 transform rotate-180" (click)="previousMonth()">
+            <div class="flex items-center">
+                <select #monthSelect name="month" id="month" class="font-hanson text-black text-3xl" (change)="selectedMonth(monthSelect.value)">
+                    @for (_month of months; track $index) {
+                        <option value="{{$index}}">{{_month}}</option>
+                    }
+                </select>
+                <h2 class="font-hanson text-black text-3xl ml-10">2026</h2>
+            </div>
+            <img src="/images/booking/next_btn.png" alt="next button" class="w-10" (click)="nextMonth()">
+        </div>
+        <table class="w-full text-white">
+            <tr class="text-xl">
+                <th class="py-3">Sun</th>
+                <th class="py-3">Mon</th>
+                <th class="py-3">Tue</th>
+                <th class="py-3">Wed</th>
+                <th class="py-3">Thur</th>
+                <th class="py-3">Fri</th>
+                <th class="py-3">Sat</th>
+            </tr>
+            @for (row of cells; track $index) {
+                <tr class="text-xl">
+                    @for (day of row; track $index) {
+                        @if (day) {
+                            <td class="relative" [ngClass]="{'bg-transparent':!selected_days.includes(day.day), 'bg-amber-50':selected_days.includes(day.day)}">
+                            
+                                <div class="flex flex-col">
+                                    @for (class of classes[day.weekday]; track $index) {
+                                        <app-schedule [class]="class" [day]="day.day" [section_selected]="selected_days.includes(day.day)" (select)="clickedSchedule($event)"></app-schedule>
+                                    }
+                                </div>
+                                <h5 
+                                class="font-lexend text-4xl font-bold absolute bottom-5 right-5"
+                                [ngClass]="{'text-amber-50':!selected_days.includes(day.day), 'text-black':selected_days.includes(day.day)}"
+                                >{{day.day}}</h5>
+                            
+                            </td>
+                        }@else {
+                            <td></td>
+                        }
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div class="flex justify-end mt-10 items-center">
+        <h4 class="font-lexend text-gold text-2xl uppercase mr-10 font-bold">3 Sessions Selected</h4>
+        <button 
+        class="bg-white text-dark-violet text-xl p-2 w-65 font-eurostile rounded-full font-bold"
+        (click)="payment()"
+        >Proceed to Payment</button>
+    </div>
+</div>

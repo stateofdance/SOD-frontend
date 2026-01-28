@@ -24,7 +24,7 @@
                 </div>
                 <div class="flex mt-10">
                     <button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-45 bg-linear-to-r from-gold to-violet cursor-pointer">BOOK A CLASS</button>
-                    <button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-65 ml-10 bg-linear-to-r from-violet to-gold cursor-pointer" (click)="projectUnderground()">PROJECT UNDERGROUND</button>
+                    <a routerLink="/" fragment="project-underground"><button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-65 ml-10 bg-linear-to-r from-violet to-gold cursor-pointer">PROJECT UNDERGROUND</button></a>
                 </div>
             </div>
             <img 
@@ -35,7 +35,7 @@
     </div>
 </div>
 
-<div class="story py-15  w-full h-fit bg-linear-to-b from-black to to-dark-violet">
+<div id="about-us" class="story py-15  w-full h-fit bg-linear-to-b from-black to to-dark-violet">
     <div class="flex px-15">
         <h2 class="font-hanson font-bold text-5xl text-white mt-auto mb-auto mx-10 w-140">Our <span class="text-gold">Story</span></h2>
         <hr class="w-full bg-white rounded-xs h-0.75 my-auto">
@@ -150,7 +150,7 @@
     </div>
 </div>
 
-<div class="classes relative z-10 w-full bg-black pt-15 pb-15">
+<div id="types-classes" class="classes relative z-10 w-full bg-black pt-15 pb-15">
     <div class="flex px-15">
         <h2 class="font-hanson font-bold text-5xl text-gold mt-auto mb-auto mx-10 w-110">Classes</h2>
         <hr class="w-full bg-white rounded-xs h-0.75 my-auto">
@@ -159,7 +159,7 @@
 
     <h3 class="font-hanson font-bold text-center text-white text-4xl mt-5">Types of Classes</h3>
 
-    <div class="flex flex-wrap mt-15 justify-center w-2/3 mx-auto">
+    <div class="flex flex-wrap mt-15 justify-center">
         @for (class of classes; track class; let i = $index) {
             <app-class-card [class]="class"></app-class-card>
         }
@@ -169,15 +169,15 @@
     <button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-45 bg-linear-to-r from-gold to-pink-violet mx-auto block cursor-pointer">BOOK A CLASS</button>
 </div>
 
-<div #underground class="underground h-screen bg-[url('/images/project_underground/background.png')] bg-cover relative z-10 w-full">
-    <div class="absolute top-1/2 left-15 transform -translate-y-1/2 w-1/2">
+<div id="project-underground" class="underground h-screen bg-[url('/images/project_underground/background.png')] bg-cover relative z-10 w-full">
+    <div class="absolute top-1/2 left-15 transform -translate-y-1/2 w-1/2 z-20">
         <img src="/images/project_underground/logo.png" alt="project undeground" class="w-full">
         <h5 class="text-center font-hanson font-bold text-white text-4xl mt-20">Limited Slots Only!</h5>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLScpgQim9rZ3EhkZ7RHGAkCQmQxxMDIjpGH2__NmV3C1lvCweQ/closedform" target="_blank">
             <button class="block mx-auto font-eurostile font-bold text-2xl bg-linear-to-r from-light-neon to-neon cursor-pointer p-3 rounded-full border-2 border-black w-80 mt-7">REGISTER NOW</button>
         </a>
     </div>
-    <img src="/images/project_underground/border.png" alt="border" class="absolute h-4/5 right-15 top-1/2 -translate-y-1/2">
+    <img src="/images/project_underground/border.png" alt="border" class="absolute h-4/5 right-15 top-1/2 -translate-y-1/2 z-10">
 </div>
 
 <div class="closing h-fit bg-amber-50 relative z-10 w-full flex flex-col">

@@ -1,0 +1,22 @@
+<div class="flex my-2 cursor-pointer" (mouseenter)="hovered.set(true)" (mouseleave)="hovered.set(false)" (click)="clicked()">
+    <div id="dot" class="w-2.5 h-2.5 border rounded-full mt-1" [ngClass]="{'bg-gold':selected() || hovered(), 'border-white': !section_selected(), 'border-black': section_selected()}"></div>
+    <div class="flex flex-col text-[14px] uppercase ml-4" [ngClass]="{'text-white':!section_selected(), 'text-black':section_selected()}">
+        <h5 class="font-bold">{{class().time}} - {{class().difficulty}}</h5>
+        
+        <div class="flex ml-3.5">
+            <ul>
+                <div class="relative flex items-center">
+                    <div class="absolute left-0 top-0 h-full w-0.5 bg-white" [ngClass]="{'bg-white': !section_selected(), 'bg-black': section_selected()}"></div>
+                    <div class="border w-2.5 h-0.5 border-white mr-1" [ngClass]="{'border-white': !section_selected(), 'border-black': section_selected()}"></div>
+                    <li>{{class().name}}</li>
+                </div>
+                <div class="relative flex items-center">
+                    <div class="absolute left-0 top-0 h-1/2 w-0.5 bg-white" [ngClass]="{'bg-white': !section_selected(), 'bg-black': section_selected()}"></div>
+                    <div class="border w-2.5 h-0.5 border-white mr-1" [ngClass]="{'border-white': !section_selected(), 'border-black': section_selected()}"></div>
+                    <li>{{class().coach}}</li>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div class="vertical-line"></div>
+</div>

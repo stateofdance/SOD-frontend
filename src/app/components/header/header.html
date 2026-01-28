@@ -14,9 +14,9 @@
                         <img src="/images/drop-down_icon.png" alt="drop down" class="w-2.5" [ngClass]="{'show': classes_show(), 'show-all': show_all()}">
                     </div>
                     <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':classes_show(), 'scrolled':isScrolled || getCurrentPath().length > 2, 'show-all':show_all()}">
-                        <li class="p-0.5 link">Types of Classes</li>
+                        <a routerLink="/" fragment="types-classes"><li class="p-0.5 link">Types of Classes</li></a>
                         <li class="p-0.5 link">Class Schedule</li>
-                        <li class="p-0.5 link">Project Underground</li>
+                        <a routerLink="/" fragment="project-underground"><li class="p-0.5 link">Project Underground</li></a>
                     </ul>
                 </div>
                 <a routerLink="/coaches"><p class="font-eurostile text-white font-bold text-base p-2 mx-3 w-35">COACHES</p></a>
@@ -37,7 +37,7 @@
                 <div class="flex flex-col w-fit relative text-white">
                     <button class="font-eurostile font-bold text-base p-1 border border-white w-35 h-11 cursor-pointer" (click)="bookings_show.set(!bookings_show())">BOOKING</button>
                     <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':bookings_show(), 'scrolled':isScrolled || getCurrentPath().length > 2, 'show-all':show_all()}">
-                        <li class="p-0.5 link">Book a Class</li>
+                        <a routerLink="/class-booking"><li class="p-0.5 link">Book a Class</li></a>
                         <a routerLink="/studio-rental"><li class="p-0.5 link">Rent our Studio</li></a>
                     </ul>
                 </div>

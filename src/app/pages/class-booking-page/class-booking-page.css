@@ -1,0 +1,14 @@
+
+table {
+    border: 1px solid #fffbeb;
+    table-layout: fixed;
+}
+
+th, td {
+    border: 1px solid #fffbeb;
+}
+
+td {
+    padding-left: 0.5rem;
+}
+
