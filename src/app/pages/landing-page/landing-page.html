@@ -6,14 +6,13 @@
 
     <div class="absolute opacity-70 inset-0 bg-linear-to-t bg-black h-full"></div>
 
-    <div class="intro flex relative px-15 z-10 h-screen w-full">
+    <div class="intro flex relative px-5 md:px-15 z-10 h-screen w-full">
         <div class="flex w-full my-auto">
-            <div class="content w-7/10">
-                <h1 class="font-hanson font-extrabold text-6xl text-white">
-                    WE DON'T JUST<br>TEACH <span class="text-gold">MOVEMENT,</span>
-                    <br>WE INSPIRE<br><span class="text-violet">TRANSFORMATION</span>
+            <div class="content w-full lg:w-7/10">
+                <h1 class="font-hanson font-extrabold text-2xl lg:text-6xl text-white text-center lg:text-left">
+                    WE DON'T JUST TEACH <span class="text-gold">MOVEMENT,</span> WE INSPIRE <span class="text-violet">TRANSFORMATION</span>
                 </h1>
-                <div class="w-4/5 font-open-sans text-white mt-5">
+                <div class="w-full lg:w-4/5 font-open-sans text-white mt-5 text-center lg:text-left">
                     <p>
                         <span class="font-bold">State of Dance (SOD)</span> is more than a studio — it's a creative space where passion unites and every dancer, of all ages, is welcome to grow. It’s a place to discover your rhythm, build confidence, and perform with purpose. 
                     </p>
@@ -22,13 +21,13 @@
                     </p>
                     <p class="mt-4">At SOD, movement meets meaning — and every step creates a story.</p>
                 </div>
-                <div class="flex mt-10">
-                    <a routerLink="/class-booking"><button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-45 bg-black cursor-pointer">BOOK A CLASS</button></a>
-                    <a routerLink="/" fragment="project-underground"><button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-65 ml-10 bg-black cursor-pointer">PROJECT UNDERGROUND</button></a>
+                <div class="flex mt-10 flex-col lg:flex-row">
+                    <a routerLink="/class-booking"><button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-full lg:w-45 bg-transparent cursor-pointer">BOOK A CLASS</button></a>
+                    <a routerLink="/" fragment="project-underground"><button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-full lg:w-65 lg:ml-10 bg-transparent cursor-pointer lg:mt-0 mt-5">PROJECT UNDERGROUND</button></a>
                 </div>
             </div>
             <img 
-            class="w-25 z-15 mt-auto ml-auto"
+            class="w-25 z-15 mt-auto ml-auto hidden lg:block"
             src="/images/large_diamond.png" alt="Diamond"
             >
         </div>
@@ -36,36 +35,46 @@
 </div>
 
 <div id="about-us" class="story py-15  w-full h-fit bg-linear-to-b from-black to to-dark-violet">
-    <div class="flex px-15">
-        <h2 class="font-hanson font-bold text-5xl text-white mt-auto mb-auto mx-10 w-140">Our <span class="text-gold">Story</span></h2>
-        <hr class="w-full bg-white rounded-xs h-0.75 my-auto">
-        <img src="/images/diamond.png" alt="diamond" class="w-15 -translate-x-1">
+    <div class="flex md:px-15">
+        <h2 class="font-hanson font-bold text-5xl text-white mt-auto mb-auto mx-10 w-full lg:w-140 lg:text-left text-center">Our <span class="text-gold">Story</span></h2>
+        <hr class="w-full bg-white rounded-xs h-0.75 my-auto lg:block hidden">
+        <img src="/images/diamond.png" alt="diamond" class="w-15 -translate-x-1 lg:block hidden">
     </div>
-    <div class="flex px-15 h-full">
-        <app-stack-carousel 
-        class="block w-1/2 my-auto"
-        [images]="['/images/carousel/image_1.jpg', '/images/carousel/image_2.jpg', '/images/carousel/image_3.jpg', '/images/carousel/image_4.jpg', '/images/carousel/image_5.jpg']"
-        ></app-stack-carousel>
-        <div class="flex flex-col w-1/2 px-15 mr-5 h-full">
-            <img src="/images/SOD_Logo_FA-16.png" alt="SOD_Logo" class="w-7/10 mx-auto">
-            <hr class="w-30 bg-white rounded-xs h-1 mx-auto">
-            <div class="story-content mt-5 p-2 text-white text-center  w-full">
-                <p class="font-open-san text-base">
-                    A premier dance institution founded on passion, artistry, and excellence. Established by renowned dancer and choreographer Kervin Mendiola, the studio began as a vision to create a space where dancers of all ages could express themselves, grow with confidence, and find purpose through movement.
-                </p>
-                <p class="font-open-sans text-base my-10">
-                    From its humble beginnings to its elegant studios in Quezon City, BGC, and Manila, State of Dance has become a home for aspiring and professional dancers alike. We offer dance classes for kids, teens, and adults, private training, recital programs, studio rentals, and professional performance services for corporate and special events.
-                </p>
-                <p class="font-open-sans text-base">
-                    Each class and performance is crafted to go beyond technique — cultivating artistry, discipline, and self-expression. At State of Dance, we don’t just teach choreography; we shape character, build confidence, and celebrate the elegance of transformation.
-                </p>
-
-                <h4 class="font-hanson font-bold text-4xl text-violet mb-5 mt-10">Mission</h4>
-                <p class="font-open-san text-base">
+    <div class="flex flex-col px-5 lg:px-15 h-fit mt-5">
+        <div class="flex min-h-[calc(100vh-5rem)] h-fit lg:flex-row flex-col">
+            <div class="w-full lg:w-1/2 flex min-h-screen">
+                <app-stack-carousel 
+                class="my-auto w-full"
+                [images]="['/images/carousel/image_1.jpg', '/images/carousel/image_2.jpg', '/images/carousel/image_3.jpg', '/images/carousel/image_4.jpg', '/images/carousel/image_5.jpg']"
+                ></app-stack-carousel>
+            </div>
+            <div class="flex flex-col w-full lg:w-1/2 mr-5 h-full">
+                <img src="/images/SOD_Logo_FA-16.png" alt="SOD_Logo" class="w-7/10 mx-auto">
+                <hr class="w-30 bg-white rounded-xs h-1 mx-auto">
+                <div class="story-content mt-5 p-2 text-white text-center  w-full">
+                    <p class="font-open-san text-base">
+                        A premier dance institution founded on passion, artistry, and excellence. Established by renowned dancer and choreographer Kervin Mendiola, the studio began as a vision to create a space where dancers of all ages could express themselves, grow with confidence, and find purpose through movement.
+                    </p>
+                    <p class="font-open-sans text-base my-10">
+                        From its humble beginnings to its elegant studios in Quezon City, BGC, and Manila, State of Dance has become a home for aspiring and professional dancers alike. We offer dance classes for kids, teens, and adults, private training, recital programs, studio rentals, and professional performance services for corporate and special events.
+                    </p>
+                    <p class="font-open-sans text-base">
+                        Each class and performance is crafted to go beyond technique — cultivating artistry, discipline, and self-expression. At State of Dance, we don’t just teach choreography; we shape character, build confidence, and celebrate the elegance of transformation.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="flex text-center items-center justify-center mt-10 lg:flex-row flex-col">
+            <div class="flex flex-col w-full lg:w-1/3 mx-5">
+                <h4 class="font-hanson font-bold text-4xl text-violet mb-5">Mission</h4>
+                <p class="font-open-san text-base text-white">
                     To build confidence through the art of dance, empowering individuals to express their true selves both on and off the stage. 
                 </p>
-                <h4 class="font-hanson font-bold text-4xl text-violet mb-5 mt-10">Vision</h4>
-                <p class="font-open-sans text-base">
+            </div>
+            <div class="mx-4 h-50 w-0.5 bg-white lg:block hidden"></div>
+            <div class="flex flex-col w-full lg:w-1/3 mx-5 lg:mt-0 mt-5">
+                <h4 class="font-hanson font-bold text-4xl text-violet mb-5">Vision</h4>
+                <p class="font-open-sans text-base text-white">
                     To be one of the most well-known and respected names in the dance industry by 2028, recognized for excellence, artistry, and community impact. 
                 </p>
             </div>
@@ -75,63 +84,63 @@
 
  
 
-<div class="bg-dark-violet h-fit pb-30 pt-10 flex">
+<div class="bg-dark-violet h-fit pb-30 pt-20 flex lg:flex-row flex-col">
    <div class="flex flex-col h-fit w-full my-auto">
-        <div class="w-fit m-auto">
-            <img src="/images/gold_diamond.png" alt="gold diamon" class="w-20 mb-15">
-            <h2 class="text-white text-6xl ml-10 font-bold font-hanson w-140">WE TEACH<br>WITH <span class="text-gold">HEART</span><br>AND LEAD BY<br><span class="text-gold">EXAMPLE</span>.</h2>
+        <div class="w-2/3 m-auto">
+            <img src="/images/gold_diamond.png" alt="gold diamon" class="w-20 mb-15 lg:block hidden">
+            <h2 class="text-white text-3xl lg:text-6xl lg:ml-10 font-bold font-hanson w-full text-center lg:text-left">WE TEACH WITH <span class="text-gold">HEART</span> AND LEAD BY <span class="text-gold">EXAMPLE</span>.</h2>
             <div class="flex mt-15">
-                <img src="/images/gold_diamond.png" alt="gold diamon" class="w-20 mb-auto">
-                <img src="/images/gold_diamond.png" alt="gold diamon" class="w-30 mt-5">
+                <img src="/images/gold_diamond.png" alt="gold diamon" class="w-20 mb-auto lg:block hidden">
+                <img src="/images/gold_diamond.png" alt="gold diamon" class="w-30 mt-5 lg:block hidden">
             </div>
         </div>
     </div>
     <div class="w-full">
-        <div class="flex w-fit my-5 relative">
-            <div #line class="absolute divider border-l-white border-l-2 h-0 left-4.75 top-6.5"></div>
-            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto mr-5 z-10">
-            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500">
-                <h3 class="font-eurostile text-gold text-4xl font-extrabold">Creativity</h3>
-                <p class="text-white font-open-sans font-bold mt-3 w-100">To build confidence through the art of dance, empowering individuals to express their true selves both on and off the stage.</p>
+        <div class="flex lg:w-fit w-2/3 lg:my-5 my-10 relative lg:flex-row flex-col lg:mx-0 mx-auto">
+            <div #line class="absolute divider border-l-white border-l-2 h-0 left-4.75 top-6.5 lg:block hidden"></div>
+            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto z-10 ml-auto lg:mr-5 mr-auto">
+            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500 lg:text-left text-center">
+                <h3 class="font-eurostile text-gold text-4xl font-extrabold w-full">Creativity</h3>
+                <p class="text-white font-open-sans font-bold mt-3 lg:w-2/3 w-full">To build confidence through the art of dance, empowering individuals to express their true selves both on and off the stage.</p>
             </div>
         </div>
-        <div class="flex w-fit my-5 relative">
-            <div #line class="absolute divider border-l-white border-l-2 h-0 left-4.75 top-6.5"></div>
-            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto mr-5 z-10">
-            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500">
-                <h3 class="font-eurostile text-gold text-4xl font-extrabold">Community</h3>
-                <p class="text-white font-open-sans font-bold mt-3 w-100">We rise together as a family of movers.</p>
+        <div class="flex lg:w-fit w-2/3 lg:my-5 my-10 relative lg:flex-row flex-col lg:mx-0 mx-auto">
+            <div #line class="absolute divider border-l-white border-l-2 h-0 left-4.75 top-6.5 lg:block hidden"></div>
+            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto z-10 ml-auto lg:mr-5 mr-auto">
+            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500 lg:text-left text-center">
+                <h3 class="font-eurostile text-gold text-4xl font-extrabold w-full">Community</h3>
+                <p class="text-white font-open-sans font-bold mt-3 lg:w-2/3 w-full">We rise together as a family of movers.</p>
             </div>
         </div>
-        <div class="flex w-fit my-5 relative">
-            <div #line class="absolute divider border-l-white border-l-2 h-0 left-4.75 top-6.5"></div>
-            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto mr-5 z-10">
-            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500">
-                <h3 class="font-eurostile text-gold text-4xl font-extrabold">Fun</h3>
-                <p class="text-white font-open-sans font-bold mt-3 w-100">We believe learning and growth should be joyful, energizing, and full of creative play.</p>
+        <div class="flex lg:w-fit w-2/3 lg:my-5 my-10 relative lg:flex-row flex-col lg:mx-0 mx-auto">
+            <div #line class="absolute divider border-l-white border-l-2 h-0 left-4.75 top-6.5 lg:block hidden"></div>
+            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto z-10 ml-auto lg:mr-5 mr-auto">
+            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500 lg:text-left text-center">
+                <h3 class="font-eurostile text-gold text-4xl font-extrabold w-full">Fun</h3>
+                <p class="text-white font-open-sans font-bold mt-3 lg:w-2/3 w-full">We believe learning and growth should be joyful, energizing, and full of creative play.</p>
             </div>
         </div>
-        <div class="flex w-fit my-5 relative">
-            <div #line class="absolute divider border-l-white border-l-2 h-0 left-4.75 top-6.5"></div>
-            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto mr-5 z-10">
-            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500">
-                <h3 class="font-eurostile text-gold text-4xl font-extrabold">Confidence</h3>
-                <p class="text-white font-open-sans font-bold mt-3 w-100">Every step forward builds self-belief.</p>
+        <div class="flex lg:w-fit w-2/3 lg:my-5 my-10 relative lg:flex-row flex-col lg:mx-0 mx-auto">
+            <div #line class="absolute divider border-l-white border-l-2 h-0 left-4.75 top-6.5 lg:block hidden"></div>
+            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto z-10 ml-auto lg:mr-5 mr-auto">
+            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500 lg:text-left text-center">
+                <h3 class="font-eurostile text-gold text-4xl font-extrabold w-full">Confidence</h3>
+                <p class="text-white font-open-sans font-bold mt-3 lg:w-2/3 w-full">Every step forward builds self-belief.</p>
             </div>
         </div>
-        <div class="flex w-fit my-5 relative">
-            <div #line class="absolute divider border-l-white border-l-2 h-0 left-4.75 top-6.5"></div>
-            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto mr-5 z-10">
-            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500">
-                <h3 class="font-eurostile text-gold text-4xl font-extrabold">Integrity</h3>
-                <p class="text-white font-open-sans font-bold mt-3 w-100">We move with honesty, respect, and authenticity — on and off the stage.</p>
+        <div class="flex lg:w-fit w-2/3 lg:my-5 my-10 relative lg:flex-row flex-col lg:mx-0 mx-auto">
+            <div #line class="absolute divider border-l-white border-l-2 h-0 left-4.75 top-6.5 lg:block hidden"></div>
+            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto z-10 ml-auto lg:mr-5 mr-auto">
+            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500 lg:text-left text-center">
+                <h3 class="font-eurostile text-gold text-4xl font-extrabold w-full">Integrity</h3>
+                <p class="text-white font-open-sans font-bold mt-3 lg:w-2/3 w-full">We move with honesty, respect, and authenticity — on and off the stage.</p>
             </div>
         </div>
-        <div class="flex w-fit my-5">
-            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto mr-5 z-10">
-            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500">
+        <div class="flex lg:w-fit w-2/3 lg:my-5 my-10 lg:flex-row flex-col lg:mx-0 mx-auto">
+            <img src="/images/gold_diamond.png" alt="gold diamong" class="w-10 mb-auto z-10 ml-auto lg:mr-5 mr-auto">
+            <div #content class="flex flex-col transition-all duration-500 ease-in-out opacity-0 pl-10 delay-500 lg:text-left text-center">
                 <h3 class="font-eurostile text-gold text-4xl font-extrabold">Enthusiasm</h3>
-                <p class="text-white font-open-sans font-bold mt-3 w-100">We bring passion and positivity to every class, inspiring dancers to give their all and love the journey.</p>
+                <p class="text-white font-open-sans font-bold mt-3 lg:w-2/3 w-full">We bring passion and positivity to every class, inspiring dancers to give their all and love the journey.</p>
             </div>
         </div>
     </div>
@@ -139,25 +148,25 @@
 
 <img src="/images/buffer_image.png" alt="coaches" class="relative z-10">
 
-<div #track2 class="relative z-10 h-[600vh]">
+<div #track2 class="relative z-10 h-[600vh] bg-black">
     <div class="z-10 pt-10 bg-linear-to-b from-dark-violet to-black w-full sticky top-20 h-[calc(100vh-5rem)]">
-        <div class="flex px-15">
-            <h2 class="font-hanson font-bold text-5xl text-gold mt-auto mb-auto mx-10 w-110">Coaches</h2>
-            <hr class="w-full bg-white rounded-xs h-0.75 my-auto">
-            <img src="/images/diamond.png" alt="diamond" class="w-15 -translate-x-1">
+        <div class="flex md:px-15">
+            <h2 class="font-hanson font-bold text-5xl text-gold mt-auto mb-auto mx-10 w-full lg:w-110 lg:text-left text-center">Coaches</h2>
+            <hr class="w-full bg-white rounded-xs h-0.75 my-auto lg:block hidden">
+            <img src="/images/diamond.png" alt="diamond" class="w-15 -translate-x-1 lg:block hidden">
         </div>
         <app-slide-carousel [sectionScrollProgress]="progress2"></app-slide-carousel>
     </div>
 </div>
 
 <div id="types-classes" class="classes relative z-10 w-full bg-black pt-15 pb-15">
-    <div class="flex px-15">
-        <h2 class="font-hanson font-bold text-5xl text-gold mt-auto mb-auto mx-10 w-110">Classes</h2>
-        <hr class="w-full bg-white rounded-xs h-0.75 my-auto">
-        <img src="/images/diamond.png" alt="diamond" class="w-15 -translate-x-1">
+    <div class="flex md:px-15">
+        <h2 class="font-hanson font-bold text-5xl text-gold mt-auto mb-auto mx-10 w-full lg:w-110 lg:text-left text-center">Classes</h2>
+        <hr class="w-full bg-white rounded-xs h-0.75 my-auto lg:block hidden">
+        <img src="/images/diamond.png" alt="diamond" class="w-15 -translate-x-1 lg:block hidden">
     </div>
 
-    <h3 class="font-hanson font-bold text-center text-white text-4xl mt-5">Types of Classes</h3>
+    <h3 class="font-hanson font-bold text-center text-white text-4xl mt-5 lg:block hidden">Types of Classes</h3>
 
     <div class="flex flex-wrap mt-15 justify-center">
         @for (class of classes; track class; let i = $index) {
@@ -169,29 +178,28 @@
     <a routerLink="/class-booking"><button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-45 bg-linear-to-r from-gold to-pink-violet mx-auto block cursor-pointer">BOOK A CLASS</button></a>
 </div>
 
-<div id="project-underground" class="underground h-screen bg-[url('/images/project_underground/background.png')] bg-cover relative z-10 w-full">
-    <div class="absolute top-1/2 left-15 transform -translate-y-1/2 w-1/2 z-20">
+<div id="project-underground" 
+class="underground min-h-screen h-fit bg-[url('/images/project_underground/background.png')] bg-cover relative md:px-15 z-10 w-full flex items-center justify-between lg:flex-row flex-col-reverse p-10">
+    <div class="lg:w-1/2 w-full z-20">
         <img src="/images/project_underground/logo.png" alt="project undeground" class="w-full">
         <h5 class="text-center font-hanson font-bold text-white text-4xl mt-20">Limited Slots Only!</h5>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLScpgQim9rZ3EhkZ7RHGAkCQmQxxMDIjpGH2__NmV3C1lvCweQ/closedform" target="_blank">
-            <button class="block mx-auto font-eurostile font-bold text-2xl bg-linear-to-r from-light-neon to-neon cursor-pointer p-3 rounded-full border-2 border-black w-80 mt-7">REGISTER NOW</button>
+            <button class="block mx-auto font-eurostile font-bold text-base lg:text-2xl bg-linear-to-r from-light-neon to-neon cursor-pointer p-3 rounded-full border-2 border-black w-60 lg:w-80 mt-7">REGISTER NOW</button>
         </a>
     </div>
-    <img src="/images/project_underground/border.png" alt="border" class="absolute h-4/5 right-15 top-1/2 -translate-y-1/2 z-10">
+    <img src="/images/project_underground/border.png" alt="border" class="h-4/5 z-10">
 </div>
 
-<div class="closing h-fit bg-amber-50 relative z-10 w-full flex flex-col">
-    <img src="/images/closing_section/SOD_Logo_FA-14.png" alt="State of Dance Logo" class="absolute h-2/3 top-8">
-    <img src="/images/closing_section/image_silhouette.png" alt="Trainer" class="absolute h-4/5 bottom-0">
-    <div class="flex pt-5 px-15">
-        <hr class="w-full bg-black rounded-xs h-0.75 my-auto">
-        <img src="/images/closing_section/diamond_cluster.png" alt="diamond" class="w-25 -translate-x-1">
+<div class="closing min-h-screen h-fit bg-amber-50 relative z-10 w-full pt-10 flex">
+    <div class="relative w-1/3 lg:block hidden">
+        <img src="/images/closing_section/SOD_Logo_FA-14.png" alt="State of Dance Logo" class="absolute w-9/10 top-5">
+        <img src="/images/closing_section/image_silhouette.png" alt="Trainer" class="absolute w-8/10 bottom-0">
     </div>
-    <div class="content w-2/3 ml-auto my-auto py-10">
-        <h1 class="font-hanson font-bold text-black text-7xl uppercase text-center">
+    <div class="content w-full lg:w-2/3 p-10">
+        <h1 class="font-hanson font-bold text-black text-3xl lg:text-7xl uppercase text-center">
             JOIN THE<br><span class="text-gold">COMMUNITY</span><br><span class="text-violet">NOW!</span>
         </h1>
-        <p class="font-open-sans text-black text-xl font-bold text-center">Got Inquiries? Contact us through our social media platforms.</p>
+        <p class="font-open-sans text-black text-base lg:text-xl font-bold text-center">Got Inquiries? Contact us through our social media platforms.</p>
         <div class="flex justify-center w-full my-5">
             <img src="/images/closing_section/gold_yt.png" alt="youtube icon" class="w-15 mx-5">
             <img src="/images/closing_section/gold_ig.png" alt="youtube icon" class="w-15 mx-5">
@@ -201,9 +209,9 @@
         <p class="text-center font-open-sans">
             State of Dance Studio<br>@stateofdancebykervinmendiola<br>0906 241 0816
         </p>
-    </div>
-    <div class="vid-links bg-linear-to-r from-gold to-violet flex p-5 justify-end">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/XJmNQFixGDU?si=7B9ipxq5QCS7JPKK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="mr-10"></iframe>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/i8qE6d8reEY?si=7XTjGwbfM_mPdMJW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="flex vid-links justify-center mt-10">
+            <iframe height="315" src="https://www.youtube.com/embed/XJmNQFixGDU?si=7B9ipxq5QCS7JPKK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="mr-10 w-1/2"></iframe>
+            <iframe height="315" src="https://www.youtube.com/embed/i8qE6d8reEY?si=7XTjGwbfM_mPdMJW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="w-1/2"></iframe>
+        </div>
     </div>
 </div>

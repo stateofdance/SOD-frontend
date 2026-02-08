@@ -24,6 +24,8 @@ export class AppState {
     address: 'abc street',
   });
   overlay_show = signal(false);
+  screen_width = signal<number>(0);
+  screen_height = signal<number>(0);
 
   set_user(user: User) {
     this.user.set(user);

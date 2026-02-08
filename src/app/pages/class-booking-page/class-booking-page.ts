@@ -1,7 +1,9 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { ClassSchedule } from '../../interfaces/class-schedule';
 import { Schedule } from '../../components/calendar/schedule/schedule';
 import { NgClass } from '@angular/common';
+import { AppState } from '../../services/app-state';
+import { ScheduleBooking } from '../../interfaces/schedule-booking';
 
 function getDaysInMonthWithWeekday(year: number, month: number): { day: number, weekday: number }[] {
     const date = new Date(year, month, 1);
@@ -24,6 +26,9 @@ function getDaysInMonthWithWeekday(year: number, month: number): { day: number, 
   styleUrl: './class-booking-page.css',
 })
 export class ClassBookingPage implements OnInit {
+  @ViewChild('monthSelect') monthSelect!:ElementRef;
+  protected state = inject(AppState);
+
   months = [
     'January', 'February', 'March', 'April', 'May',
     'June', 'July', 'August', 'September', 'October',
@@ -56,18 +61,18 @@ export class ClassBookingPage implements OnInit {
     ]
   ]
 
-  private today = new Date();
-  month = signal<number>(this.today.getMonth())
+  date = new Date();
   days!:{ day: number, weekday: number }[];
   cells:Array<Array<{ day: number, weekday: number } | undefined>> = [];
-  selected_days:number[] = [];
+  selected_day_mobile:{day:number, weekday:number}|null = null;
+  selected_schedules:ScheduleBooking[] = [];
 
   ngOnInit(): void {
     this.updateCalendar();
   }
 
   updateCalendar() {
-    this.days = getDaysInMonthWithWeekday(this.today.getFullYear(), this.month());
+    this.days = getDaysInMonthWithWeekday(this.date.getFullYear(), this.date.getMonth());
     this.cells = [];
     let day1_weekday = this.days[0].weekday;
     let row:Array<{ day: number, weekday: number } | undefined> = [];
@@ -97,32 +102,64 @@ export class ClassBookingPage implements OnInit {
   }
 
   nextMonth() {
-    if (this.month() == 11) {return;}
-    this.month.set(this.month() + 1);
+    if (this.date.getMonth() == 11) {return;}
+    this.date.setMonth(this.date.getMonth() + 1);
+    this.monthSelect.nativeElement.value = this.date.getMonth();
     this.updateCalendar()
   }
 
   previousMonth() {
-    if (this.month() == 0) {return;}
-    this.month.set(this.month() - 1);
+    if (this.date.getMonth() == 0) {return;}
+    this.date.setMonth(this.date.getMonth() - 1);
+    this.monthSelect.nativeElement.value = this.date.getMonth();
     this.updateCalendar()
   }
 
   selectedMonth(month:string) {
-    if (month != this.month().toString()){
-      this.month.set(parseInt(month));
-      this.updateCalendar()
+    this.date.setMonth(parseInt(month));
+    this.updateCalendar()
+  }
+
+ 
+  checkSelectedByDay(day:{day:number, weekday:number}) : boolean {
+    for (const schedule of this.selected_schedules) {
+      if (schedule.date.getDate() == day.day) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  checkSelectedByTime(day:number,time:string) : boolean {
+    for (const schedule of this.selected_schedules) {
+      if (schedule.time == time && schedule.date.getDate() == day) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  clickedDay(day:{day:number, weekday:number}) {
+    if (this.state.screen_width() < 1024) {
+      this.selected_day_mobile = day != this.selected_day_mobile ? day : null;
     }
   }
 
-  clickedSchedule(event:[number, ClassSchedule, boolean]):void {
-    const day = event[0];
-    const selected = event[2];
+  getMonth(month:string) {
+    return this.months[parseInt(month)];
+  }
+
+  clickedSchedule(event:[ScheduleBooking, boolean]):void {
+    const booking = event[0];
+    const selected = event[1];
+
     if (selected) {
-      this.selected_days.push(day)
+      this.selected_schedules.push(booking);
+      console.log(this.selected_schedules)
     }else {
-      const index = this.selected_days.indexOf(day);
-      this.selected_days = this.selected_days.filter((_, i) => i !== index);
+      const index = this.selected_schedules.findIndex(_booking => booking.date.getTime() == _booking.date.getTime());
+      this.selected_schedules = this.selected_schedules.filter((_, i) => i !== index);
+      console.log(this.selected_schedules)
     }
   }
 }

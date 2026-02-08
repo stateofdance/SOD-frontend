@@ -1,37 +1,37 @@
-<div class="h-fit p-10 pt-35 bg-dark-violet flex flex-col">
+<div class="h-fit p-2 md:px-10 pt-35 bg-dark-violet flex flex-col">
     <h1 class="text-white font-hanson text-5xl text-center">Book a <span class="text-gold">Class</span></h1>
 
     <div class="form mt-15">
-        <div class="flex items-center justify-between">
-            <div class="flex">
-                <select name="branch" id="branch" class="border border-white rounded-xs text-white text-xl p-2 w-55 uppercase">
+        <div class="flex items-center justify-between lg:flex-row flex-col">
+            <div class="flex lg:flex-row flex-col lg:w-fit w-full">
+                <select name="branch" id="branch" class="border border-white rounded-xs text-white text-xl p-2 w-full lg:w-55 uppercase">
                     <option value="binondo" class="uppercase bg-dark-violet">Binondo Studio</option>
                     <option value="quezon" class="uppercase bg-dark-violet">Quezon Studio</option>
                     <option value="bgc" class="uppercase bg-dark-violet">BGC Studio</option>
                 </select>
-                <select name="coach" id="coach" class="border border-white rounded-xs text-white text-xl p-2 w-55 mx-5 uppercase">
+                <select name="coach" id="coach" class="border border-white rounded-xs text-white text-xl p-2 w-full lg:w-55 my-5 lg:my-0 lg:mx-5 uppercase">
                     <option value="all" class="uppercase bg-dark-violet">All Coaches</option>
                 </select>
-                <select name="class" id="class" class="border border-white rounded-xs text-white text-xl p-2 w-55 uppercase">
+                <select name="class" id="class" class="border border-white rounded-xs text-white text-xl p-2 w-full lg:w-55 uppercase">
                     <option value="all" class="uppercase bg-dark-violet">All Class Types</option>
                 </select>
             </div>
-            <h3 class="font-lexend text-white text-xl">*EACH SESSION LASTS 1.5 HRS</h3>
+            <h3 class="font-lexend text-white text-xl lg:mt-0 mt-10">*EACH SESSION LASTS 1.5 HRS</h3>
         </div>
-        <div class="flex p-3 bg-amber-50 justify-between items-center mt-10">
-            <img src="/images/booking/next_btn.png" alt="next button" class="w-10 transform rotate-180" (click)="previousMonth()">
+        <div class="flex p-3 bg-amber-50 justify-center md:justify-between items-center mt-10">
+            <img src="/images/booking/next_btn.png" alt="next button" class="w-10 transform rotate-180 md:block hidden" (click)="previousMonth()">
             <div class="flex items-center">
-                <select #monthSelect name="month" id="month" class="font-hanson text-black text-3xl" (change)="selectedMonth(monthSelect.value)">
+                <select #monthSelect name="month" id="month" class="font-hanson text-black text-base lg:text-3xl" (change)="selectedMonth(monthSelect.value)">
                     @for (_month of months; track $index) {
                         <option value="{{$index}}">{{_month}}</option>
                     }
                 </select>
-                <h2 class="font-hanson text-black text-3xl ml-10">2026</h2>
+                <h2 class="font-hanson text-black text-base lg:text-3xl ml-10">2026</h2>
             </div>
-            <img src="/images/booking/next_btn.png" alt="next button" class="w-10" (click)="nextMonth()">
+            <img src="/images/booking/next_btn.png" alt="next button" class="w-10 md:block hidden" (click)="nextMonth()">
         </div>
         <table class="w-full text-white">
-            <tr class="text-xl">
+            <tr class="text-base lg:text-xl">
                 <th class="py-3">Sun</th>
                 <th class="py-3">Mon</th>
                 <th class="py-3">Tue</th>
@@ -44,16 +44,17 @@
                 <tr class="text-xl">
                     @for (day of row; track $index) {
                         @if (day) {
-                            <td class="relative" [ngClass]="{'bg-transparent':!selected_days.includes(day.day), 'bg-amber-50':selected_days.includes(day.day)}">
-                            
-                                <div class="flex flex-col">
-                                    @for (class of classes[day.weekday]; track $index) {
-                                        <app-schedule [class]="class" [day]="day.day" [section_selected]="selected_days.includes(day.day)" (select)="clickedSchedule($event)"></app-schedule>
-                                    }
-                                </div>
+                            <td class="relative" [ngClass]="{'bg-transparent':!checkSelectedByDay(day), 'bg-amber-50':checkSelectedByDay(day)}" (click)="clickedDay(day)">
+                                @if (state.screen_width() >= 1024) {
+                                    <div class="flex flex-col">
+                                        @for (class of classes[day.weekday]; track $index) {
+                                            <app-schedule [month]="monthSelect.value" [class]="class" [day]="day.day" [section_selected]="checkSelectedByDay(day)" (select)="clickedSchedule($event)"></app-schedule>
+                                        }
+                                    </div>
+                                }
                                 <h5 
-                                class="font-lexend text-4xl font-bold absolute bottom-5 right-5"
-                                [ngClass]="{'text-amber-50':!selected_days.includes(day.day), 'text-black':selected_days.includes(day.day)}"
+                                class="font-lexend text-base lg:text-4xl font-bold lg:absolute lg:bottom-5 lg:right-5 lg:p-0 md:px-5 py-5 text-center"
+                                [ngClass]="{'text-amber-50':!checkSelectedByDay(day), 'text-black':checkSelectedByDay(day)}"
                                 >{{day.day}}</h5>
                             
                             </td>
@@ -66,10 +67,22 @@
         </table>
     </div>
 
-    <div class="flex justify-end mt-10 items-center">
-        <h4 class="font-lexend text-gold text-2xl uppercase mr-10 font-bold">3 Sessions Selected</h4>
+    @if (selected_day_mobile && state.screen_width() < 1024) {
+        <h3 class="font-hanson bg-amber-50 w-full text-xl text-black text-center py-5">{{getMonth(monthSelect.value)}} {{selected_day_mobile.day}}, 2026</h3>
+        <div class="flex flex-col">
+            @for (class of classes[selected_day_mobile.weekday]; track $index) {
+                <div class="w-full border" 
+                [ngClass]="{'bg-transparent':!checkSelectedByTime(selected_day_mobile.day, class.time), 'bg-amber-50':checkSelectedByTime(selected_day_mobile.day, class.time), 'border-black':checkSelectedByTime(selected_day_mobile.day, class.time), 'border-amber-50':!checkSelectedByTime(selected_day_mobile.day, class.time)}">
+                <app-schedule [month]="monthSelect.value" [class]="class" [day]="selected_day_mobile.day" [section_selected]="checkSelectedByTime(selected_day_mobile.day, class.time)" (select)="clickedSchedule($event)"></app-schedule>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="flex justify-end mt-10 items-center lg:flex-row flex-col">
+        <h4 class="font-lexend text-gold text-2xl uppercase lg:mr-10 w-full lg:w-fit font-bold lg:text-left text-center ">3 Sessions Selected</h4>
         <button 
-        class="bg-white text-dark-violet text-xl p-2 w-65 font-eurostile rounded-full font-bold"
+        class="bg-white text-dark-violet text-xl p-2 w-65 font-eurostile rounded-full font-bold lg:mx-0 mx-auto lg:mt-0 mt-5"
         (click)="payment()"
         >Proceed to Payment</button>
     </div>

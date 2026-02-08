@@ -1,5 +1,5 @@
 <div class="flex my-2 cursor-pointer" (mouseenter)="hovered.set(true)" (mouseleave)="hovered.set(false)" (click)="clicked()">
-    <div id="dot" class="w-2.5 h-2.5 border rounded-full mt-1" [ngClass]="{'bg-gold':selected() || hovered(), 'border-white': !section_selected(), 'border-black': section_selected()}"></div>
+    <div id="dot" class="w-2.5 h-2.5 border rounded-full mt-1" [ngClass]="{'bg-gold':section_selected() || hovered(), 'border-white': !section_selected(), 'border-black': section_selected()}"></div>
     <div class="flex flex-col text-[14px] uppercase ml-4" [ngClass]="{'text-white':!section_selected(), 'text-black':section_selected()}">
         <h5 class="font-bold">{{class().time}} - {{class().difficulty}}</h5>
         

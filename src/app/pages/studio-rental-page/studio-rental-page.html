@@ -1,8 +1,8 @@
 
-<div class="min-h-screen pt-35 px-15 bg-black flex">
-    <div class="flex flex-col sticky w-120 mr-5 top-30 left-0 h-fit">
-        <h1 class="font-hanson text-white font-bold text-6xl">Rent our <span class="text-gold">Studio</span></h1>
-        <p class="font-lexend text-white text-base my-5">Your space to move, create, and inspire.</p>
+<div class="min-h-screen pt-35 md:px-15 bg-black flex lg:flex-row flex-col-reverse">
+    <div class="flex flex-col lg:sticky w-full lg:w-120 lg:mr-5 lg:top-30 left-0 h-fit lg:mt-0 mt-10">
+        <h1 class="font-hanson text-white font-bold text-3xl md:text-6xl lg:text-left text-center">Rent our <span class="text-gold">Studio</span></h1>
+        <p class="font-lexend text-white md:text-base my-5 lg:text-left text-center">Your space to move, create, and inspire.</p>
         <div class="flex flex-col w-full mr-5">
             <input #date type="date" name="date" class="text-white border border-white p-2 rounded-lg text-xl [&::-webkit-calendar-picker-indicator]:invert" (change)="selectDate(date.value)" [min]="today.toISOString().slice(0, 10)">
             <select #startTime name="start" id="start" class="text-white border border-white p-2 rounded-lg text-xl my-5" (click)="selectStartTime(startTime.value)">
@@ -20,7 +20,7 @@
     </div>
     <div class="flex flex-col w-full">
         <div class="flex flex-wrap bg-amber-50 p-5 w-full border-12 border-black" (click)="selected_branch.set('quezon')" [ngClass]="{'border-gold':selected_branch()=='quezon'}">
-            <div class="relative w-1/2 m-auto mb-5 xl:h-full xl:m-0">
+            <div class="relative w-4/5 lg:w-1/2 m-auto mb-5 xl:h-full xl:m-0">
                 <img 
                 src="/images/next_circular_button.png" alt="next circular" 
                 class="absolute left-5 top-1/2 transform -translate-y-1/2 cursor-pointer rotate-180"
@@ -36,7 +36,7 @@
             <div class="flex flex-col m-auto w-[24rem]">
                 <h2 class="text-black font-lexend text-3xl font-bold uppercase text-center">Quezon City</h2>
                 <div class="flex justify-center">
-                    <img src="/images/studio/gps_icon.png" alt="gps icon" class="w-5">
+                    <img src="/images/studio/gps_icon.png" alt="gps icon" class="w-5 md:block hidden">
                     <p class="font-lexend text-black text-base">108 Panay Avenue near Mplace</p>
                 </div>
                 <div class="flex flex-wrap justify-around my-5">
@@ -68,11 +68,11 @@
             <div class="flex flex-col m-auto w-[24rem]">
                 <h2 class="text-black font-lexend text-3xl font-bold uppercase text-center">Binondo Manila</h2>
                 <div class="flex justify-center">
-                    <img src="/images/studio/gps_icon.png" alt="gps icon" class="w-5">
+                    <img src="/images/studio/gps_icon.png" alt="gps icon" class="w-5 md:block hidden">
                     <p class="font-lexend text-black text-base">7th floor PNB Quintin Paredes</p>
                 </div>
-                <div class="flex mt-5 w-full">
-                    <div class="flex flex-col justify-around mr-5">
+                <div class="flex mt-5 w-full md:flex-row flex-col">
+                    <div class="flex flex-row flex-wrap md:flex-col justify-around md:mr-5 mx-auto">
                         <div class="flex flex-col w-30">
                             <img src="/images/studio/aircon_icon.png" alt="aircon icon" class="w-15 mx-auto">
                             <p class="text-black font-lexend text-base text-center">With 3 2.5 hp air-conditioner</p>
@@ -87,7 +87,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col w-full my-auto">
+                    <div class="flex flex-col w-full my-auto md:mt-0 mt-5">
                         <table>
                             <tr>
                                 <td class="w-1/3"><img src="/images/studio/dancing_icon.png" alt="dancing icon" class="w-15 m-auto"></td>
@@ -116,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            <div class="relative w-1/2 mb-5 m-auto xl:h-full xl:m-0">
+            <div class="relative w-4/5 lg:w-1/2 mb-5 m-auto xl:h-full xl:m-0">
                 <img 
                 src="/images/next_circular_button.png" alt="next circular" 
                 class="absolute left-5 top-1/2 transform -translate-y-1/2 cursor-pointer rotate-180"
