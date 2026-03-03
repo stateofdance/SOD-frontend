@@ -4,6 +4,7 @@ import { RentalService } from '../../services/rental-service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppState } from '../../services/app-state';
 import { User } from '../../interfaces/user';
+import { Branch } from '../../interfaces/branch';
 
 @Component({
   selector: 'app-studio-rental-page',
@@ -11,7 +12,7 @@ import { User } from '../../interfaces/user';
   templateUrl: './studio-rental-page.html',
   styleUrl: './studio-rental-page.css',
 })
-export class StudioRentalPage {
+export class StudioRentalPage implements OnInit{
   @ViewChild('date') date!:ElementRef;
   @ViewChild('startTime') startTime!:ElementRef;
   @ViewChild('endTime') endTime!:ElementRef;
@@ -32,45 +33,31 @@ export class StudioRentalPage {
   available_scheds!:Array<[number, number]>;
   today:Date;
 
-  quezon_active_index = signal<number>(0);
-  binondo_active_index = signal<number>(0);
-
   selected_date:Date|null = null;
-  selected_branch = signal<string>('');
+  selected_branch = signal<number>(-1);
   start_index = signal<number>(0);
   start_sched = signal<string>('');
   end_sched = signal<string>('');
+  branches = signal<Branch[]>([]);
+  hovered_branch = signal<number>(-1);
+  viewing_branch = signal<Branch|null>(null);
 
   constructor() {
     this.today = new Date();
     this.today.setDate(this.today.getDate() + 1);
   }
 
-  setBranch(branch:string) {
+  ngOnInit() {
+    this.rental_service.get_rentable_branches().then(branches => {
+      this.branches.set(branches);
+    })
+  }
+
+  setBranch(branch:number) {
     this.selected_branch.set(branch);
     this.date.nativeElement.value = '';
     this.startTime.nativeElement.value = '';
     this.endTime.nativeElement.value = '';
-  }
-
-  next(branch:string) {
-    if (branch == 'quezon') {
-      if (this.quezon_active_index() == this.quezon_images.length - 1) {this.quezon_active_index.set(0); return;}
-      this.quezon_active_index.set(this.quezon_active_index() + 1);
-    }else {
-      if (this.binondo_active_index() == this.binondo_images.length - 1) {this.binondo_active_index.set(0); return;}
-      this.binondo_active_index.set(this.binondo_active_index() + 1);
-    }
-  }
-
-  previous(branch:string) {
-    if (branch == 'quezon') {
-      if (this.quezon_active_index() == 0) {this.quezon_active_index.set(this.quezon_images.length - 1); return;}
-      this.quezon_active_index.set(this.quezon_active_index() - 1);
-    }else {
-      if (this.binondo_active_index() == 0) {this.binondo_active_index.set(this.binondo_images.length - 1); return;}
-      this.binondo_active_index.set(this.binondo_active_index() - 1);
-    }
   }
 
   findGroup(time:number) : number {
@@ -161,6 +148,10 @@ export class StudioRentalPage {
 
     this.rental_service.rent_studio(this.selected_branch(), this.selected_date, this.start_sched(), this.end_sched(), this.state.user()!.authToken!)
     .then(checkoutUrl => window.open(checkoutUrl));
+  }
+
+  is_hovered(id:number):boolean {
+    return this.hovered_branch() == id;
   }
 
 }

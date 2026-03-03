@@ -15,11 +15,13 @@ import { PackagePage } from './pages/package-page/package-page';
 import { Tickets } from './components/account/tickets/tickets';
 import { Orders } from './components/account/orders/orders';
 import { Rentals } from './components/account/rentals/rentals';
+import { Performances } from './pages/performances/performances';
 
 export const routes: Routes = [
     { path:'', component:LandingPage, title:'State of Dance' },
     { path:'coaches', component:CoachesPage, title:'Coaches' },
     { path:'events', component:EventsPage, title:'Events' },
+    { path:'performances', component:Performances, title:'Performances' },
     { path:'merch', component:MerchPage, title:'Merchandise' },
     { path:'merch/item/:id', component:ItemPage, title:"Item" },
     { path:'studio-rental', component:StudioRentalPage, title:'Studio Rental' },
