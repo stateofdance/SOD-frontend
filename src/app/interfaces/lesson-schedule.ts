@@ -6,7 +6,6 @@ export interface LessonSchedule {
     id:number,
     lesson:Class,
     branch:Branch,
-    students:number[],
     coach:Coach,
     weekday:number,
     start_time:string,

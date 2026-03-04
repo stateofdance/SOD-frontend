@@ -1,10 +1,10 @@
 <div class="min-h-screen h-fit pt-30 pb-10 md:px-15">
     <div class="flex w-full">
-        <h2 class="font-hanson font-bold text-3xl lg:text-5xl text-black mt-auto mb-auto lg:mr-5 w-full lg:w-90 lg:text-left text-center">Merchandise</h2>
+        <h2 class="font-hanson font-bold text-3xl lg:text-5xl text-black mt-auto mb-auto lg:mr-5 w-full lg:w-110 lg:text-left text-center">Merchandise</h2>
         <hr class="w-full bg-black rounded-xs h-0.75 my-auto lg:block hidden">
         <img src="/images/black_diamond.png" alt="diamond" class="w-20 -translate-x-1 lg:block hidden">
     </div>
-    <div class="flex flex-wrap mt-15">
+    <div class="flex flex-wrap mt-15 justify-center lg:justify-start">
         @for (merch of merchandises(); track merch; let i = $index) {
             <div class="item w-80 flex flex-col mx-15">
                 <a href="/merch/item/{{merch.id}}">

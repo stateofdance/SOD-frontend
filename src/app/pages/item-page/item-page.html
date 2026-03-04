@@ -25,48 +25,12 @@
             >
         </div>
     </div>
-    <div class="flex flex-col p-10">
+    <div class="flex flex-col p-10 w-full lg:w-1/2">
         <h1 class="font-lexend text-black text-4xl font-bold md:text-left text-center">{{item()!.name}}</h1>
         <h2 class="font-open-sans text-black text-2xl font-bold mt-5 md:text-left text-center">₱{{final_price}}</h2>
-        <p class="font-lexend text-black text-xl mt-5 hidden md:block">Size Guide:</p>
-        <table class="hidden md:block">
-            <tr class="bg-black text-white text-xl font-lexend text-center">
-                <th class="p-5">Sizes</th>
-                <th class="p-5">Chest</th>
-                <th class="p-5">Body</th>
-                <th class="p-5">Sleeve</th>
-            </tr>
-            <tr class="text-black font-lexend text-xl text-center">
-                <td class="p-2.5">S</td>
-                <td class="p-2.5">20 1/2”</td>
-                <td class="p-2.5">26 1/2”</td>
-                <td class="p-2.5">9”</td>
-            </tr>
-            <tr class="text-black font-lexend text-xl text-center">
-                <td class="p-2.5">M</td>
-                <td class="p-2.5">22”</td>
-                <td class="p-2.5">27 1/2”</td>
-                <td class="p-2.5">9 1/2”</td>
-            </tr>
-            <tr class="text-black font-lexend text-xl text-center">
-                <td class="p-2.5">L</td>
-                <td class="p-2.5">23 1/2”</td>
-                <td class="p-2.5">28 1/2”</td>
-                <td class="p-2.5">10”</td>
-            </tr>
-            <tr class="text-black font-lexend text-xl text-center">
-                <td class="p-2.5">XL</td>
-                <td class="p-2.5">25”</td>
-                <td class="p-2.5">29 1/2”</td>
-                <td class="p-2.5">10 1/2”</td>
-            </tr>
-            <tr class="text-black font-lexend text-xl text-center">
-                <td class="p-2.5">2XL</td>
-                <td class="p-2.5">26 1/2”</td>
-                <td class="p-2.5">30 1/2”</td>
-                <td class="p-2.5">11”</td>
-            </tr>
-        </table>
+        @if (item()!.details) {
+            <img src="{{item()!.details}}" alt="item details" class="mt-5 hidden md:block mx-auto w-4/5">
+        }
         <form [formGroup]="custom_form" class="flex mt-10 lg:justify-between justify-center lg:flex-row flex-col items-start">
             <div class="flex flex-col">
                 @for (customization of customizations(); track $index) {

@@ -52,4 +52,9 @@ export class LessonService {
     );
     return firstValueFrom(observable);
   }
+
+  async get_occupancy(schedule_id:number, date_string:string):Promise<number> {
+    const observable = this.httpClient.get<number>(`${environment.apiURl}/schedules/occupancy/${schedule_id}/${date_string}/`);
+    return firstValueFrom(observable);
+  }
 }

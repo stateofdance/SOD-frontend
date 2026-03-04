@@ -1,6 +1,7 @@
 export interface MerchItem {
     id:number,
     name:string,
+    details:string,
     price:string,
     customizations?:string[],
     thumbnail:string,

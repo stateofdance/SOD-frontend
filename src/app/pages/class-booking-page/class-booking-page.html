@@ -1,4 +1,4 @@
-<div class="h-fit p-2 md:px-10 pt-35 bg-dark-violet flex flex-col">
+<div class="h-fit p-2 md:px-10 pt-35 bg-black-violet flex flex-col">
     <h1 class="text-white font-hanson text-5xl text-center">Book a <span class="text-gold">Class</span></h1>
 
     @if (finalizing_booking) {
@@ -56,7 +56,11 @@
                                 <div class="flex flex-col min-h-50 h-fit">
                                     @for (class of classes()[date.getDay()]; track $index) {
                                         @if (filterClass(class)) {
-                                            <app-schedule [class]="class" [date]="date" [section_selected]="true" [schedule_selected]="checkSelectedByTime(date, class.start_time)" (select)="clickedSchedule($event)"></app-schedule>
+                                            @if (this.state.user()) {
+                                                <app-schedule [class]="class" [date]="date" [section_selected]="true" [schedule_selected]="checkSelectedByTime(date, class.start_time)" (select)="clickedSchedule($event)" [user_id]="this.state.user()!.id!"></app-schedule>
+                                            }@else {
+                                                <app-schedule [class]="class" [date]="date" [section_selected]="true" [schedule_selected]="checkSelectedByTime(date, class.start_time)" (select)="clickedSchedule($event)"></app-schedule>
+                                            }
                                         }
                                     }
                                 </div>
