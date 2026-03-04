@@ -90,6 +90,15 @@ export class ItemPage implements OnInit{
   }
 
   submit() {
+    if (this.branch.value == "None") {
+      alert("Please select a branch.");
+      return;
+    }
+    if (this.custom_form.value && Object.values(this.custom_form.value).includes("None")) {
+      alert("Please select all customizations.");
+      return;
+    }
+
     this.service.submit_order(
       this.item()?.id!, Object.values(this.custom_form.value).map(Number), 
       this.counter(), parseInt(this.branch.value!), this.state.user()?.authToken!
