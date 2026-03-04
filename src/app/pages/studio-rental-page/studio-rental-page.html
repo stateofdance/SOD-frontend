@@ -112,7 +112,8 @@
                 <button class="font-eurostile text-black bg-white font-bold p-1.5 rounded-full w-full h-10 lg:w-45 cursor-pointer uppercase"
                 (click)="viewing_branch.set(null)">Select Branch</button>
             </div>
-            <p></p>
+            
+            <app-studio-detail [rawApiData]="viewing_branch()?.description || ''" class="w-full"></app-studio-detail>
 
             <!-- google maps -->
             <iframe #viewMap 

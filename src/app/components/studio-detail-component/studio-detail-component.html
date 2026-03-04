@@ -1,0 +1,21 @@
+<div class="studio-container">
+  <div class="studio-section" *ngFor="let section of parsedSections">
+    
+    <h2 class="section-title" *ngIf="section.title">{{ section.title }}</h2>
+    
+    <ng-container *ngFor="let block of section.blocks">
+      
+      <p class="section-text" *ngIf="block.type === 'text'">
+        {{ block.value }}
+      </p>
+
+      <ul class="section-list" *ngIf="block.type === 'list'">
+        <li class="section-item" *ngFor="let item of block.values">
+          {{ item }}
+        </li>
+      </ul>
+
+    </ng-container>
+
+  </div>
+</div>
