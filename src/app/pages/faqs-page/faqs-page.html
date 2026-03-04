@@ -1,0 +1,75 @@
+<div class="h-fit  min-h-full gap-10 p-2 md:px-10 pt-35 font-lexend bg-linear-to-b from-black to to-[#0E0114] flex flex-col">
+    <div class="justify-center items-center">
+        <p class="text-center text-violet font-lexend text-base"> FAQs  </p>
+        <h1 class="mt-3 text-center text-white font-hanson text-4xl">Frequently Asked <span class="text-gold"> Questions </span></h1>
+        <p class="mt-5 text-center text-white font-light font-lexend text-base"> Quick answers to help you get started with State of Dance.  </p>
+    </div>
+
+    <!-- buttons -->
+    <div class="mx-auto flex gap-5 w-[60%]">
+        <button (click)="setActiveButton('academy')"
+            [ngClass]="{
+                'bg-violet text-white': activeButton() === 'academy', 
+                'bg-white text-black': activeButton() !== 'academy'
+            }"
+            class="w-1/4 p-3 rounded-full font-bold hover:bg-violet transition-all ease-in">
+            Academy
+        </button>
+        <button (click)="setActiveButton('booking')"
+           [ngClass]="{
+                'bg-violet text-white': activeButton() === 'booking', 
+                'bg-white text-black': activeButton() !== 'booking'
+            }"
+            class="w-1/4 p-3 rounded-full font-bold hover:bg-violet transition-all ease-in">
+            Booking
+        </button>
+        <button (click)="setActiveButton('payments')"
+           [ngClass]="{
+                'bg-violet text-white': activeButton() === 'payments', 
+                'bg-white text-black': activeButton() !== 'payments'
+            }"
+            class="w-1/4 p-3 rounded-full font-bold hover:bg-violet transition-all ease-in">
+            Payments
+        </button>
+        <button (click)="setActiveButton('account')"
+           [ngClass]="{
+                'bg-violet text-white': activeButton() === 'account', 
+                'bg-white text-black': activeButton() !== 'account'
+            }"
+            class="w-1/4 p-3 rounded-full font-bold hover:bg-violet transition-all ease-in">
+            Account
+        </button>
+    </div>
+
+    <!-- questions -->
+    <div class="mb-[100px] mx-auto flex flex-col gap-5 w-[60%] text-white">
+        <div *ngFor="let question of questions; let i = index" 
+            class="p-10 rounded-4xl w-full border border-violet bg-linear-to-b from-[#0F0016] to to-[#1E002A]">
+            
+            <!-- Question text with rotating SVG icon -->
+            <div class="flex justify-between cursor-pointer items-center " (click)="toggleQuestion(i)">
+                <p class="text-lg ">
+                    {{ question.question }}
+                </p>
+
+                <!-- Dropdown icon (rotates when expanded) -->
+                <svg 
+                    [ngClass]="{'rotate-180': activeQuestionIndex() === i}" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    class="h-5 w-5 text-white transition-transform duration-300" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            
+            <!-- Answer content (toggle visibility) -->
+            <div [ngClass]="{'block': activeQuestionIndex() === i, 'hidden': activeQuestionIndex() !== i}" 
+                class="mt-4 text-white transition-all ease-in">
+                <p>{{ question.answer }}</p>
+            </div>
+        </div>
+    </div>
+</div>
