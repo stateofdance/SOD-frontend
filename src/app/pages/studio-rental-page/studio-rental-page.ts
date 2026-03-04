@@ -154,4 +154,31 @@ export class StudioRentalPage implements OnInit{
     return this.hovered_branch() == id;
   }
 
+
+  currentImageIndex = signal<number>(0);
+
+  get currentGallery(): string[] {
+    const branchName = this.viewing_branch()?.name.toLowerCase() || '';
+    if (branchName.includes('quezon')) return this.quezon_images;
+    if (branchName.includes('binondo')) return this.binondo_images;
+    return [];
+  }
+
+  nextImage() {
+    this.currentImageIndex.update(i => (i + 1) % this.currentGallery.length);
+  }
+
+  prevImage() {
+    this.currentImageIndex.update(i => (i - 1 + this.currentGallery.length) % this.currentGallery.length);
+  }
+
+  getSlidePosition(index: number): 'center' | 'left' | 'right' | 'hidden' {
+  const current = this.currentImageIndex();
+  const total = this.currentGallery.length;
+
+  if (index === current) return 'center';
+  if (index === (current - 1 + total) % total) return 'left';
+  if (index === (current + 1) % total) return 'right';
+  return 'hidden';
+}
 }

@@ -1,0 +1,14 @@
+/* studio-rental-page.css */
+.scale-90 {
+    transform: scale(0.9);
+}
+
+/* Ensure the container doesn't show scrollbars during transitions */
+.relative {
+    perspective: 1000px;
+}
+
+/* Optional: Add a subtle glow to the active image like the one in the photo */
+.z-30 img {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}

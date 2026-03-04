@@ -46,9 +46,57 @@
         </div>
     }@else {
         <div class="flex flex-col w-full ml-10 text-white">
-            <div class="flex cursor-pointer p-2" (click)="viewing_branch.set(null)">
+            <div class="flex gap-4 items-center cursor-pointer" (click)="viewing_branch.set(null)">
+                <img src="/images/back.png" alt="back icon" class="w-5 cursor-pointer">
                 <p class="font-lexend text-base">Back to Branches</p>
             </div>
+
+            <!-- carousel -->
+            <div class="relative w-full overflow-hidden h-[400px] -mt-10 md:h-[600px] flex items-center justify-center">
+                <div class="relative flex items-center justify-center w-full h-full">
+                    
+                    @for (img of currentGallery; track $index) {
+                        <div class="h-[70vh] overflow-hidden absolute transition-all duration-500 ease-in-out transform flex items-center justify-center"
+                            [ngClass]="{
+                                'z-30 scale-100 opacity-100 w-[70%] md:w-[60%] translate-x-0': getSlidePosition($index) === 'center',
+                                'z-20 -translate-x-[60%] scale-80 opacity-100 w-[50%]': getSlidePosition($index) === 'left',
+                                'z-20 translate-x-[60%] scale-90 opacity-100 w-[50%]': getSlidePosition($index) === 'right',
+                                'z-10 opacity-0 scale-75': getSlidePosition($index) === 'hidden'
+                            }">
+                            
+                            <div class="absolute inset-0 bg-black transition-opacity duration-500 z-10"
+                                [ngClass]="{'opacity-0': getSlidePosition($index) === 'center', 'opacity-60': getSlidePosition($index) !== 'center'}">
+                            </div>
+
+                            <img [src]="img" class="w-full h-full object-cover shadow-2xl border border-white/10">
+                        </div>
+                    }
+
+                    <button (click)="prevImage()" 
+                        class="flex items-center justify-center absolute left-[15.2%] z-40 bg-black/40 hover:bg-black/70 text-white w-[50px] h-[100px] border border-violet border-r-0 transition-all cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                        </svg>
+                    </button>
+
+                    <button (click)="nextImage()" 
+                        class="flex items-center justify-center absolute right-[15.2%] z-40 bg-black/40 hover:bg-black/70 text-white w-[50px] h-[100px] border border-violet border-l-0 transition-all cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 flex gap-2">
+                    @for (img of currentGallery; track $index) {
+                        <div class="h-3 w-3 rounded-full transition-all duration-300"
+                            [ngClass]="currentImageIndex() === $index ? 'bg-white w-6' : 'border border-white'">
+                        </div>
+                    }
+                </div>
+            </div>
+
+
             <div class="flex items-center justify-between w-full  mb-5">
                 <div class="flex flex-col">
                     <h2 class="font-lexend font-bold text-3xl uppercase mb-1">{{viewing_branch()?.name}}</h2>
