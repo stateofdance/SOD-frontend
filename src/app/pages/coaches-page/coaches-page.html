@@ -1,4 +1,4 @@
-<div class="min-h-screen h-fit pt-35 bg-linear-to-t from-dark-violet to-black">
+<div class="min-h-screen h-fit lg:px-0 pt-35 bg-linear-to-t from-dark-violet to-black">
     <div class="justify-center items-center">
         <h1 class="mt-3 text-center text-white font-hanson text-4xl"> <span class="text-gold"> Coaches </span></h1>
         <p class="mt-5 text-center text-white font-light font-lexend text-base"> Meet the passionate mentors who turn every step into confidence and artistry.  </p>
@@ -6,9 +6,9 @@
     @for (coach of coaches(); track coach.id) {
         @if ($index % 2 == 0) {
             <div class="flex h-fit py-10 flex-col lg:flex-row">
-                <div class="w-full lg:w-1/2 relative flex">
+                <div class="w-full lg:w-1/2 relative flex bg-gold lg:bg-transparent">
                     <img src="/images/coach_page/coaches_background.png" alt="design" class="absolute bottom-0 w-4/5 z-0 lg:block hidden">
-                    <img src="{{coach.bio_picture}}" alt="Kervin Mendiola" class="w-1/2 lg:h-9/10 lg:w-auto mt-auto z-10 lg:ml-15 ml-auto mr-auto">
+                    <img src="{{coach.bio_picture}}" alt="Coach Picture" class="w-1/2 lg:h-9/10 lg:w-auto mt-auto z-10 lg:ml-15 ml-auto mr-auto">
                 </div>
                 <div class="flex flex-col w-full lg:w-1/2 lg:px-0 px-5 lg:mt-0 mt-10">
                     <div class="content mr-auto my-auto w-full lg:w-4/5 lg:text-left text-center">
@@ -29,7 +29,7 @@
                         <p class="font-hanson text-white text-xl font-bold mt-5">{{coach.motto}}</p>
                     </div>
                 </div>
-                <div class="w-full lg:w-1/2 relative flex">
+                <div class="w-full lg:w-1/2 relative flex bg-gold lg:bg-transparent">
                     <img src="/images/coach_page/coaches_background.png" alt="design" class="absolute bottom-0 right-0 w-4/5 z-0 transform rotate-180 lg:block hidden">
                     <img src="{{coach.bio_picture}}" alt="Kervin Mendiola" class="w-1/2 lg:h-9/10 lg:w-auto mt-auto z-10 lg:mr-15 ml-auto mr-auto">
                 </div>
