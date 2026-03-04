@@ -35,10 +35,10 @@
             <hr class="w-full bg-black rounded-xs h-0.5">
         }
     </div>
-    <a [routerLink]="['/packages', {outlets:{sidebar: null}}]" class="mt-5">
+    <a [routerLink]="['', {outlets:{primary: 'packages', sidebar: null}}]" class="mt-5">
         <button class="font-eurostile font-bold text-white text-xl rounded-full bg-black uppercase py-2 w-full cursor-pointer">Get Tickets</button>
     </a>
     <a [routerLink]="['', {outlets:{sidebar: 'account'}}]" class="mt-5">
-        <button class="font-eurostile font-bold text-white text-xl rounded-full bg-black uppercase py-2 w-full cursor-pointer mt-10">Back</button>
+        <button class="font-eurostile font-bold text-white text-xl rounded-full bg-black uppercase py-2 w-full cursor-pointer">Back</button>
     </a>
 </div>
