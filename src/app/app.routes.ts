@@ -17,10 +17,12 @@ import { Orders } from './components/account/orders/orders';
 import { Rentals } from './components/account/rentals/rentals';
 import { Performances } from './pages/performances/performances';
 import { TypesClassesPage } from './pages/class-typesofclass-page/class-types-classes-page';
+import { FAQsPage } from './pages/faqs-page/faqs-page';
 
 export const routes: Routes = [
     { path:'', component:LandingPage, title:'State of Dance' },
     { path:'types-classes', component:TypesClassesPage, title:'Types of Classes' },
+    { path:'faqs', component:FAQsPage, title:'Frequently Asked Questions' },
     { path:'coaches', component:CoachesPage, title:'Coaches' },
     { path:'events', component:EventsPage, title:'Events' },
     { path:'performances', component:Performances, title:'Performances' },

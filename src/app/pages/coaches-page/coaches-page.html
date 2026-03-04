@@ -1,8 +1,7 @@
 <div class="min-h-screen h-fit pt-35 bg-linear-to-t from-dark-violet to-black">
-    <div class="flex md:px-15">
-        <h2 class="font-hanson font-bold text-3xl md:text-5xl text-amber-50 mt-auto mb-auto mx-10 w-full lg:w-110 lg:text-left text-center">Coaches</h2>
-        <hr class="w-full bg-amber-50 rounded-xs h-0.75 my-auto lg:block hidden">
-        <img src="/images/cream_diamond.png" alt="diamond" class="w-15 -translate-x-1 lg:block hidden">
+    <div class="justify-center items-center">
+        <h1 class="mt-3 text-center text-white font-hanson text-4xl"> <span class="text-gold"> Coaches </span></h1>
+        <p class="mt-5 text-center text-white font-light font-lexend text-base"> Meet the passionate mentors who turn every step into confidence and artistry.  </p>
     </div>
     @for (coach of coaches(); track coach.id) {
         @if ($index % 2 == 0) {
@@ -37,5 +36,40 @@
             </div>
         }
     }
+
+    <!-- core values  -->
+    <div class="w-[90%] md:w-[85%] lg:w-[80%] mx-auto mt-10 pb-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-20">
+
+        <div class="flex flex-col lg:flex-row items-center lg:items-start text-center lg:text-left">
+            <img src="/images/large_diamond.png" alt="diamond" class="w-10 h-10 mb-4 lg:mb-0 lg:mr-5 shrink-0">
+            <div class="flex flex-col">
+                <h3 class="font-eurostile text-gold text-3xl lg:text-4xl font-bold">Fun</h3>
+                <p class="text-white font-open-sans font-regular mt-3 leading-relaxed">
+                    We believe learning and growth should be joyful, energizing, and full of creative play.
+                </p>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center lg:items-start text-center lg:text-left">
+            <img src="/images/large_diamond.png" alt="diamond" class="w-10 h-10 mb-4 lg:mb-0 lg:mr-5 shrink-0">
+            <div class="flex flex-col">
+                <h3 class="font-eurostile text-gold text-3xl lg:text-4xl font-bold">Integrity</h3>
+                <p class="text-white font-open-sans font-regular mt-3 leading-relaxed">
+                    We move with honesty, respect, and authenticity — on and off the stage.
+                </p>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center lg:items-start text-center lg:text-left md:col-span-2 lg:col-span-1 md:w-1/2 md:mx-auto lg:w-full">
+            <img src="/images/large_diamond.png" alt="diamond" class="w-10 h-10 mb-4 lg:mb-0 lg:mr-5 shrink-0">
+            <div class="flex flex-col">
+                <h3 class="font-eurostile text-gold text-3xl lg:text-4xl font-bold">Enthusiasm</h3>
+                <p class="text-white font-open-sans font-regular mt-3 leading-relaxed">
+                    We bring passion and positivity to every class, inspiring dancers to give their all and love the journey.
+                </p>
+            </div>
+        </div>
+
+    </div>
 </div>
 
