@@ -32,7 +32,8 @@
                         </div>
                         <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':events_show(), 'scrolled':isScrolled || getCurrentPath().length > 2, 'show-all':show_all()}">
                             <p class="uppercase font-eurostile font-bold text-base xl:hidden block">EVENTS</p>
-                            <a routerLink="/events"><li class="p-0.5 link" (click)="hideAll()">Dancer Events Profile</li></a>
+                            <a routerLink="/performances"><li class="p-0.5 link" (click)="hideAll()">Dancer Events Profile</li></a>
+                            <a routerLink="/events"><li class="p-0.5 link" (click)="hideAll()">School Events</li></a>
                             <a routerLink="/merch"><p class="uppercase font-eurostile font-bold text-base xl:hidden block" (click)="hideAll()">Merch</p></a>
                         </ul>
                     </div>

@@ -4,7 +4,7 @@
 @import "tailwindcss";
 
 @font-face {
-    font-family: "EurostileExtended";
+    font-family: "Eurostile-Extended";
     src: url("/fonts/EurostileExtendedBlack.ttf") format('truetype');
     font-weight: bold;
     font-style: normal;
@@ -18,7 +18,7 @@
 }
 
 @theme {
-    --font-eurostile: "EurostileExtended", sans-serif;
+    --font-eurostile: "Eurostile-Extended", sans-serif;
     --font-open-sans: "Open Sans", sans-serif;
     --font-hanson: "Hanson", sans-serif;
     --font-lexend: "Lexend", sans-serif;

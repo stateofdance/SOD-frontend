@@ -16,8 +16,11 @@
                 }
             </select>
         </div>
-        <button class="mt-10 font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-full bg-linear-to-r from-gold to-violet uppercase cursor-pointer"
-        (click)="payment()">PROCEED TO PAYMENT</button>
+        <button class="mt-10 h-14 font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-full bg-violet uppercase cursor-pointer 
+                    transition-all duration-200 ease-in-out 
+                    hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:bg-gold active:scale-95">
+            PROCEED TO PAYMENT
+        </button>
     </div>
     @if (!viewing_branch()) {
         <div class="flex flex-col w-full">
@@ -46,7 +49,7 @@
         </div>
     }@else {
         <div class="flex flex-col w-full ml-10 text-white">
-            <div class="flex gap-4 items-center cursor-pointer" (click)="viewing_branch.set(null)">
+            <div class="z-50 flex gap-4 items-center cursor-pointer" (click)="viewing_branch.set(null)">
                 <img src="/images/back.png" alt="back icon" class="w-5 cursor-pointer">
                 <p class="font-lexend text-base">Back to Branches</p>
             </div>
@@ -109,6 +112,16 @@
                 (click)="viewing_branch.set(null)">Select Branch</button>
             </div>
             <p></p>
+
+            <!-- google maps -->
+            <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.123!2d120.981!3d14.599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDM1JzU2LjQiTiAxMjDCsDU4JzUxLjYiRQ!5e0!3m2!1sen!2sph!4v123456789" 
+            class="w-full hue-rotate-[60deg]" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+            </iframe>
         </div>
     }
 </div>
