@@ -18,6 +18,7 @@ import { Rentals } from './components/account/rentals/rentals';
 import { Performances } from './pages/performances/performances';
 import { TypesClassesPage } from './pages/class-typesofclass-page/class-types-classes-page';
 import { FAQsPage } from './pages/faqs-page/faqs-page';
+import { EventsDetailsPage } from './pages/events-details/event-details';
 
 export const routes: Routes = [
     { path:'', component:LandingPage, title:'State of Dance' },
@@ -25,6 +26,7 @@ export const routes: Routes = [
     { path:'faqs', component:FAQsPage, title:'Frequently Asked Questions' },
     { path:'coaches', component:CoachesPage, title:'Coaches' },
     { path:'events', component:EventsPage, title:'Events' },
+    { path:'event-details', component:EventsDetailsPage, title:'School Events' },
     { path:'performances', component:Performances, title:'Performances' },
     { path:'merch', component:MerchPage, title:'Merchandise' },
     { path:'merch/item/:id', component:ItemPage, title:"Item" },

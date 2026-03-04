@@ -1,0 +1,12 @@
+
+.event.not-display {
+    display: none;
+}
+
+.event.display {
+    display: block;
+}
+
+video.show {
+    display: block;
+}

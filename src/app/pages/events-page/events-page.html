@@ -1,109 +1,39 @@
-<div class="h-screen pt-20 flex bg-amber-50">
-    <img src="{{images[current_displayed()]}}" alt="event poster" class="h-full lg:block hidden">
-    <div class="flex flex-col w-full h-full p-10">
-        <div class="flex w-full">
-            <h2 class="font-hanson font-bold text-5xl text-black mt-auto mb-auto mr-5 w-full lg:w-90 lg:text-left text-center">Events</h2>
-            <hr class="w-full bg-black rounded-xs h-0.75 my-auto lg:block hidden">
-            <img src="/images/black_diamond.png" alt="diamond" class="w-15 -translate-x-1 lg:block hidden">
-        </div>
-        <div #event class="event flex flex-col w-full m-auto h-full overflow-y-scroll">
-            <h3 class="text-black font-lexend font-bold text-2xl mt-5">State Of Dance Christmas Party 2025</h3>
-            <p class="font-lexend text-black text-base mt-2">
-                We’re starting the holiday chaos earlier than everyone else.<br>
-                Because why wait for December when we can party 𝗡𝗢𝗪?<br>
-                <br>
-                𝗡𝗼𝘃𝗲𝗺𝗯𝗲𝗿 𝟮𝟰, 𝟮𝟬𝟮𝟱 (𝗠𝗼𝗻𝗱𝗮𝘆)<br>
-                𝟳:𝟯𝟬 𝗣𝗠<br>
-                𝗦𝘁𝗮𝘁𝗲 𝗼𝗳 𝗗𝗮𝗻𝗰𝗲 𝗦𝘁𝘂𝗱𝗶𝗼 — 𝗠𝗮𝗻𝗶𝗹𝗮 𝗕𝗿𝗮𝗻𝗰𝗵<br>
-                <br>
-                Exchange gifts: worth P500<br>
-                Registration Fee: P1,500 with food<br>
-                Early Bird: P995 with food (valid until Nov 21)<br>
-                Scan the QR code on the poster to secure your slot before it fills up!<br>
-                <br>
-                This one’s for the 𝗮𝗱𝘂𝗹𝘁𝘀 𝗼𝗳 𝗦𝗢𝗗 — the dancers who grind all year and deserve a night of pure fun, zero stress, full vibes.<br>
-                <br>
-                Because:<br>
-                December = traffic, fully booked, mall sardines<br>
-                November = more space, more fun, less stress<br>
-                Games. Dance Party. Exchange gifts.<br>
-                And yes — photo dumps will be mandatory.<br>
-                Don’t ghost the group chat. See you there!<br>
-                <br>
-                𝗖𝗼𝗺𝗲 𝗳𝗲𝘀𝘁𝗶𝘃𝗲. 𝗖𝗼𝗺𝗲 𝗲𝘅𝘁𝗿𝗮.<br>
-                𝗖𝗼𝗺𝗲 𝗿𝗲𝗮𝗱𝘆 𝘁𝗼 𝗽𝗮𝗿𝘁𝘆 𝘄𝗶𝘁𝗵 𝘆𝗼𝘂𝗿 𝗱𝗮𝗻𝗰𝗲 𝗳𝗮𝗺<br>
-            </p>
-        </div>
-        <div #event class="event flex flex-col w-full m-auto h-full overflow-y-scroll not-display">
-            <h3 class="text-black font-lexend font-bold text-2xl mt-5">State Of Dance Christmas Party 2025 Testing</h3>
-            <p class="font-lexend text-black text-base mt-2">
-                We’re starting the holiday chaos earlier than everyone else.<br>
-                Because why wait for December when we can party 𝗡𝗢𝗪?<br>
-                <br>
-                𝗡𝗼𝘃𝗲𝗺𝗯𝗲𝗿 𝟮𝟰, 𝟮𝟬𝟮𝟱 (𝗠𝗼𝗻𝗱𝗮𝘆)<br>
-                𝟳:𝟯𝟬 𝗣𝗠<br>
-                𝗦𝘁𝗮𝘁𝗲 𝗼𝗳 𝗗𝗮𝗻𝗰𝗲 𝗦𝘁𝘂𝗱𝗶𝗼 — 𝗠𝗮𝗻𝗶𝗹𝗮 𝗕𝗿𝗮𝗻𝗰𝗵<br>
-                <br>
-                Exchange gifts: worth P500<br>
-                Registration Fee: P1,500 with food<br>
-                Early Bird: P995 with food (valid until Nov 21)<br>
-                Scan the QR code on the poster to secure your slot before it fills up!<br>
-                <br>
-                This one’s for the 𝗮𝗱𝘂𝗹𝘁𝘀 𝗼𝗳 𝗦𝗢𝗗 — the dancers who grind all year and deserve a night of pure fun, zero stress, full vibes.<br>
-                <br>
-                Because:<br>
-                December = traffic, fully booked, mall sardines<br>
-                November = more space, more fun, less stress<br>
-                Games. Dance Party. Exchange gifts.<br>
-                And yes — photo dumps will be mandatory.<br>
-                Don’t ghost the group chat. See you there!<br>
-                <br>
-                𝗖𝗼𝗺𝗲 𝗳𝗲𝘀𝘁𝗶𝘃𝗲. 𝗖𝗼𝗺𝗲 𝗲𝘅𝘁𝗿𝗮.<br>
-                𝗖𝗼𝗺𝗲 𝗿𝗲𝗮𝗱𝘆 𝘁𝗼 𝗽𝗮𝗿𝘁𝘆 𝘄𝗶𝘁𝗵 𝘆𝗼𝘂𝗿 𝗱𝗮𝗻𝗰𝗲 𝗳𝗮𝗺<br>
-            </p>
-        </div>
-        <div #event class="event flex flex-col w-full m-auto h-full overflow-y-scroll not-display">
-            <h3 class="text-black font-lexend font-bold text-2xl mt-5">State Of Dance Christmas Party 2025 Testing 1</h3>
-            <p class="font-lexend text-black text-base mt-2">
-                We’re starting the holiday chaos earlier than everyone else.<br>
-                Because why wait for December when we can party 𝗡𝗢𝗪?<br>
-                <br>
-                𝗡𝗼𝘃𝗲𝗺𝗯𝗲𝗿 𝟮𝟰, 𝟮𝟬𝟮𝟱 (𝗠𝗼𝗻𝗱𝗮𝘆)<br>
-                𝟳:𝟯𝟬 𝗣𝗠<br>
-                𝗦𝘁𝗮𝘁𝗲 𝗼𝗳 𝗗𝗮𝗻𝗰𝗲 𝗦𝘁𝘂𝗱𝗶𝗼 — 𝗠𝗮𝗻𝗶𝗹𝗮 𝗕𝗿𝗮𝗻𝗰𝗵<br>
-                <br>
-                Exchange gifts: worth P500<br>
-                Registration Fee: P1,500 with food<br>
-                Early Bird: P995 with food (valid until Nov 21)<br>
-                Scan the QR code on the poster to secure your slot before it fills up!<br>
-                <br>
-                This one’s for the 𝗮𝗱𝘂𝗹𝘁𝘀 𝗼𝗳 𝗦𝗢𝗗 — the dancers who grind all year and deserve a night of pure fun, zero stress, full vibes.<br>
-                <br>
-                Because:<br>
-                December = traffic, fully booked, mall sardines<br>
-                November = more space, more fun, less stress<br>
-                Games. Dance Party. Exchange gifts.<br>
-                And yes — photo dumps will be mandatory.<br>
-                Don’t ghost the group chat. See you there!<br>
-                <br>
-                𝗖𝗼𝗺𝗲 𝗳𝗲𝘀𝘁𝗶𝘃𝗲. 𝗖𝗼𝗺𝗲 𝗲𝘅𝘁𝗿𝗮.<br>
-                𝗖𝗼𝗺𝗲 𝗿𝗲𝗮𝗱𝘆 𝘁𝗼 𝗽𝗮𝗿𝘁𝘆 𝘄𝗶𝘁𝗵 𝘆𝗼𝘂𝗿 𝗱𝗮𝗻𝗰𝗲 𝗳𝗮𝗺<br>
-            </p>
-        </div>
-        <div class="flex justify-center md:justify-between mt-10 items-center md:flex-row flex-col">
-            <a href="{{registration_links[current_displayed()]}}" target="_blank"><button class="bg-gold p-2 uppercase border-2 w-45 border-white rounded-full text-white font-bold font-eurostile cursor-pointer">Register Here</button></a>
-            <div class="flex md:mt-0 mt-5">
-                <button class="w-9 h-9 my-auto cursor-pointer" (click)="previousPage()"><img src="/images/next_circular_button.png" alt="next circular button" class="h-full w-full transform rotate-180"></button>
-                @for (event of events(); track event; let i = $index) {
-                    @if (i == current_displayed()) {
-                        <img src="/images/selected_dot.png" alt="selected dot" class="w-5 mx-2 my-auto">
-                    }@else {
-                        <img src="/images/not_selected_dot.png" alt="selected dot" class="w-5 mx-2 my-auto">
-                    }
-                }
-                <button class="w-9 h-9 my-auto cursor-pointer" (click)="nextPage()"><img src="/images/next_circular_button.png" alt="next circular button" class="h-full w-full"></button>
-            </div>
-        </div>
+<div class="h-screen pt-20 bg-linear-to-b from-black to to-[#0E0114] ">
+    <div class="mt-20 m-auto justify-center items-center ">
+        <p class="text-center text-violet font-lexend text-base"> School Events  </p>
+        <h1 class="mt-3 text-center text-white font-hanson text-4xl"> Upcoming <span class="text-gold"> Events </span></h1>
     </div>
+
+    <!-- events -->
+     <div class="mt-10 font-lexend overflow-hidden">
+        <div class="mb-[100px] mx-auto flex flex-col gap-5 w-[60%] text-white ">
+            <!-- container -->
+            <a routerLink="/event-details" fragment="event-details">
+
+                <div class="flex rounded-4xl w-full border border-violet bg-linear-to-b from-[#0F0016] to to-[#1E002A] overflow-hidden">
+                    <!-- text -->
+                    <div class="p-10 flex flex-1 flex-col cursor-pointer">
+                        <p class="font-bold text-2xl">
+                            State of Dance Christmas Party 2025
+                        </p>
+                        <p class="font-thin mb-4">
+                            November 24, 2025   |   7:30 PM   |   SOD Studio (Binondo Manila Branch)
+                        </p>
+                        <p class="font-normal font-sm">
+                            We’re starting the holiday chaos earlier than everyone else. Because why wait for December when we can party 𝗡𝗢𝗪?
+                        </p>
+                    </div>
+
+                    <!-- image -->
+
+                    <div class="w-1/4 h-full cursor-pointer">
+                        <div class="h-full">
+                            <img src="/images/carousel/image_1.jpg" class="w-full min-h-[190px] object-center object-cover" />
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+     </div>
 </div>
 
