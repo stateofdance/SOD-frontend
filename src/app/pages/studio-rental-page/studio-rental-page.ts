@@ -5,10 +5,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppState } from '../../services/app-state';
 import { User } from '../../interfaces/user';
 import { Branch } from '../../interfaces/branch';
+import { StudioDetailComponent } from "../../components/studio-detail-component/studio-detail-component";
 
 @Component({
   selector: 'app-studio-rental-page',
-  imports: [NgClass, ReactiveFormsModule],
+  imports: [NgClass, ReactiveFormsModule, StudioDetailComponent],
   templateUrl: './studio-rental-page.html',
   styleUrl: './studio-rental-page.css',
 })

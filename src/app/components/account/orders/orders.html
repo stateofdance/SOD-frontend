@@ -1,1 +1,26 @@
-<p>orders works!</p>
+<div class="flex flex-col w-full h-full p-5 bg-amber-50 text-black">
+    <h2 class="font-hanson text-black font-bold text-4xl text-center mt-5">Orders</h2>
+    <div class="flex flex-col w-full h-full overflow-y-auto mt-10">
+        <hr class="w-full bg-black rounded-xs h-0.5">
+        @if (orders().length == 0) {
+            <p class="text-center text-xl font-lexend mt-5">No orders yet.</p>
+        }
+        @for (order of orders(); track $index) {
+            <div class="flex flex-col text-[14px] uppercase ml-4 text-black my-5">
+                <h6 class="font-bold text-xs">{{order.created_at.toDateString()}} - {{order.branch.name}}</h6>
+                <h5 class="font-bold">{{order.quantity}}x {{order.merch.name}}</h5>
+                <div class="flex flex-wrap">
+                    <p>P{{order.total}}</p>
+                    @for (customization of order.customizations; track customization.id) {
+                        <p class="ml-2">| {{customization.name}}</p>
+                    }
+                </div>
+            </div>
+            <hr class="w-full bg-black rounded-xs h-0.5">
+        }
+        
+    </div>
+    <a [routerLink]="['', {outlets:{sidebar: 'account'}}]" class="mt-5">
+        <button class="font-eurostile font-bold text-white text-xl rounded-full bg-black uppercase py-2 w-full cursor-pointer">Back</button>
+    </a>
+</div>

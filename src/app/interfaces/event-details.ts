@@ -1,6 +1,6 @@
 import { Branch } from "./branch";
 
-export interface Event {
+export interface EventDetails {
     id: number,
     name: string,
     branch: Branch,

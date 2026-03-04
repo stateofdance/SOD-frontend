@@ -1,1 +1,20 @@
-<p>rentals works!</p>
+<div class="flex flex-col w-full h-full p-5 bg-amber-50 text-black">
+    <h2 class="font-hanson text-black font-bold text-4xl text-center mt-5">Rentals</h2>
+    <div class="flex flex-col w-full h-full overflow-y-auto mt-10">
+        <hr class="w-full bg-black rounded-xs h-0.5">
+        @if (rents().length == 0) {
+            <p class="text-center text-xl font-lexend mt-5">No rentals yet.</p>
+        }
+        @for (rent of rents(); track $index) {
+            <div class="flex flex-col text-[14px] uppercase ml-4 text-black my-5">
+                <h5 class="font-bold">{{rent.date.toDateString()}} - {{rent.branch.name}}</h5>
+                <p>{{rent.start_time}} - {{rent.end_time}}</p>
+            </div>
+            <hr class="w-full bg-black rounded-xs h-0.5">
+        }
+        
+    </div>
+    <a [routerLink]="['', {outlets:{sidebar: 'account'}}]" class="mt-5">
+        <button class="font-eurostile font-bold text-white text-xl rounded-full bg-black uppercase py-2 w-full cursor-pointer">Back</button>
+    </a>
+</div>

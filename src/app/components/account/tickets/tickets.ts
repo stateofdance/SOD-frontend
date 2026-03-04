@@ -18,11 +18,11 @@ export class Tickets implements OnInit {
 
   ngOnInit(): void {
     this.service.get_tickets(this.state.user()?.authToken!).then(tickets => {
-      for (const ticket of tickets) {
+      tickets.map(ticket => {
         ticket.expiration_date = new Date(ticket.expiration_date)
         ticket.created_at = new Date(ticket.created_at)
-      }
-      console.log(tickets);
+        return ticket;
+      });
       this.tickets.set(tickets);
     });
   }

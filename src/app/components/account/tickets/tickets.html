@@ -6,31 +6,27 @@
             <p class="text-center text-xl font-lexend mt-5">No tickets yet.</p>
         }
         @for (ticket of tickets(); track $index) {
-            <div class="flex my-5 cursor-pointer">
-                <div id="dot" class="w-2.5 h-2.5 border rounded-full mt-1 border-black bg-black"></div>
-                <div class="flex flex-col text-[14px] uppercase ml-4 text-black">
-                    <h5 class="font-bold">{{ticket.package.number_of_sessions}} Sessions</h5>
-                    <div class="flex ml-3.5">
-                        <ul>
-                            <div class="relative flex items-center">
-                                <div class="absolute left-0 top-0 h-full w-0.5 bg-black"></div>
-                                <div class="border w-2.5 h-0.5 border-black mr-1"></div>
-                                <li class="uppercase">{{ticket.package.number_of_sessions- ticket.used_sessions}} Sessions left</li>
-                            </div>
-                            <div class="relative flex items-center">
-                                <div class="absolute left-0 top-0 h-full w-0.5 bg-black" ></div>
-                                <div class="border w-2.5 h-0.5 border-black mr-1"></div>
-                                <li class="uppercase">Expiration: {{ticket.expiration_date.toDateString()}}</li>
-                            </div>
-                            <div class="relative flex items-center">
-                                <div class="absolute left-0 top-0 h-1/2 w-0.5 bg-black" ></div>
-                                <div class="border w-2.5 h-0.5 border-black mr-1"></div>
-                                <li class="uppercase">Ordered At: {{ticket.created_at.toDateString()}}</li>
-                            </div>
-                        </ul>
-                    </div>
+            <div class="flex flex-col text-[14px] uppercase ml-4 text-black my-5">
+                <h5 class="font-bold">{{ticket.package.number_of_sessions}} Sessions</h5>
+                <div class="flex ml-3.5">
+                    <ul>
+                        <div class="relative flex items-center">
+                            <div class="absolute left-0 top-0 h-full w-0.5 bg-black"></div>
+                            <div class="border w-2.5 h-0.5 border-black mr-1"></div>
+                            <li class="uppercase">{{ticket.package.number_of_sessions- ticket.used_sessions}} Sessions left</li>
+                        </div>
+                        <div class="relative flex items-center">
+                            <div class="absolute left-0 top-0 h-full w-0.5 bg-black" ></div>
+                            <div class="border w-2.5 h-0.5 border-black mr-1"></div>
+                            <li class="uppercase">Expiration: {{ticket.expiration_date.toDateString()}}</li>
+                        </div>
+                        <div class="relative flex items-center">
+                            <div class="absolute left-0 top-0 h-1/2 w-0.5 bg-black" ></div>
+                            <div class="border w-2.5 h-0.5 border-black mr-1"></div>
+                            <li class="uppercase">Ordered At: {{ticket.created_at.toDateString()}}</li>
+                        </div>
+                    </ul>
                 </div>
-                <div class="vertical-line"></div>
             </div>
             <hr class="w-full bg-black rounded-xs h-0.5">
         }

@@ -26,7 +26,7 @@ export const routes: Routes = [
     { path:'faqs', component:FAQsPage, title:'Frequently Asked Questions' },
     { path:'coaches', component:CoachesPage, title:'Coaches' },
     { path:'events', component:EventsPage, title:'Events' },
-    { path:'event-details', component:EventsDetailsPage, title:'School Events' },
+    { path:'event-details/:id', component:EventsDetailsPage, title:'School Events' },
     { path:'performances', component:Performances, title:'Performances' },
     { path:'merch', component:MerchPage, title:'Merchandise' },
     { path:'merch/item/:id', component:ItemPage, title:"Item" },

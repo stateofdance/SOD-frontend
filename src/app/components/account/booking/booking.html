@@ -6,27 +6,23 @@
             <p class="text-center text-xl font-lexend mt-5">No bookings yet.</p>
         }
         @for (enrollment of enrollments(); track $index) {
-            <div class="flex my-5 cursor-pointer">
-                <div id="dot" class="w-2.5 h-2.5 border rounded-full mt-1 border-black bg-black"></div>
-                <div class="flex flex-col text-[14px] uppercase ml-4 text-black">
-                    <h6 class="font-bold text-xs">{{enrollment.scheduled_date}} ({{enrollment.lesson_schedule.branch.name}})</h6>
-                    <h5 class="font-bold">{{enrollment.lesson_schedule.start_time}} - {{enrollment.lesson_schedule.lesson.difficulty_level}}</h5>
-                    <div class="flex ml-3.5">
-                        <ul>
-                            <div class="relative flex items-center">
-                                <div class="absolute left-0 top-0 h-full w-0.5 bg-black"></div>
-                                <div class="border w-2.5 h-0.5 bg-black mr-1"></div>
-                                <li class="uppercase">{{enrollment.lesson_schedule.lesson.title}}</li>
-                            </div>
-                            <div class="relative flex items-center">
-                                <div class="absolute left-0 top-0 h-1/2 w-0.5 bg-black" ></div>
-                                <div class="border w-2.5 h-0.5 bg-black mr-1"></div>
-                                <li class="uppercase">{{enrollment.lesson_schedule.coach.name}}</li>
-                            </div>
-                        </ul>
-                    </div>
+            <div class="flex flex-col text-[14px] uppercase ml-4 text-black my-5">
+                <h6 class="font-bold text-xs">{{enrollment.scheduled_date.toDateString()}} ({{enrollment.lesson_schedule.branch.name}})</h6>
+                <h5 class="font-bold">{{enrollment.lesson_schedule.start_time}} - {{enrollment.lesson_schedule.lesson.difficulty_level}}</h5>
+                <div class="flex ml-3.5">
+                    <ul>
+                        <div class="relative flex items-center">
+                            <div class="absolute left-0 top-0 h-full w-0.5 bg-black"></div>
+                            <div class="border w-2.5 h-0.5 bg-black mr-1"></div>
+                            <li class="uppercase">{{enrollment.lesson_schedule.lesson.title}}</li>
+                        </div>
+                        <div class="relative flex items-center">
+                            <div class="absolute left-0 top-0 h-1/2 w-0.5 bg-black" ></div>
+                            <div class="border w-2.5 h-0.5 bg-black mr-1"></div>
+                            <li class="uppercase">{{enrollment.lesson_schedule.coach.name}}</li>
+                        </div>
+                    </ul>
                 </div>
-                <div class="vertical-line"></div>
             </div>
             <hr class="w-full bg-black rounded-xs h-0.5">
         }

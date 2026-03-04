@@ -8,5 +8,7 @@ export interface Order {
     customizations:MerchCustomization[],
     branch:Branch,
     quantity:number,
-    receipt:string
+    receipt:string,
+    total:number,
+    created_at:Date,
 }

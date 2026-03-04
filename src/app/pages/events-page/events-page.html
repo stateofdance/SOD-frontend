@@ -1,38 +1,39 @@
-<div class="h-screen pt-20 bg-linear-to-b from-black to to-[#0E0114] ">
+<div class="min-h-screen h-fit pt-20 pb-20 bg-linear-to-b from-black to to-[#0E0114] ">
     <div class="mt-20 m-auto justify-center items-center ">
         <p class="text-center text-violet font-lexend text-base"> School Events  </p>
         <h1 class="mt-3 text-center text-white font-hanson text-4xl"> Upcoming <span class="text-gold"> Events </span></h1>
     </div>
 
     <!-- events -->
-     <div class="mt-10 font-lexend overflow-hidden">
-        <div class="mb-[100px] mx-auto flex flex-col gap-5 w-[60%] text-white ">
-            <!-- container -->
-            <a routerLink="/event-details" fragment="event-details">
+     <div class="mt-10 font-lexend h-fit">
+        <div class="mx-auto flex flex-col gap-5 w-[60%] text-white h-fit">
+            @for (event of event_list(); track event.id) {
+                <a routerLink="/event-details/{{event.id}}">
 
-                <div class="flex rounded-4xl w-full border border-violet bg-linear-to-b from-[#0F0016] to to-[#1E002A] overflow-hidden">
-                    <!-- text -->
-                    <div class="p-10 flex flex-1 flex-col cursor-pointer">
-                        <p class="font-bold text-2xl">
-                            State of Dance Christmas Party 2025
-                        </p>
-                        <p class="font-thin mb-4">
-                            November 24, 2025   |   7:30 PM   |   SOD Studio (Binondo Manila Branch)
-                        </p>
-                        <p class="font-normal font-sm">
-                            We’re starting the holiday chaos earlier than everyone else. Because why wait for December when we can party 𝗡𝗢𝗪?
-                        </p>
-                    </div>
+                    <div class="flex rounded-4xl w-full border border-violet bg-linear-to-b from-[#0F0016] to to-[#1E002A] overflow-hidden">
+                        <!-- text -->
+                        <div class="p-10 flex flex-1 flex-col cursor-pointer">
+                            <p class="font-bold text-2xl">
+                                {{event.name}}
+                            </p>
+                            <p class="font-thin mb-4">
+                                {{event.schedule.toDateString()}}   |   {{event.schedule.toLocaleTimeString()}}   |   {{event.branch.name}}
+                            </p>
+                            <p class="font-normal font-sm">
+                               {{event.details | slice:0:200}}...
+                            </p>
+                        </div>
 
-                    <!-- image -->
+                        <!-- image -->
 
-                    <div class="w-1/4 h-full cursor-pointer">
-                        <div class="h-full">
-                            <img src="/images/carousel/image_1.jpg" class="w-full min-h-[190px] object-center object-cover" />
+                        <div class="w-1/4 h-full cursor-pointer">
+                            <div class="h-full">
+                                <img src="{{event.poster}}" class="w-full min-h-[190px] object-center object-cover" />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            }
         </div>
      </div>
 </div>
