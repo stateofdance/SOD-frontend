@@ -15,6 +15,7 @@ export class Orders implements OnInit{
   protected service = inject(AccountService);
   
   orders = signal<Order[]>([]);
+  loading = signal(true);
 
   ngOnInit(): void {
     this.service.get_orders(this.state.user()?.authToken!).then(orders => {
@@ -23,6 +24,7 @@ export class Orders implements OnInit{
         return order;
       })
       this.orders.set(orders);
+      this.loading.set(false);
     });
   }
 

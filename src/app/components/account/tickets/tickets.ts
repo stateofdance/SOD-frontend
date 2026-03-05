@@ -15,6 +15,7 @@ export class Tickets implements OnInit {
   protected state = inject(AppState);
 
   tickets = signal<Ticket[]>([]);
+  loading = signal(true);
 
   ngOnInit(): void {
     this.service.get_tickets(this.state.user()?.authToken!).then(tickets => {
@@ -24,6 +25,7 @@ export class Tickets implements OnInit {
         return ticket;
       });
       this.tickets.set(tickets);
+      this.loading.set(false);
     });
   }
 }

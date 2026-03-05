@@ -15,6 +15,7 @@ export class Booking implements OnInit{
   private service = inject(AccountService);
 
   enrollments = signal<Enrollment[]>([]);
+  loading = signal(true);
 
 
   ngOnInit(): void {
@@ -29,7 +30,7 @@ export class Booking implements OnInit{
         return dateB.getTime() - dateA.getTime();
       });
       this.enrollments.set(enrollments); 
-      
+      this.loading.set(false);
     });
   }
 }

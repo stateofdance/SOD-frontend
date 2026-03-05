@@ -15,6 +15,7 @@ export class Rentals implements OnInit{
   protected service = inject(AccountService);
 
   rents = signal<Rent[]>([]);
+  loading = signal(true);
 
   ngOnInit(): void {
     this.service.get_rentals(this.state.user()!.authToken!).then(rents => {
@@ -30,6 +31,7 @@ export class Rentals implements OnInit{
       });
 
       this.rents.set(rents);
+      this.loading.set(false);
     });
   }
 
