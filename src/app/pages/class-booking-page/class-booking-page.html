@@ -96,7 +96,9 @@
             @for (class of classes()[selected_date_mobile.getDay()]; track $index) {
                 <div class="w-full border border-amber-50" 
                 [ngClass]="{'bg-transparent':!checkSelectedByTime(selected_date_mobile, class.start_time), 'bg-amber-50':checkSelectedByTime(selected_date_mobile, class.start_time)}">
-                <app-schedule [class]="class" [date]="selected_date_mobile" [section_selected]="checkSelectedByTime(selected_date_mobile, class.start_time)" [schedule_selected]="checkSelectedByTime(date, class.start_time)" (select)="clickedSchedule($event)"></app-schedule>
+                    @if (filterClass(class)) {
+                        <app-schedule [class]="class" [date]="selected_date_mobile" [section_selected]="checkSelectedByTime(selected_date_mobile, class.start_time)" [schedule_selected]="checkSelectedByTime(date, class.start_time)" (select)="clickedSchedule($event)"></app-schedule>
+                    }
                 </div>
             }
         </div>

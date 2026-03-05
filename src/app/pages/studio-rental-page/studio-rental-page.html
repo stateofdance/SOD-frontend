@@ -29,19 +29,19 @@
                 <div class="relative w-full h-90 mb-5 overflow-hidden cursor-pointer border"
                 (mouseenter)="hovered_branch.set(branch.id)" (mouseleave)="hovered_branch.set(-1)"
                 (click)="setBranch(branch.id)" [ngClass]="{'border-white': selected_branch() == branch.id, 'border-transparent': selected_branch() != branch.id}">
-                    <img src="{{branch.thumbnail}}" alt="{{branch.name}}" class="w-full">
+                    <img src="{{branch.thumbnail}}" alt="{{branch.name}}" class="w-full h-full object-cover">
                     <div class="bg-black opacity-50 absolute inset-0 transition-opacity duration-500 ease-in-out" [ngClass]="{'opacity-50':!is_hovered(branch.id), 'opacity-10':is_hovered(branch.id)}"></div>
                     <div class="flex w-full h-25 justify-between items-center absolute bottom-0 left-0 p-5">
                         <div class="flex items-center">
-                            <img src="/images/loc_white.png" alt="loc white" class="h-15">
+                            <img src="/images/loc_white.png" alt="loc white" class="h-10 lg:h-15">
                             <div class="flex flex-col ml-2">
-                                <h3 class="font-lexend text-white text-xl">{{branch.name}}</h3>
-                                <p class="font-lexend text-white text-sm">{{branch.address}}</p>
+                                <h3 class="font-lexend text-white lg:text-xl text-base">{{branch.name}}</h3>
+                                <p class="font-lexend text-white lg:text-sm text-xs">{{branch.address}}</p>
                             </div>
                         </div>
                         <div class="flex flex-col">
-                            <p class="font-lexend text-white text-base text-center mb-1">P {{branch.rate}} / hr</p>
-                            <button class="font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-full lg:w-45 bg-transparent cursor-pointer uppercase"
+                            <p class="font-lexend text-white text-xs lg:text-base text-center mb-1">P {{branch.rate}} / hr</p>
+                            <button class="font-eurostile text-white font-bold text-xs lg:text-base p-1.5 border border-white rounded-full w-25 lg:w-45 bg-transparent cursor-pointer uppercase"
                             (click)="setBranchView(branch)">View More</button>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
             }
         </div>
     }@else {
-        <div class="flex flex-col w-full ml-10 text-white">
+        <div class="flex flex-col w-full lg:ml-10 text-white">
             <div class="z-50 flex gap-4 items-center cursor-pointer" (click)="viewing_branch.set(null)">
                 <img src="/images/back.png" alt="back icon" class="w-5 cursor-pointer">
                 <p class="font-lexend text-base">Back to Branches</p>
@@ -101,12 +101,12 @@
             </div>
 
 
-            <div class="flex items-center justify-between w-full  mb-5">
-                <div class="flex flex-col">
+            <div class="flex flex-col lg:flex-row items-center justify-between w-full  mb-5">
+                <div class="flex flex-row lg:flex-col mb-10 lg:mb-0">
                     <h2 class="font-lexend font-bold text-3xl uppercase mb-1">{{viewing_branch()?.name}}</h2>
-                    <div class="flex">
+                    <div class="flex items-center">
                         <img src="/images/loc_white.png" alt="location" class="h-8">
-                        <p class="ml-2 font-open-sans text-xs">{{viewing_branch()?.address}}</p>
+                        <p class="ml-2 font-open-sans text-base">{{viewing_branch()?.address}}</p>
                     </div>
                 </div>
                 <button class="font-eurostile text-black bg-white font-bold p-1.5 rounded-full w-full h-10 lg:w-45 cursor-pointer uppercase"
