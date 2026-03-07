@@ -1,7 +1,8 @@
 import { NgClass, Location, NgOptimizedImage } from '@angular/common';
 import { Component, effect, HostListener, inject, signal } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet, NavigationEnd } from '@angular/router';
 import { AppState } from '../../services/app-state';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -21,33 +22,44 @@ export class Header {
   bookings_show = signal(false);
   profile_show = signal(false);
   show_all = signal(false);
-  currentUrl : string;
+  currentUrl: string;
 
   constructor(private location: Location) {
     this.currentUrl = this.location.path();
+
+    // Update profile icon based on user state
     effect(() => {
       if (this.state.user()) {
         this.profile_img.set('/images/profile_icon_solid.png');
-      }else {
+      } else {
         this.profile_img.set('/images/profile_icon_hollow.png');
       }
     });
+
+    // Auto-close navbar on navigation
+    this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.hideAll();
+        // Also close sidebar if open
+        this.sidebar_show.set(false);
+      });
   }
 
-  getCurrentPath() : string {
+  getCurrentPath(): string {
     return this.location.path();
   }
-  
+
   @HostListener('window:scroll')
   onWindowScroll() {
-    this.isScrolled = window.scrollY > 100
+    this.isScrolled = window.scrollY > 100;
   }
 
   extendHeader() {
     if (this.sidebar_show()) {
-      this.router.navigate(['', {outlets: {sidebar: null}}]);
-    }else {
-      this.show_all.set(!this.show_all())
+      this.router.navigate(['', { outlets: { sidebar: null } }]);
+    } else {
+      this.show_all.set(!this.show_all());
       this.classes_show.set(false);
       this.events_show.set(false);
       this.bookings_show.set(false);
@@ -65,11 +77,9 @@ export class Header {
 
   profileClicked() {
     if (this.state.user() == null) {
-      this.router.navigate(['', {outlets:{sidebar: 'login'}}]);
-    }else {
-      this.router.navigate(['', {outlets:{sidebar: 'account'}}]);
+      this.router.navigate(['', { outlets: { sidebar: 'login' } }]);
+    } else {
+      this.router.navigate(['', { outlets: { sidebar: 'account' } }]);
     }
-    
   }
-
 }

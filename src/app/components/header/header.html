@@ -56,46 +56,62 @@
         </div>
     </div>
 }@else {
-    <div class="navigation fixed w-full px-3 py-5 z-60" [ngClass]="{'scrolled': isScrolled || getCurrentPath().length > 2 || show_all()}">
+
+    
+    <div class="navigation fixed w-full px-3 py-5 z-60" 
+            [ngClass]="{'scrolled': isScrolled || getCurrentPath().length > 2 || show_all()}">
         <div class="flex justify-between items-center w-full">
-            <a routerLink="/"><img src="/images/header_logo.png" alt="SOD-Brand-Logo" class="min-w-60 w-60" (click)="hideAll()"></a>
+            <a routerLink="/" (click)="hideAll()">
+            <img src="/images/header_logo.png" alt="SOD-Brand-Logo" class="min-w-60 w-60">
+            </a>
 
             <div class="flex h-11 items-center w-fit">
-                <img src="{{profile_img()}}" alt="profile icon" class="min-w-8 h-8 cursor-pointer ml-5" (click)="hideAll();profileClicked();">
-                <img src="/images/drawer_icon.png" alt="drawer icon" class="w-7 h-7 lg:w-10 lg:h-10 cursor-pointer ml-5" (click)="extendHeader()">
+            <img src="{{profile_img()}}" alt="profile icon" class="min-w-8 h-8 cursor-pointer ml-5" (click)="profileClicked()">
+            <img src="/images/drawer_icon.png" alt="drawer icon" class="w-7 h-7 lg:w-10 lg:h-10 cursor-pointer ml-5" (click)="extendHeader()">
             </div>
         </div>
-        <div class="flex-col h-screen text-white" [ngClass]="{'flex':show_all(), 'hidden':!show_all()}">
-            <p class=" text-white text-justify font-open-sans text-sm m-5">
-                At State of Dance, we don’t just teach choreography; we shape character, build confidence, and celebrate the elegance of transformation. We don’t just teach movement—we inspire transformation.
-            </p>
-            <hr class="w-full bg-white h-0.5">
-            <h2 class="font-eurostile font-bold text-3xl m-3">Classes</h2>
-            <hr class="w-full bg-white h-0.5">
-            <ul class="navigation p-2 font-open-sans text-base ml-5 my-1">
-                <a routerLink="/" fragment="types-classes"><li class="p-0.5 link" (click)="hideAll()">Types of Classes</li></a>
-                <a routerLink="/" fragment="project-underground"><li class="p-0.5 link" (click)="hideAll()">Project Underground</li></a>
-            </ul>
-            <hr class="w-full bg-white h-0.5">
-            <a routerLink="/coaches"><h2 class="font-eurostile font-bold text-3xl m-3" (click)="hideAll()">Coaches</h2></a>
-            <hr class="w-full bg-white h-0.5">
-            <h2 class="font-eurostile font-bold text-3xl m-3">Events</h2>
-            <hr class="w-full bg-white h-0.5">
-            <ul class="navigation p-2 font-open-sans text-base ml-5 my-1">
-                <a routerLink="/events"><li class="p-0.5 link" (click)="hideAll()">Dancer Events Profile</li></a>
-            </ul>
-            <hr class="w-full bg-white h-0.5">
-            <a routerLink="/merch"><h2 class="font-eurostile font-bold text-3xl m-3" (click)="hideAll()">Merch</h2></a>
-            <hr class="w-full bg-white h-0.5">
-            <div class="text-center mt-10">
-                <a routerLink="/class-booking"><p class="font-open-sans text-base">Book a Class</p></a>
-                <a routerLink="/studio-rental"><p class="font-open-sans text-base my-5">Rent our Studio</p></a>
-                <p class="font-open-sans text-base">Contact Us</p>
+
+            <div class="flex-col h-screen text-white" [ngClass]="{'flex': show_all(), 'hidden': !show_all()}">
+                <p class="text-white text-justify font-open-sans text-sm m-5">
+                At State of Dance, we don’t just teach choreography; we shape character, build confidence, and celebrate the elegance of transformation.
+                </p>
+                <hr class="w-full bg-white h-0.5">
+
+                <h2 class="font-eurostile font-bold text-3xl m-3">Classes</h2>
+                <hr class="w-full bg-white h-0.5">
+                <ul class="navigation p-2 font-open-sans text-base ml-5 my-1">
+                <li class="p-0.5 link"><a routerLink="/" fragment="types-classes">Types of Classes</a></li>
+                <li class="p-0.5 link"><a routerLink="/" fragment="project-underground">Project Underground</a></li>
+                </ul>
+                <hr class="w-full bg-white h-0.5">
+
+                <a routerLink="/coaches"><h2 class="font-eurostile font-bold text-3xl m-3">Coaches</h2></a>
+                <hr class="w-full bg-white h-0.5">
+
+                <h2 class="font-eurostile font-bold text-3xl m-3">Events</h2>
+                <hr class="w-full bg-white h-0.5">
+                <ul class="navigation p-2 font-open-sans text-base ml-5 my-1">
+                <li class="p-0.5 link"><a routerLink="/performances">Dancer Events Profile</a></li>
+                <li class="p-0.5 link"><a routerLink="/events"> School Events </a></li>
+                </ul>
+                <hr class="w-full bg-white h-0.5">
+
+                <a routerLink="/merch"><h2 class="font-eurostile font-bold text-3xl m-3">Merch</h2></a>
+                <hr class="w-full bg-white h-0.5">
+
+                <a routerLink="/class-booking"><h2 class="font-eurostile font-bold text-3xl m-3">Book a Class</h2></a>
+                <hr class="w-full bg-white h-0.5">
+
+                <ul class="navigation p-2 font-open-sans text-base ml-5 my-1">
+                <li><a routerLink="/class-booking">Book a Class</a></li>
+                <li class="my-5"><a routerLink="/studio-rental">Rent our Studio</a></li>
+                <li>Contact Us</li>
+                </ul>
             </div>
         </div>
-    </div>
 }
 
-<div class="profile fixed w-full md:w-80 border-2 border-black top-20 h-[calc(100vh-5rem)] right-0 z-50" [ngClass]="{'block': sidebar_show(), 'hidden': !sidebar_show()}">
-    <router-outlet name="sidebar" (activate)="sidebar_show.set(true)" (deactivate)="sidebar_show.set(false)"></router-outlet>
+<div class="profile fixed w-full md:w-80 border-2 border-black top-20 h-[calc(100vh-5rem)] right-0 z-50"
+     [ngClass]="{'block': sidebar_show(), 'hidden': !sidebar_show()}">
+  <router-outlet name="sidebar" (activate)="sidebar_show.set(true)" (deactivate)="sidebar_show.set(false)"></router-outlet>
 </div>
