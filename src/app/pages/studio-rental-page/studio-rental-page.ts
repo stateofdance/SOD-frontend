@@ -30,8 +30,8 @@ export class StudioRentalPage implements OnInit{
   selected_date:Date|null = null;
   selected_branch = signal<number>(-1);
   start_index = signal<number>(0);
-  start_sched = signal<string>('');
-  end_sched = signal<string>('');
+  start_sched = signal<string>('none');
+  end_sched = signal<string>('none');
   branches = signal<Branch[]>([]);
   hovered_branch = signal<number>(-1);
   viewing_branch = signal<Branch|null>(null);
@@ -51,8 +51,8 @@ export class StudioRentalPage implements OnInit{
   setBranch(branch:number) {
     this.selected_branch.set(branch);
     this.date.nativeElement.value = '';
-    this.startTime.nativeElement.value = '';
-    this.endTime.nativeElement.value = '';
+    this.startTime.nativeElement.value = 'none';
+    this.endTime.nativeElement.value = 'none';
   }
 
   findGroup(time:number) : number {
@@ -136,7 +136,7 @@ export class StudioRentalPage implements OnInit{
       alert('Select a date to book.');
       return;
     };
-    if (!this.start_sched() || !this.end_sched()) {
+    if (this.start_sched() == 'none' || this.end_sched() == 'none') {
       alert('Please complete the start and end time of your rent.');
       return;
     }
