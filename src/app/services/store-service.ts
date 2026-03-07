@@ -17,7 +17,7 @@ export class StoreService {
   }
 
   async get_merch(id:number) : Promise<MerchItem> {
-    const observable = this.httpClient.get<MerchItem>(`${environment.apiURl}/store/merch/${id}`);
+    const observable = this.httpClient.get<MerchItem>(`${environment.apiURl}/store/merch/${id}/`);
     return firstValueFrom(observable);
   }
 
