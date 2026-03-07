@@ -20,13 +20,15 @@ export class Profile {
   protected service = inject(AccountService);
   protected router = inject(Router);
 
-  name:FormControl;
+  first_name:FormControl;
+  last_name:FormControl;
   number:FormControl;
   birthdate:FormControl;
   address:FormControl;
 
   constructor() {
-    this.name = new FormControl(this.state.user()!.username);
+    this.first_name = new FormControl(this.state.user()!.first_name);
+    this.last_name = new FormControl(this.state.user()!.last_name);
     this.number = new FormControl(this.state.user()!.contact);
     this.birthdate = new FormControl(this.state.user()!.birthdate);
     this.address = new FormControl(this.state.user()!.address);
@@ -35,7 +37,9 @@ export class Profile {
   save_details() {
     let user:User = {...this.state.user()!};
 
-    user.username = this.name.value;
+    user.username = this.first_name.value + ' ' + this.last_name.value;
+    user.first_name = this.first_name.value;
+    user.last_name = this.last_name.value;
     user.contact = this.number.value;
     user.birthdate = this.birthdate.value;
     user.address = this.address.value;

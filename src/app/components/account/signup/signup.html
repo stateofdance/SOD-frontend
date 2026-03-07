@@ -1,7 +1,8 @@
 <div class="flex flex-col w-full h-full p-5 bg-black text-white">
     <img src="/images/SOD_Logo_FA-21.png" alt="Stage of Dance Logo" class="w-25 my-5  mx-auto">
     <h2 class="font-hanson text-white font-bold text-4xl text-center">Sign Up</h2>
-    <input type="text" [formControl]="name" name="name" id="name" placeholder="Name" class="mt-10 p-2 border border-white text-white font-open-sans focus:outline-none focus:ring-0 focus:border-gold focus:border-2">
+    <input type="text" [formControl]="first_name" name="first_name" id="first_name" placeholder="First Name" class="mt-10 p-2 border border-white text-white font-open-sans focus:outline-none focus:ring-0 focus:border-gold focus:border-2">
+    <input type="text" [formControl]="last_name" name="last_name" id="last_name" placeholder="Last Name" class="mt-5 p-2 border border-white text-white font-open-sans focus:outline-none focus:ring-0 focus:border-gold focus:border-2">
     <input type="email" [formControl]="email" name="email" id="email" placeholder="Email" class="mt-5 p-2 border border-white text-white font-open-sans focus:outline-none focus:ring-0 focus:border-gold focus:border-2">
     <app-password #password placeholder="Password" design="dark"></app-password>
     <app-password #confirm_password placeholder="Confirm Password" design="dark"></app-password>
