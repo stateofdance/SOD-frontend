@@ -49,7 +49,7 @@
                     </div>
                     <div class="flex h-11 items-center">
                         <img src="{{profile_img()}}" alt="profile icon" class="min-w-8 h-8 cursor-pointer ml-5" (click)="hideAll(); profileClicked();">
-                        <button class="font-eurostile text-white font-bold text-lg p-1 w-10 h-10 cursor-pointer ml-5" (click)="extendHeader()"><img src="/images/drawer_icon.png" alt="drawer icon" class="w-full"></button>
+                        <button class="font-eurostile text-white font-bold text-lg p-1 w-10 h-10 cursor-pointer ml-5" (click)="extendHeader()"><img src="{{drawer_img()}}" alt="drawer icon" class="w-full"></button>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                     class="min-w-8 h-8 cursor-pointer ml-5"
                     (click)="profileClicked()">
 
-                <img src="/images/drawer_icon.png"
+                <img src="{{drawer_img()}}"
                     alt="drawer icon"
                     class="w-7 h-7 lg:w-10 lg:h-10 cursor-pointer ml-5"
                     (click)="extendHeader()">

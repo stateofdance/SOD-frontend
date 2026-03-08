@@ -14,6 +14,9 @@ export class Header {
   protected state = inject(AppState);
   protected router = inject(Router);
 
+  
+  drawer_img = signal('/images/drawer_icon.png');
+  
   profile_img = signal('/images/profile_icon_hollow.png');
   sidebar_show = signal(false);
   isScrolled = false;
@@ -40,6 +43,7 @@ export class Header {
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe(() => {
         this.hideAll();
+        
       });
   }
 
@@ -52,17 +56,29 @@ export class Header {
     this.isScrolled = window.scrollY > 100;
   }
 
+    
   extendHeader() {
     if (this.sidebar_show()) {
       this.router.navigate(['', { outlets: { sidebar: null } }]);
-    } else {
-      this.show_all.set(!this.show_all());
-      this.classes_show.set(false);
-      this.events_show.set(false);
-      this.bookings_show.set(false);
-      this.profile_show.set(false);
+      this.drawer_img.set('/images/drawer_icon.png');
+      return;
     }
+
+    const open = !this.show_all();
+    this.show_all.set(open);
+
+    if (open) {
+      this.drawer_img.set('/images/close_sidebar.png');
+    } else {
+      this.drawer_img.set('/images/drawer_icon.png');
+    }
+
+    this.classes_show.set(false);
+    this.events_show.set(false);
+    this.bookings_show.set(false);
+    this.profile_show.set(false);
   }
+
 
   hideAll() {
     this.show_all.set(false);
@@ -75,8 +91,11 @@ export class Header {
   profileClicked() {
     if (this.state.user() == null) {
       this.router.navigate(['', { outlets: { sidebar: 'login' } }]);
+      this.drawer_img.set('/images/close_sidebar.png');
     } else {
       this.router.navigate(['', { outlets: { sidebar: 'account' } }]);
+      this.drawer_img.set('/images/close_sidebar.png');
+
     }
   }
 }
