@@ -36,13 +36,10 @@ export class Header {
       }
     });
 
-    // Auto-close navbar on navigation
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe(() => {
         this.hideAll();
-        // Also close sidebar if open
-        this.sidebar_show.set(false);
       });
   }
 

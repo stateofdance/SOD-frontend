@@ -187,7 +187,7 @@
     </div>
 }
 
-<div class="profile fixed w-full md:w-80 border-2 border-black top-20 h-[calc(100vh-5rem)] right-0 z-50"
-     [ngClass]="{'block': sidebar_show(), 'hidden': !sidebar_show()}">
-  <router-outlet name="sidebar" (activate)="sidebar_show.set(true)" (deactivate)="sidebar_show.set(false)"></router-outlet>
+
+<div class="profile fixed w-full md:w-80 border-2 border-black top-20 h-[calc(100vh-5rem)] right-0 z-50" [ngClass]="{'block': sidebar_show(), 'hidden': !sidebar_show()}">
+    <router-outlet name="sidebar" (activate)="sidebar_show.set(true)" (deactivate)="sidebar_show.set(false)"></router-outlet>
 </div>
