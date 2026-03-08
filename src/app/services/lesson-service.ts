@@ -41,8 +41,8 @@ export class LessonService {
     return firstValueFrom(observabe);
   }
 
-  async get_packages():Promise<Package[]> {
-    const observable = this.httpClient.get<Package[]>(`${environment.apiURl}/transactions/packages/`);
+  async get_packages(branch_id:number):Promise<Package[]> {
+    const observable = this.httpClient.get<Package[]>(`${environment.apiURl}/transactions/packages/${branch_id}/`);
     return firstValueFrom(observable);
   }
 

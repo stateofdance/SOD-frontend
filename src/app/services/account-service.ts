@@ -80,8 +80,13 @@ export class AccountService {
     return firstValueFrom(observable);
   }
 
-  async get_tickets(authToken:string):Promise<Ticket[]> {
-    const observable = this.httpClient.get<Ticket[]>(`${environment.apiURl}/transactions/tickets/me/`, {
+  async get_tickets(query_branch_id:number|null, authToken:string):Promise<Ticket[]> {
+    let url = `${environment.apiURl}/transactions/tickets/me/`
+    if (query_branch_id) {
+      url += `?branch_id=${query_branch_id}`
+    }
+
+    const observable = this.httpClient.get<Ticket[]>(url, {
       headers : new HttpHeaders('').set('Authorization', `Token ${authToken}`)
     })
     return firstValueFrom(observable);
