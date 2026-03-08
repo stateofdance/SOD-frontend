@@ -69,7 +69,7 @@ export class ClassBookingPage implements OnInit {
       this.branches.set(branches);
       this.branch.setValue(branches[0].id);
       this.lesson_service.get_schedules(branches[0].id).then(schedules => {this.classes.set(schedules);});
-      this.account_service.get_tickets(this.state.user()?.authToken!).then(tickets => this.tickets.set(tickets));
+      this.account_service.get_tickets(this.branch.value, this.state.user()?.authToken!).then(tickets => this.tickets.set(tickets));
       this.monthSelect.nativeElement.value = this.date.getMonth();
     }).catch((error) => {
         if (error.status === 401) {

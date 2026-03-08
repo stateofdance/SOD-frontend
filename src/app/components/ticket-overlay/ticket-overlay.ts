@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
+import { Component, EventEmitter, inject, input, Output, signal } from '@angular/core';
 import { AppState } from '../../services/app-state';
 import { AccountService } from '../../services/account-service';
 import { Ticket } from '../../interfaces/ticket';
@@ -15,6 +15,7 @@ export class TicketOverlay {
   protected service = inject(AccountService);
   protected state = inject(AppState);
   
+  branch = input.required<number>();
   tickets = signal<Ticket[]>([]);   
   selected_ticket:Ticket|null = null;
   hovered_ticket:number = -1;
@@ -23,7 +24,7 @@ export class TicketOverlay {
   @Output() book = new EventEmitter<Ticket>();
 
   ngOnInit(): void {
-    this.service.get_tickets(this.state.user()?.authToken!).then(tickets=> this.tickets.set(tickets));
+    this.service.get_tickets(this.branch(), this.state.user()?.authToken!).then(tickets=> this.tickets.set(tickets));
   }
 
   is_hovered(ticket:Ticket):boolean {

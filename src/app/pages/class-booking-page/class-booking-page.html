@@ -2,7 +2,7 @@
     <h1 class="text-white font-hanson text-5xl text-center">Book a <span class="text-gold">Class</span></h1>
 
     @if (finalizing_booking) {
-        <app-ticket-overlay (close)="finalizing_booking = false" (book)="payment($event)"></app-ticket-overlay>
+        <app-ticket-overlay [branch]="branch.value!" (close)="finalizing_booking = false" (book)="payment($event)"></app-ticket-overlay>
     }
 
     <div class="form mt-15">

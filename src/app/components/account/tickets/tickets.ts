@@ -18,7 +18,7 @@ export class Tickets implements OnInit {
   loading = signal(true);
 
   ngOnInit(): void {
-    this.service.get_tickets(this.state.user()?.authToken!).then(tickets => {
+    this.service.get_tickets(null, this.state.user()?.authToken!).then(tickets => {
       tickets.map(ticket => {
         ticket.expiration_date = new Date(ticket.expiration_date)
         ticket.created_at = new Date(ticket.created_at)
