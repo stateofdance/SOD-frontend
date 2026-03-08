@@ -118,6 +118,11 @@ export class ClassBookingPage implements OnInit {
   payment(ticket:Ticket) {
     if (this.booking) return;
 
+    if (this.selected_schedules.length == 0) {
+      alert('Please select a schedule!');
+      return;
+    }
+
     if (this.selected_schedules.length > ticket.package.number_of_sessions - ticket.used_sessions) {
       alert(`You have selected ${this.selected_schedules.length} sessions, but your ticket only has ${ticket.package.number_of_sessions - ticket.used_sessions} remaining. Please select fewer sessions or purchase a new ticket.`);
       return;
