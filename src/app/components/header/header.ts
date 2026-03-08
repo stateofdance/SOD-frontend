@@ -45,6 +45,10 @@ export class Header {
         this.hideAll();
         
       });
+
+    window.addEventListener('force-login', () => {
+      this.profileClicked();
+    });
   }
 
   getCurrentPath(): string {

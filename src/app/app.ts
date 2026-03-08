@@ -23,15 +23,28 @@ export class App implements OnInit{
   ngOnInit(): void {
     this.state.screen_width.set(window.innerWidth);
     this.state.screen_height.set(window.innerHeight);
-    const authToken =  localStorage.getItem('authToken');
+
+    const authToken = localStorage.getItem('authToken');
+
     if (authToken) {
-      this.account_service.get_user(authToken).then(user => {
-        user.authToken = authToken;
-        this.state.set_user(user);
-      });
+      this.account_service.get_user(authToken)
+        .then(user => {
+          user.authToken = authToken;
+          this.state.set_user(user);
+        })
+        .catch((error: any) => {
+          if (error.status === 401) {
+            console.log('Unauthorized: token is invalid or expired. Logging out...');
+            localStorage.removeItem('authToken');
+            this.state.user.set(null);
+            window.dispatchEvent(new Event('force-login'));
+          } 
+        });
     }
   }
-  
+
+
+
   @HostListener('window:resize')
   onResize() {
     this.state.screen_width.set(window.innerWidth);

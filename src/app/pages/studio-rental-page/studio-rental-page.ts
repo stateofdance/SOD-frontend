@@ -176,9 +176,18 @@ export class StudioRentalPage implements OnInit{
     }
     this.paying = true;
     this.rental_service.rent_studio(this.selected_branch(), this.selected_date, this.start_sched(), this.end_sched(), this.state.user()!.authToken!)
-    .then(checkoutUrl => window.open(checkoutUrl)).finally(() => {
-      this.paying = false;
-    });
+      .then(checkoutUrl => window.open(checkoutUrl)).finally(() => {
+        this.paying = false;
+      }).catch((error) => {
+          if (error.status === 401) {
+            console.log('Unauthorized: token is invalid or expired. Logging out...');
+            localStorage.removeItem('authToken');
+            this.state.user.set(null);
+            window.dispatchEvent(new Event('force-login'));
+          } else { 
+            console.log(error.message);
+          }
+      });
   }
 
   is_hovered(id:number):boolean {

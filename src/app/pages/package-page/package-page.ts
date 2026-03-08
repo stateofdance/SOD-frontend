@@ -39,6 +39,18 @@ export class PackagePage implements OnInit{
     }
     
     this.paying = true;
-    this.service.order_ticket(this.selected_package, this.state.user()!.authToken!).then(checkout_url => window.open(checkout_url)).finally(() => {this.paying = false;});
+    this.service.order_ticket(this.selected_package, this.state.user()!.authToken!)
+    .then(checkout_url => window.open(checkout_url))
+    .finally(() => {this.paying = false;})
+    .catch((error) => {
+        if (error.status === 401) {
+          console.log('Unauthorized: token is invalid or expired. Logging out...');
+          localStorage.removeItem('authToken');
+          this.state.user.set(null);
+          window.dispatchEvent(new Event('force-login'));
+        } else { 
+          console.log(error.message);
+        }
+    });
   }
 }

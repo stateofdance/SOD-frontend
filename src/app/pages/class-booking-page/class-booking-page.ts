@@ -71,7 +71,17 @@ export class ClassBookingPage implements OnInit {
       this.lesson_service.get_schedules(branches[0].id).then(schedules => {this.classes.set(schedules);});
       this.account_service.get_tickets(this.state.user()?.authToken!).then(tickets => this.tickets.set(tickets));
       this.monthSelect.nativeElement.value = this.date.getMonth();
+    }).catch((error) => {
+        if (error.status === 401) {
+          console.log('Unauthorized: token is invalid or expired. Logging out...');
+          localStorage.removeItem('authToken');
+          this.state.user.set(null);
+          window.dispatchEvent(new Event('force-login'));
+        } else { 
+          console.log(error.message);
+        }
     });
+    
     this.lesson_service.get_coaches().then(coaches => this.coaches.set(coaches));
     this.lesson_service.get_classes().then(lessons => this.lessons.set(lessons));
     this.branch.valueChanges.subscribe(branch_id => {

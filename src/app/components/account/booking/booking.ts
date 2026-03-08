@@ -19,6 +19,7 @@ export class Booking implements OnInit{
 
 
   ngOnInit(): void {
+
     this.service.get_enrollments(this.state.user()!.authToken!).then(enrollments => {
       enrollments.map(enrollment => {
         enrollment.scheduled_date = new Date(enrollment.scheduled_date);
@@ -31,6 +32,18 @@ export class Booking implements OnInit{
       });
       this.enrollments.set(enrollments); 
       this.loading.set(false);
+    }).catch((error) => {
+        if (error.status === 401) {
+          console.log('Unauthorized: token is invalid or expired. Logging out...');
+          localStorage.removeItem('authToken');
+          this.state.user.set(null);
+          window.dispatchEvent(new Event('force-login'));
+        } else { 
+          console.log(error.message);
+        }
     });
+    
+
+
   }
 }

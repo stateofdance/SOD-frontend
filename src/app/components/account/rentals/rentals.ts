@@ -18,6 +18,8 @@ export class Rentals implements OnInit{
   loading = signal(true);
 
   ngOnInit(): void {
+
+
     this.service.get_rentals(this.state.user()!.authToken!).then(rents => {
       rents.map(rent => {
         rent.date = new Date(rent.date);
@@ -32,6 +34,15 @@ export class Rentals implements OnInit{
 
       this.rents.set(rents);
       this.loading.set(false);
+    }).catch((error) => {
+        if (error.status === 401) {
+          console.log('Unauthorized: token is invalid or expired. Logging out...');
+          localStorage.removeItem('authToken');
+          this.state.user.set(null);
+          window.dispatchEvent(new Event('force-login'));
+        } else { 
+          console.log(error.message);
+        }
     });
   }
 

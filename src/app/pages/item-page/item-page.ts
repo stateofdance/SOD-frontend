@@ -106,6 +106,15 @@ export class ItemPage implements OnInit{
     this.service.submit_order(
       this.item()?.id!, Object.values(this.custom_form.value).map(Number), 
       this.counter(), parseInt(this.branch.value!), this.state.user()?.authToken!
-    ).then(link => window.open(link)).finally(() => {this.paying = false;});
+    ).then(link => window.open(link)).finally(() => {this.paying = false;}).catch((error) => {
+        if (error.status === 401) {
+          console.log('Unauthorized: token is invalid or expired. Logging out...');
+          localStorage.removeItem('authToken');
+          this.state.user.set(null);
+          window.dispatchEvent(new Event('force-login'));
+        } else { 
+          console.log(error.message);
+        }
+    });
   }
 }
