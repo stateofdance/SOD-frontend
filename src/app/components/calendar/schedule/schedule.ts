@@ -39,8 +39,26 @@ export class Schedule{
   dayPassed():boolean {
     const now = new Date();
     const classDateTime = new Date(this.date());
-    const [hours, minutes] = this.class().start_time.split(':').map(Number);
-    classDateTime.setHours(hours, minutes, 0, 0);
-    return classDateTime < now || this.occupancies().length >= this.class().max_students || (this.state.user()?.id !== undefined && this.occupancies().includes(this.state.user()!.id!));
+    
+    // 1. Split the time string (e.g., "02:30 PM") into the time and the modifier
+    const [time, modifier] = this.class().start_time.split(' ');
+    let [hours, minutes] = time.split(':').map(Number);
+    
+    // 2. Convert to 24-hour format
+    if (modifier.toUpperCase() === 'PM' && hours < 12) {
+      hours += 12;
+    } else if (modifier.toUpperCase() === 'AM' && hours === 12) {
+      hours = 0;
+    }
+    
+    const gracePeriodMinutes = 0; 
+    classDateTime.setHours(hours, minutes + gracePeriodMinutes, 0, 0);
+
+    const isPast = classDateTime < now;
+    const isFull = this.occupancies().length >= this.class().max_students;
+    const alreadyJoined = this.state.user()?.id !== undefined && 
+                          this.occupancies().includes(this.state.user()!.id!);
+
+    return isPast || isFull || alreadyJoined;
   }
 }

@@ -3,10 +3,11 @@ import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
 import { AppState } from '../../services/app-state';
 import { AccountService } from '../../services/account-service';
 import { Ticket } from '../../interfaces/ticket';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-overlay',
-  imports: [NgClass, ],
+  imports: [NgClass, RouterLink],
   templateUrl: './ticket-overlay.html',
   styleUrl: './ticket-overlay.css',
 })
