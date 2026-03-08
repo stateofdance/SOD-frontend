@@ -18,6 +18,11 @@
                 }
             </select>
         </div>
+        <div class="flex items-center mt-5">
+            <p class="font-lexend font-bold text-white text-xl">Total: </p>
+            <p class="font-lexend font-bold text-gold text-xl ml-2">P {{total_amount() | number:'1.2-2'}}</p>
+        </div>
+
         <button class="mt-10 h-14 font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-full bg-violet uppercase cursor-pointer 
                     transition-all duration-200 ease-in-out 
                     hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:bg-gold active:scale-95"

@@ -62,6 +62,7 @@ export class ClassBookingPage implements OnInit {
   lessons = signal<Class[]>([]);
   tickets = signal<Ticket[]>([]);
   finalizing_booking = false;
+  booking = false;
 
   ngOnInit(): void {
     this.account_service.get_branches().then(branches => {
@@ -105,14 +106,17 @@ export class ClassBookingPage implements OnInit {
   }
 
   payment(ticket:Ticket) {
+    if (this.booking) return;
+
     if (this.selected_schedules.length > ticket.package.number_of_sessions - ticket.used_sessions) {
       alert(`You have selected ${this.selected_schedules.length} sessions, but your ticket only has ${ticket.package.number_of_sessions - ticket.used_sessions} remaining. Please select fewer sessions or purchase a new ticket.`);
       return;
     }
 
+    this.booking = true;
     this.lesson_service.book_enrollment(this.selected_schedules, ticket.id, this.state.user()?.authToken!).then(response =>
       this.router.navigate(['/'])
-    );
+    ).finally(() => {this.booking = false;});
   }
 
   nextMonth() {

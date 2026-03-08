@@ -6,5 +6,6 @@ export interface Branch {
     google_maps_link:string,
     contact_number:string,
     rate:number,
+    package_rate?:number,
     thumbnail:string
 }

@@ -1,5 +1,5 @@
 import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
-import { NgClass } from "@angular/common";
+import { DecimalPipe, NgClass } from "@angular/common";
 import { RentalService } from '../../services/rental-service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppState } from '../../services/app-state';
@@ -9,7 +9,7 @@ import { StudioDetailComponent } from "../../components/studio-detail-component/
 
 @Component({
   selector: 'app-studio-rental-page',
-  imports: [NgClass, ReactiveFormsModule, StudioDetailComponent],
+  imports: [NgClass, ReactiveFormsModule, StudioDetailComponent, DecimalPipe],
   templateUrl: './studio-rental-page.html',
   styleUrl: './studio-rental-page.css',
 })
@@ -36,6 +36,8 @@ export class StudioRentalPage implements OnInit{
   hovered_branch = signal<number>(-1);
   viewing_branch = signal<Branch|null>(null);
   viewing_gallery = signal<string[]>([]);
+  total_amount = signal<number>(0);
+  paying = false;
 
   constructor() {
     this.today = new Date();
@@ -114,6 +116,7 @@ export class StudioRentalPage implements OnInit{
         this.end_times.push(`${hour_display}:${min_display} ${am_pm}`)
       }
       
+      this.computeTotal();
     }
 
   }
@@ -124,10 +127,41 @@ export class StudioRentalPage implements OnInit{
       let hour_minute = time.split(' ')[0].split(':');
       const hour = parseInt(hour_minute[0]) + (am_pm == 'PM' ? 12 : 0);
       this.end_sched.set(time)
+      this.computeTotal();
+    }
+  }
+
+  computeTotal() {
+    if (this.start_sched() == 'none' || this.end_sched() == 'none') {
+      this.total_amount.set(0);
+      return;
+    }
+    const branch = this.branches().find(b => b.id == this.selected_branch());
+    if (!branch) return;
+
+    let start_am_pm = this.start_sched().split(' ')[1];
+    let start_hour_minute = this.start_sched().split(' ')[0].split(':');
+    const start_min = parseInt(start_hour_minute[1]);
+    const start_hour = parseInt(start_hour_minute[0]) + (start_am_pm == 'PM' && start_hour_minute[0] !== '12' ? 12 : 0);
+    let end_am_pm = this.end_sched().split(' ')[1];
+    let end_hour_minute = this.end_sched().split(' ')[0].split(':');
+    const end_min = parseInt(end_hour_minute[1]);
+    const end_hour = parseInt(end_hour_minute[0]) + (end_am_pm == 'PM' && end_hour_minute[0] !== '12' ? 12 : 0);
+
+    const start_time = start_hour + (start_min/60)
+    const end_time = end_hour + (end_min/60)
+
+    const duration = end_time - start_time;
+    if (branch.package_rate && duration >= 3) {
+      this.total_amount.set(duration * branch.package_rate)
+    } else {
+      this.total_amount.set(duration * branch.rate)
     }
   }
 
   payment() {
+    if (this.paying) return;
+
     if (!this.state.user()) {
       alert('You need to be logged in to rent a studio.');
       return;
@@ -140,9 +174,11 @@ export class StudioRentalPage implements OnInit{
       alert('Please complete the start and end time of your rent.');
       return;
     }
-
+    this.paying = true;
     this.rental_service.rent_studio(this.selected_branch(), this.selected_date, this.start_sched(), this.end_sched(), this.state.user()!.authToken!)
-    .then(checkoutUrl => window.open(checkoutUrl));
+    .then(checkoutUrl => window.open(checkoutUrl)).finally(() => {
+      this.paying = false;
+    });
   }
 
   is_hovered(id:number):boolean {

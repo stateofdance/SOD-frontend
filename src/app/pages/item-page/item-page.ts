@@ -29,6 +29,7 @@ export class ItemPage implements OnInit{
   custom_form = new FormGroup({});
   added_prices = new Map<string, string>();
   final_price = 0;
+  paying = false;
 
   constructor(private route: ActivatedRoute){}
 
@@ -90,6 +91,8 @@ export class ItemPage implements OnInit{
   }
 
   submit() {
+    if (this.paying) return;
+
     if (this.branch.value == "None") {
       alert("Please select a branch.");
       return;
@@ -99,9 +102,10 @@ export class ItemPage implements OnInit{
       return;
     }
 
+    this.paying = true;
     this.service.submit_order(
       this.item()?.id!, Object.values(this.custom_form.value).map(Number), 
       this.counter(), parseInt(this.branch.value!), this.state.user()?.authToken!
-    ).then(link => window.open(link));
+    ).then(link => window.open(link)).finally(() => {this.paying = false;});
   }
 }

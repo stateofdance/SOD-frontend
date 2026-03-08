@@ -17,6 +17,7 @@ export class PackagePage implements OnInit{
   packages = signal<Package[]>([]);
   selected_package:number = -1;
   hovered_package:number = -1;
+  paying = false;
 
   ngOnInit(): void {
     this.service.get_packages().then(packages => {
@@ -30,10 +31,14 @@ export class PackagePage implements OnInit{
   }
 
   payment() {
+    if (this.paying) return;
+
     if (this.selected_package == -1) {
       alert('Please select a package before proceeding.');
       return;
     }
-    this.service.order_ticket(this.selected_package, this.state.user()!.authToken!).then(checkout_url => window.open(checkout_url));
+    
+    this.paying = true;
+    this.service.order_ticket(this.selected_package, this.state.user()!.authToken!).then(checkout_url => window.open(checkout_url)).finally(() => {this.paying = false;});
   }
 }
