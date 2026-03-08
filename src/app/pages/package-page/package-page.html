@@ -1,16 +1,30 @@
 
 <div class="min-h-screen pt-30 bg-black-violet flex flex-col">
-    <h1 class="text-white font-hanson text-5xl text-center">Select a <span class="text-gold">Package</span></h1>
+    <h1 class="my-10 text-white font-hanson text-5xl text-center">Select a <span class="text-gold">Package</span></h1>
 
     <div class="flex flex-wrap w-2/3 mx-auto justify-center items-center h-fit my-auto">
         @for (package of packages(); track package.id){
-            <div 
-            class="p-8 bg-dark-violet text-center w-50 rounded-xl mx-5 my-3 cursor-pointer transition-colors duration-500 ease-in-out"
-            (mouseenter)="hovered_package = package.id" (mouseleave)="hovered_package = -1" (click)="selected_package = package.id"
-            [ngClass]="{'bg-amber-50':is_hovered(package.id), 'bg-dark-violet':!is_hovered(package.id)}">
-                <h2 class="font-lexend text-4xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(package.id), 'text-black':is_hovered(package.id)}">{{package.number_of_sessions}}</h2>
-                <p class="font-lexend text-xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(package.id), 'text-black':is_hovered(package.id)}">Sessions</p>
+            @if (!package.special) {
+                <div 
+                class="p-8 bg-dark-violet text-center w-50 rounded-xl mx-5 my-3 cursor-pointer transition-colors duration-500 ease-in-out"
+                (mouseenter)="hovered_package = package.id" (mouseleave)="hovered_package = -1" (click)="selected_package = package.id"
+                [ngClass]="{'bg-amber-50':is_hovered(package.id), 'bg-dark-violet':!is_hovered(package.id)}">
+                    <h2 class="font-lexend text-4xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(package.id), 'text-black':is_hovered(package.id)}">{{package.number_of_sessions}}</h2>
+                    <p class="font-lexend text-xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(package.id), 'text-black':is_hovered(package.id)}">Sessions</p>
+                </div>
+            }}
+        @for (package of packages(); track package.id){
+            <div class="w-full m-auto ">
+                @if (package.special) {
+                    <div class="p-8 bg-dark-violet text-center w-50 rounded-xl mx-5 my-3 cursor-pointer transition-colors duration-500 ease-in-out"
+                        (mouseenter)="hovered_package = package.id" (mouseleave)="hovered_package = -1" (click)="selected_package = package.id"
+                        [ngClass]="{'bg-amber-50':is_hovered(package.id), 'bg-dark-violet':!is_hovered(package.id)}">
+                        <!-- img -->
+                        <img>
+                    </div>
+                }
             </div>
+
         }
     </div>
 
