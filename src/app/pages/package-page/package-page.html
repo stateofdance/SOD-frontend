@@ -2,46 +2,47 @@
 <div class="min-h-screen pt-30 bg-black-violet flex flex-col">
     <h1 class="my-10 text-white font-hanson text-5xl text-center">Select a <span class="text-gold">Package</span></h1>
 
-    <select name="branch" id="branch" [formControl]="branch" class="m-auto border border-white rounded-xs text-white text-xl p-2 w-full lg:w-1/3 uppercase">
+    <select name="branch" id="branch" [formControl]="branch" class="m-auto border border-white rounded-xs text-white text-xl p-2 w-[0%] lg:w-1/3 uppercase">
         @for (branch of branches(); track $index) {
             <option value="{{branch.id}}" class="uppercase bg-dark-violet">{{branch.name}}</option>
         }
     </select>
     <!-- packages -->
     <h1 class="mt-20 text-center text-white font-jost font-extrabold text-4xl mb-4"> Packages </h1>
-    @if (packages().length == 0) {
-        <h1 class="mt-20 text-center text-white font-jost font-extrabold text-lg mb-4">No Packages</h1>
-    }@else {
-        <div class="flex flex-wrap w-2/3 mx-auto justify-center items-center h-fit my-auto">
-                @for (package of packages(); track package.id){
-                    @if (!package.special) {
-                        <div 
-                        class="p-8 bg-dark-violet text-center w-50 rounded-xl mx-5 my-3 cursor-pointer transition-colors duration-500 ease-in-out"
-                        (mouseenter)="hovered_package = package.id" (mouseleave)="hovered_package = -1" (click)="selected_package = package.id"
-                        [ngClass]="{'bg-amber-50':is_hovered(package.id), 'bg-dark-violet':!is_hovered(package.id)}">
-                            <h2 class="font-lexend text-4xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(package.id), 'text-black':is_hovered(package.id)}">{{package.number_of_sessions}}</h2>
-                            <p class="font-lexend text-xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(package.id), 'text-black':is_hovered(package.id)}">Sessions</p>
-                        </div>
-                    }
+    <div class="flex flex-wrap w-2/3 mx-auto justify-center items-center h-fit my-auto">
+            @if (no_special().length == 0) {
+                <h1 class="mt-20 text-center text-white font-jost font-extrabold text-lg mb-4">No Packages</h1>
+            }@else {
+                @for (package of no_special(); track package.id){
+                    <div 
+                    class="p-8 bg-dark-violet text-center w-50 rounded-xl mx-5 my-3 cursor-pointer transition-colors duration-500 ease-in-out"
+                    (mouseenter)="hovered_package = package.id" (mouseleave)="hovered_package = -1" (click)="selected_package = package.id"
+                    [ngClass]="{'bg-amber-50':is_hovered(package.id), 'bg-dark-violet':!is_hovered(package.id)}">
+                        <h2 class="font-lexend text-4xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(package.id), 'text-black':is_hovered(package.id)}">{{package.number_of_sessions}}</h2>
+                        <p class="font-lexend text-xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(package.id), 'text-black':is_hovered(package.id)}">Sessions</p>
+                    </div>
                 }
+            }
         </div>
             <!-- recitals -->
         <h1 class="mt-3 text-center text-white font-jost font-extrabold text-4xl mt-20 mb-4"> Recitals </h1>
         <div class="flex flex-wrap w-2/3 mx-auto justify-center items-center h-fit my-auto">
-                @for (package of packages(); track package.id){
-                        @if (package.special) {
-                            <div class="border rounded-lg hover:scale-105 transition-all ease-in-out duration-200 text-center w-100 h-[100] mx-5 my-3 cursor-pointer transition-colors duration-500 ease-in-out"
-                                (mouseenter)="hovered_package = package.id" (mouseleave)="hovered_package = -1" (click)="selected_package = package.id"
-                                [ngClass]="{'border-white':is_hovered(package.id), 'border-black':!is_hovered(package.id)}">
-                                <!-- img -->
-                                <img src="{{package.thumbnail}}" class="rounded-xl  w-full h-full object-cover object-center" />
-                                <p class="font-lexend text-xl transition-colors duration-500 ease-in-out my-3" [ngClass]="'text-white'"> {{package.name}} </p>
+                @if (special().length == 0) {
+                    <h1 class="mt-20 text-center text-white font-jost font-extrabold text-lg mb-4">No Recitals</h1>
+                }@else {
+                    @for (package of special(); track package.id){
+                        <div class="border rounded-lg hover:scale-105 transition-all ease-in-out duration-200 text-center w-100 h-[100] mx-5 my-3 cursor-pointer transition-colors duration-500 ease-in-out"
+                            (mouseenter)="hovered_package = package.id" (mouseleave)="hovered_package = -1" (click)="selected_package = package.id"
+                            [ngClass]="{'border-white':is_hovered(package.id), 'border-black':!is_hovered(package.id)}">
+                            <!-- img -->
+                            <img src="{{package.thumbnail}}" class="rounded-xl  w-full h-full object-cover object-center" />
+                            <p class="font-lexend text-xl transition-colors duration-500 ease-in-out my-3" [ngClass]="'text-white'"> {{package.name}} </p>
 
-                            </div>
-                        }
+                        </div>
+                    }
                 }
         </div>
-    }
+    
     
     <button 
         class="hover:bg-amber-100 hover:text-black bg-transparent border border-white text-white font-eurostile font-bold text-base uppercase rounded-full w-70 mx-auto p-2 mt-auto mb-30 cursor-pointer"
