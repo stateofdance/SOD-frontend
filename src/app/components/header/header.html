@@ -44,6 +44,7 @@
                         <button class="font-eurostile font-bold text-base p-1 border border-white w-35 h-11 cursor-pointer" (click)="bookings_show.set(!bookings_show())">BOOKING</button>
                         <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':bookings_show(), 'scrolled':isScrolled || getCurrentPath().length > 2, 'show-all':show_all()}">
                             <a routerLink="/class-booking"><li class="p-0.5 link" (click)="hideAll()">Book a Class</li></a>
+                            <a routerLink="/packages"><li class="p-0.5 link" (click)="hideAll()">Buy a Ticket</li></a>
                             <a routerLink="/studio-rental"><li class="p-0.5 link" (click)="hideAll()">Rent our Studio</li></a>
                         </ul>
                     </div>
@@ -155,7 +156,7 @@
             <!-- Book a Class -->
             <a routerLink="/class-booking"
             class="block px-3 py-2 rounded-lg transition active:bg-violet/40 active:scale-95">
-                <h2 class="font-eurostile font-bold text-3xl">Book a Class</h2>
+                <h2 class="font-eurostile font-bold text-3xl"> Bookings </h2>
             </a>
 
             <hr class="w-full bg-white h-0.5">
@@ -171,16 +172,16 @@
                 </li>
 
                 <li>
-                    <a routerLink="/studio-rental"
+                    <a routerLink="/packages"
                     class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95">
-                    Rent our Studio
+                    Buy a Ticket 
                     </a>
                 </li>
 
-                <li >
-                    <a routerLink="/" fragment="contact-us"
+                <li>
+                    <a routerLink="/studio-rental"
                     class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95">
-                    Contact Us
+                    Rent our Studio
                     </a>
                 </li>
 
