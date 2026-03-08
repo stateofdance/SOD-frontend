@@ -63,7 +63,7 @@ export class PackagePage implements OnInit{
     
     this.paying = true;
     this.service.order_ticket(this.selected_package, this.state.user()!.authToken!)
-    .then(checkout_url => window.open(checkout_url))
+    .then(checkout_url => {window.open(checkout_url);})
     .finally(() => {this.paying = false;})
     .catch((error) => {
         if (error.status === 401) {
