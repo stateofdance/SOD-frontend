@@ -1,4 +1,15 @@
 export const environment = {
     production:false,
-    apiURl:'https://stateofdance-backend-624412332968.asia-southeast1.run.app'
+    apiURl:'https://sod-backend-522164650053.asia-southeast1.run.app/admin/'
+};
+
+
+export const coaches_img = {
+  production: false,
+  imageUrl: 'https://sod-demo-bucket.s3.ap-southeast-2.amazonaws.com/buffer_image.png?response-content-disposition=inline&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBEaDmFwLXNvdXRoZWFzdC0yIkcwRQIhAPyQDMv6WKxIX4eE2siRlaFqkzCaX5iW%2Ba%2FF6zy8%2FfK%2FAiBL%2BX4vVfdsXCgYpj0Undc%2BBEfGypUYmAi7UPFqQwmX9Sq%2BAwja%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDMxNzQ5MzU1Nzc5NiIMdoX%2BIp5CLR3J7pl%2FKpIDKbjGHAfi2RblcJbsNZCsI0p7XZh9v111KQlF4bemWn4UxSvT9dBEs4XvnpHprSPR9eBpaZRxGOYko%2FI43yB2gYEm%2FejWat7CGq0w1wXyBT82ceTjMQu8Bs0vHlG5Iu0SBHd6rHwcKfr4upiGRdlD7lNH38VHMZQ827MsNCW%2FsZlN%2Fz%2B8KpAX5gWWs1MB5hDDBGaoYEUrqfjn9KXfxLnnkT088I5YN0fYuxHkHPq3Wpk%2FyE%2B5hs%2BFsuYnOgiGGoHiExbRPqOi5Zgua5XLc5GqH5Iuxd%2FHtasAtAI4qnJUZi%2BRyjMFeHhSUjw96yg465u%2FL3LdrJvpi9t44k96%2FItwAs5QYUOZv%2BOg4pvRZrScnM91E04hcQgdMW151cuA%2B1jBkwUbFl9dVPfTqbg%2FlYv%2B0sWikf%2BtHfb3dM9Pc67crNoDvLYr%2FJ1LNkuOIU10yAVbKoTVrH206ObTj0evcAfY1RqDI9b3%2BsK%2BvrewGQV653mqPD1BRxDW5wG9MN%2FL3thqU4WLvUMhmft7kdMKwsJaJQEzMIfy4M0GOt4CjBip421oC%2FyTP28sbPr4h3%2FqmMc%2Bz7FH5K%2FEAgEY%2B1q5kaSmAyz5Cc0qzWixJdjGe%2Bzj3GUNrjjrkCrXj4SffnL%2F%2B2YJzGCiUoEx0lv5tVkHb10LqlFpEjOHpcQ1PM1X6Nod7kHm%2Buk1k%2FsHt2bfOW3J2NzwvvCnD11Ba8K2LL6GyUAKcCr6JPZBKE82QDet3hmJDdoqE8ziPL6wRskO0O%2FHzPSrl2H%2F8V4MhRdTsRgFrTmUjX%2Buhz0IDlBeVfbn8MECD1eeqsT4z95yZQNtz5lzMGf8RCNvpHID%2FbQTh3KlFSJKRezB3pAIyx46pxAs4KQLcMBvjOY8chq2Qqu2MeeK2c1q63oy6GJ9lM967Mand1oqr8fNYmpg1bOMAgCe%2B50zGg5YRBpSOab9%2FXL0rqVU%2F0gD4FcWjOoWU5r5%2FcUjKXpIerG1Oxc0gwNhm8p%2BBlZcGS%2FtEuqRbt65Tyw%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAUT3AXHISO7A4DBGD%2F20260316%2Fap-southeast-2%2Fs3%2Faws4_request&X-Amz-Date=20260316T170939Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&X-Amz-Signature=d7e7268f20ab6a87660193e9e00bc6a7a83bbb054e8dcd1af2295e4c0587cef2'
+};
+
+export const closing_img = {
+  production: false,
+  imageUrl: 'https://your-bucket-name.s3.ap-southeast-1.amazonaws.com/logo.png'
 };
