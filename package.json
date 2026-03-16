@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "set-env": "node set-env.js",
+    "start": "npm run set-env && ng serve",
     "prebuild": "node set-env.js",
-    "build": "ng build",
+    "build": "npm run set-env && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -32,14 +33,15 @@
     "@angular/material": "~21.1.1",
     "@angular/platform-browser": "^21.1.0",
     "@angular/router": "^21.1.0",
+    "dotenv": "^17.3.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@angular/build": "^21.1.0",
+    "@angular/cdk": "^21.2.0",
     "@angular/cli": "^21.1.0",
     "@angular/compiler-cli": "^21.1.0",
-    "@angular/cdk": "^21.2.0",
     "@angular/material": "^21.2.0",
     "@tailwindcss/postcss": "^4.1.12",
     "jsdom": "^27.1.0",
