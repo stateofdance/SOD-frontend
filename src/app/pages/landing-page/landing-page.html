@@ -1,7 +1,7 @@
 <div class="hero-section relative w-full">
 
     <video autoplay [muted]="'muted'" loop class="absolute inset-0 h-screen object-cover w-full">
-        <source src="/videos/intro_background.mp4" type="video/mp4">
+        <source [src]="intro_video" type="video/mp4">
     </video>
 
     <div class="absolute opacity-70 inset-0 bg-linear-to-t bg-black h-full"></div>
@@ -248,7 +248,7 @@
 </div>
 
 <!-- coaches -->
-<img [src]="coaches_img" alt="coaches" class="relative z-10">
+<img [src]="coaches_img" alt="latest coaches pic 2" class="relative z-10">
 
 <div #track2 class="relative z-10 h-[700vh] bg-black">
     <div class="z-10 pt-10 bg-linear-to-b from-dark-violet to-black w-full sticky top-20 h-[calc(100vh-5rem)]">
