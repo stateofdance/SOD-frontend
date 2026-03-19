@@ -213,7 +213,7 @@ export class ClassBookingPage implements OnInit {
   }
 
   finalizedBooking() {
-    if (!this.state.user) {
+    if (!this.state.user()) {
       alert("You need to be logged in before finalizing your booking!");
       return;
     }
