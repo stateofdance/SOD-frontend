@@ -1,10 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MerchItem } from '../../interfaces/merch-item';
 import { StoreService } from '../../services/store-service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-merch-page',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './merch-page.html',
   styleUrl: './merch-page.css',
 })

@@ -211,4 +211,13 @@ export class ClassBookingPage implements OnInit {
       console.log(this.selected_schedules)
     }
   }
+
+  finalizedBooking() {
+    if (!this.state.user()) {
+      alert("You need to be logged in before finalizing your booking!");
+      return;
+    }
+
+    this.finalizing_booking = true;
+  }
 }

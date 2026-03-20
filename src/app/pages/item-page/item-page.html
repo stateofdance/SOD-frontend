@@ -11,18 +11,20 @@
                 
             }
         </div>
-        <div class="relative lg:h-full lg:w-auto w-4/5 md:w-1/2 mx-auto lg:mx-0">
-            <img 
-            src="/images/next_circular_button.png" alt="next circular button" 
-            class="absolute top-1/2 transform -translate-y-1/2 rotate-180 left-3 cursor-pointer"
-            (click)="previous()"
-            >
-            <img #mainDisplay src="{{item()!.image_links[current_index()].image}}" alt="item" class="h-full">
-            <img 
-            src="/images/next_circular_button.png" alt="next circular button" 
-            class="absolute top-1/2 transform -translate-y-1/2 right-3 cursor-pointer"
-            (click)="next()"
-            >
+        <div class="flex lg:h-full lg:w-auto w-4/5 md:w-1/2 mx-auto lg:mx-0">
+            <div class="relative h-fit">
+                <img 
+                src="/images/next_circular_button.png" alt="next circular button" 
+                class="absolute top-1/2 transform -translate-y-1/2 rotate-180 left-3 cursor-pointer"
+                (click)="previous()"
+                >
+                <img #mainDisplay src="{{item()!.image_links[current_index()].image}}" alt="item" class="w-full">
+                <img 
+                src="/images/next_circular_button.png" alt="next circular button" 
+                class="absolute top-1/2 transform -translate-y-1/2 right-3 cursor-pointer"
+                (click)="next()"
+                >
+            </div>
         </div>
     </div>
     <div class="flex flex-col p-10 w-full lg:w-1/2">
@@ -32,7 +34,7 @@
             <img src="{{item()!.details}}" alt="item details" class="mt-5 hidden md:block mx-auto w-4/5">
         }
         <form [formGroup]="custom_form" class="flex mt-10 lg:justify-between justify-center lg:flex-row flex-col items-start">
-            <div class="flex flex-col">
+            <div class="flex flex-col min-h-25">
                 @for (customization of customizations(); track $index) {
                     <div class="flex items-center justify-between md:justify-start mb-5">
                         <p class="text-black font-lexend text-base md:mr-5">Select {{customization.customizationName}}</p>

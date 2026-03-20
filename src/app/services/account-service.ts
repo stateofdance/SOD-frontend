@@ -33,7 +33,7 @@ export class AccountService {
   }
 
   async get_branches() : Promise<Branch[]> {
-    const observable = this.httpClient.get<Branch[]>(`${environment.apiURl}/members/branches/`);
+    const observable = this.httpClient.get<Branch[]>(`${environment.apiURl}/members/branches/store/`);
     return firstValueFrom(observable);
   }
 
