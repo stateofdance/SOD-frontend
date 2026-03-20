@@ -226,4 +226,6 @@ export class StudioRentalPage implements OnInit{
   if (index === (current + 1) % total) return 'right';
   return 'hidden';
 }
+
+
 }

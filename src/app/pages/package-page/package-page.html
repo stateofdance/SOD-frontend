@@ -20,6 +20,7 @@
                     [ngClass]="{'bg-amber-50':is_hovered(package.id, 'packages'), 'bg-dark-violet':!is_hovered(package.id, 'packages')}">
                         <h2 class="font-lexend text-4xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(package.id, 'packages'), 'text-black':is_hovered(package.id, 'packages')}">{{package.number_of_sessions}}</h2>
                         <p class="font-lexend text-xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(package.id, 'packages'), 'text-black':is_hovered(package.id, 'packages')}">Sessions</p>
+                        <p class="font-lexend text-md transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(package.id, 'packages'), 'text-black':is_hovered(package.id, 'packages')}"> ₱{{package.price}} </p>
                     </div>
                 }
             }
@@ -37,6 +38,7 @@
                             <!-- img -->
                             <img src="{{recital.thumbnail}}" class="rounded-xl  w-full h-full object-cover object-center" />
                             <p class="font-lexend text-xl transition-colors duration-500 ease-in-out my-3" [ngClass]="'text-white'"> {{recital.name}} </p>
+                            <p class="font-lexend text-md transition-colors duration-500 ease-in-out my-3" [ngClass]="'text-white'"> ₱{{recital.price}} </p>
 
                         </div>
                     }
