@@ -128,14 +128,16 @@
             <app-studio-detail [rawApiData]="viewing_branch()?.description || ''" class="w-full"></app-studio-detail>
 
             <!-- google maps -->
-            <!-- <iframe #viewMap 
-            [src]="viewing_branch()?.google_maps_link || ''" 
-            class="w-full hue-rotate-[60deg]" 
-            height="450" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy">
-            </iframe> -->
+            @if (safeMapUrl(); as mapUrl) {
+            <iframe
+                [src]="mapUrl"
+                class="w-full hue-rotate-[60deg]"
+                height="450"
+                style="border:0;"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+            }
         </div>
     }
 </div>

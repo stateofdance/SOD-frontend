@@ -88,47 +88,66 @@ export class PackagePage implements OnInit{
   payment() {
     if (this.paying) return;
 
+    const user = this.state.user();
+    const token = user?.authToken;
+
+    if (!user || !token) {
+      window.dispatchEvent(new Event('force-login'));
+      return;
+    }
+
     if (this.selected_package == -1) {
       alert('Please select a package before proceeding.');
       return;
     }
-    
+
     this.paying = true;
+
     if (this.section == 'packages') {
-      this.service.order_ticket(this.selected_package, this.state.user()!.authToken!)
-      .then(checkout_url => {window.open(checkout_url);})
-      .finally(() => {this.paying = false;})
-      .catch((error) => {
+      this.service.order_ticket(this.selected_package, token)
+        .then(checkout_url => {
+          window.open(checkout_url);
+        })
+        .finally(() => {
+          this.paying = false;
+        })
+        .catch((error) => {
           if (error.status === 401) {
             console.log('Unauthorized: token is invalid or expired. Logging out...');
             localStorage.removeItem('authToken');
             this.state.user.set(null);
             window.dispatchEvent(new Event('force-login'));
-          } else { 
+          } else {
             console.log(error.message);
           }
-      });
-    }else {
+        });
+    } else {
       for (const recital of this.recitals()) {
         if (recital.id == this.selected_package && recital.students.length >= recital.max_students) {
           alert('The recital is already full! Pick a different recital');
+          this.paying = false;
           return;
         }
       }
 
-      this.service.book_recital(this.selected_package, this.state.user()!.authToken!)
-      .then(checkout_url => {window.open(checkout_url);})
-      .finally(() => {this.paying = false;})
-      .catch((error) => {
+      this.service.book_recital(this.selected_package, token)
+        .then(checkout_url => {
+          window.open(checkout_url);
+        })
+        .finally(() => {
+          this.paying = false;
+        })
+        .catch((error) => {
           if (error.status === 401) {
             console.log('Unauthorized: token is invalid or expired. Logging out...');
             localStorage.removeItem('authToken');
             this.state.user.set(null);
             window.dispatchEvent(new Event('force-login'));
-          } else { 
+          } else {
             console.log(error.message);
           }
-      });
+        });
     }
   }
+
 }
