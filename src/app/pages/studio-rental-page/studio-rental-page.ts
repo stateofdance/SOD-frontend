@@ -1,12 +1,12 @@
-import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
-import { DecimalPipe, NgClass } from "@angular/common";
+import { Component, computed, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { DecimalPipe, NgClass, NgIf } from '@angular/common';
 import { RentalService } from '../../services/rental-service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppState } from '../../services/app-state';
 import { User } from '../../interfaces/user';
 import { Branch } from '../../interfaces/branch';
 import { StudioDetailComponent } from "../../components/studio-detail-component/studio-detail-component";
-
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-studio-rental-page',
   imports: [NgClass, ReactiveFormsModule, StudioDetailComponent, DecimalPipe],
@@ -39,6 +39,8 @@ export class StudioRentalPage implements OnInit{
   total_amount = signal<number>(0);
   paying = false;
 
+  private sanitizer = inject(DomSanitizer);
+
   constructor() {
     this.today = new Date();
     this.today.setDate(this.today.getDate() + 1);
@@ -49,6 +51,14 @@ export class StudioRentalPage implements OnInit{
       this.branches.set(branches);
     })
   }
+
+
+  safeMapUrl = computed<SafeResourceUrl | null>(() => {
+    const url = this.viewing_branch()?.google_maps_link?.trim();
+    if (!url) return null;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  });
+
 
   setBranch(branch:number) {
     this.selected_branch.set(branch);
@@ -205,7 +215,7 @@ export class StudioRentalPage implements OnInit{
       this.currentImageIndex.set(0);
       const imageUrls = images.map(img => img.image);
       this.viewing_gallery.set(imageUrls);
-      this.map.nativeElement.src = this.viewing_branch()?.google_maps_link;
+      // this.map.nativeElement.src = this.viewing_branch()?.google_maps_link;
     });
   }
 
