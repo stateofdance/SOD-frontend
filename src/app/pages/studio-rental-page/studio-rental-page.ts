@@ -59,7 +59,7 @@ export class StudioRentalPage implements OnInit{
 
   findGroup(time:number) : number {
     for (const [index, range] of this.available_scheds.entries()) {
-      if (time >= range[0] && time <= range[1]) {
+      if (time >= range[0] && time <= range[1] - 1) {
         return index;
       } 
     }
@@ -102,7 +102,7 @@ export class StudioRentalPage implements OnInit{
       let am_pm = time.split(' ')[1];
       let hour_minute = time.split(' ')[0].split(':');
       const start_min = parseInt(hour_minute[1]);
-      const start_hour = parseInt(hour_minute[0]) + (am_pm == 'PM' ? 12 : 0);
+      const start_hour = parseInt(hour_minute[0]) + ((am_pm == 'PM' && hour_minute[0] != '12') ? 12 : 0);
       this.start_sched.set(time)
 
       const start_time = start_hour + (start_min/60)
