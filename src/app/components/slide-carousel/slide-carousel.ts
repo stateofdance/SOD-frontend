@@ -37,7 +37,7 @@ export class SlideCarousel implements OnInit, OnDestroy {
     this.lesson_service.get_coaches().then(coaches => {
       for (const coach of coaches) {
         this.lesson_service.get_lessons_per_coach(coach.id).then(lessons => {
-          coach.lessons = lessons; 
+          coach.lessons = lessons.slice(0, 3);
           this.coaches.update(currentCoaches => {
             const newCoaches = [...currentCoaches, coach];
             return newCoaches.sort((a, b) => a.id - b.id);
