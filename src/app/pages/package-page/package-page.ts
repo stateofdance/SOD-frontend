@@ -104,9 +104,13 @@ export class PackagePage implements OnInit{
     this.paying = true;
 
     if (this.section == 'packages') {
+      const newWindow = window.open('about:blank', '_blank');
+
       this.service.order_ticket(this.selected_package, token)
         .then(checkout_url => {
-          window.open(checkout_url);
+          if (newWindow) {
+            newWindow.location.href = checkout_url;
+          }
         })
         .finally(() => {
           this.paying = false;
@@ -129,10 +133,13 @@ export class PackagePage implements OnInit{
           return;
         }
       }
+      const newWindow = window.open('about:blank', '_blank');
 
       this.service.book_recital(this.selected_package, token)
         .then(checkout_url => {
-          window.open(checkout_url);
+          if (newWindow) {
+            newWindow.location.href = checkout_url;
+          }
         })
         .finally(() => {
           this.paying = false;

@@ -175,7 +175,7 @@ export class StudioRentalPage implements OnInit{
     if (this.paying) return;
 
     if (!this.state.user()) {
-      alert('You need to be logged in to rent a studio.');
+      window.dispatchEvent(new Event('force-login'));
       return;
     }
     if (!this.selected_date) {
