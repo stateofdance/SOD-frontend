@@ -78,7 +78,7 @@ export class StudioRentalPage implements OnInit{
   }
 
   selectDate(date:string) {
-    this.selected_date =  new Date(date);
+    this.selected_date =  new Date(date + 'T00:00:00')
     this.startTime.nativeElement.value = 'none';
     this.endTime.nativeElement.value = 'none';
     this.rental_service.get_available_slots(this.selected_branch(), this.selected_date.toISOString()).then(available_slots => {
