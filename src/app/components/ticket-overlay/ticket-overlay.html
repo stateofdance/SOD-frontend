@@ -9,7 +9,7 @@
             class="p-8 bg-dark-violet text-center w-50 rounded-xl mx-5 my-3 cursor-pointer transition-colors duration-500 ease-in-out"
             (mouseenter)="hovered_ticket = ticket.id" (mouseleave)="hovered_ticket = -1" (click)="selected_ticket = ticket"
             [ngClass]="{'bg-amber-50':is_hovered(ticket), 'bg-dark-violet':!is_hovered(ticket)}">
-                <h2 class="font-lexend text-4xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(ticket), 'text-black':is_hovered(ticket)}">{{ticket.package.number_of_sessions}}</h2>
+                <h2 class="font-lexend text-4xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(ticket), 'text-black':is_hovered(ticket)}">{{ticket.package.number_of_sessions - ticket.used_sessions}}</h2>
                 <p class="font-lexend text-xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(ticket), 'text-black':is_hovered(ticket)}">Sessions</p>
             </div>
         }

@@ -70,6 +70,7 @@ export class ClassBookingPage implements OnInit {
       this.branches.set(branches);
       this.branch.setValue(branches[0].id); 
       this.lesson_service.get_schedules(branches[0].id).then(schedules => {
+        this.setLessons(schedules);
         schedules.map(schedule => {
           schedule.schedule = new Date(schedule.schedule);
         })
@@ -86,44 +87,42 @@ export class ClassBookingPage implements OnInit {
           console.log(error.message);
         }
     });
+
+    this.coach.valueChanges.subscribe(coach_id => this.lesson.setValue('-1'));
     
-    this.lesson_service.get_coaches().then(coaches => this.coaches.set(coaches));
-    this.lesson_service.get_classes().then(lessons => this.lessons.set(lessons));
     this.branch.valueChanges.subscribe(branch_id => {
+      this.lesson.setValue('-1');
+      this.coach.setValue('-1');
       this.selected_schedules = [];
       if (branch_id) {
-        this.lesson_service.get_schedules(branch_id).then(schedules => {this.classes.set(schedules);})
-      }
-    });
-    this.coach.valueChanges.subscribe(coach_id => {
-      this.lesson.setValue('-1');
-      if (coach_id && coach_id != '-1') {
-        this.lesson_service.get_lessons_per_coach(parseInt(coach_id)).then(lessons => {
-          this.coach_lessons.set(lessons.filter(value => this.branchLesson(value)));
-        });
-      }else {
-        this.coach_lessons.set([]);
+        this.lesson_service.get_schedules(branch_id).then(schedules => {
+          this.setLessons(schedules);
+          schedules.map(schedule => {
+            schedule.schedule = new Date(schedule.schedule);
+          })
+          this.classes.set(schedules);
+        })
       }
     });
     this.updateCalendar();
   }
 
-  branchLesson(title:string) {
-    for (const lesson of this.classes()) {
-      if (lesson.lesson.title == title) {
-        return true;
+  setLessons(schedules:LessonSchedule[]) {
+    this.lessons.set([]);
+    this.coaches.set([]);
+    for (const schedule of schedules) {
+      if (!this.lessons().map(lesson => lesson.id).includes(schedule.lesson.id)) {
+        this.lessons().push(schedule.lesson);
       }
-    }
-    return false;
-  }
 
-  getLessonId(title:string) {
-    for (const lesson of this.lessons()) {
-      if (lesson.title == title) {
-        return lesson.id;
+      const index = this.coaches().findIndex(coach => coach.id === schedule.coach.id)
+      if (index < 0) {
+        schedule.coach.lessons = [schedule.lesson.title];
+        this.coaches().push(schedule.coach);
+      }else {
+        this.coaches().at(index)?.lessons?.push(schedule.lesson.title);
       }
     }
-    return -1;
   }
 
   updateCalendar() {
@@ -149,6 +148,11 @@ export class ClassBookingPage implements OnInit {
     }
   }
 
+  getCoach(id:string) {
+    const _id = parseInt(id);
+    return this.coaches().find(coach => coach.id == _id);
+  }
+
   payment(ticket:Ticket) {
     if (this.booking) return;
 
@@ -172,6 +176,7 @@ export class ClassBookingPage implements OnInit {
     if (this.date.getMonth() == 11 || this.changing_month) {return;}
     this.changing_month = true;
     this.lesson_service.get_schedules(this.branch.value!).then(schedules => {
+      this.setLessons(schedules);
       schedules.map(schedule => {
           schedule.schedule = new Date(schedule.schedule);
         })
@@ -187,6 +192,7 @@ export class ClassBookingPage implements OnInit {
     if (this.date.getMonth() == 0 || this.changing_month) {return;}
     this.changing_month = true;
     this.lesson_service.get_schedules(this.branch.value!).then(schedules => {
+      this.setLessons(schedules);
       schedules.map(schedule => {
           schedule.schedule = new Date(schedule.schedule);
         })
@@ -200,6 +206,10 @@ export class ClassBookingPage implements OnInit {
 
   selectedMonth(month:string) {
     this.lesson_service.get_schedules(this.branch.value!).then(schedules => {
+      this.setLessons(schedules);
+      schedules.map(schedule => {
+          schedule.schedule = new Date(schedule.schedule);
+        })
       this.date.setMonth(parseInt(month));
       this.classes.set(schedules);
       this.updateCalendar();

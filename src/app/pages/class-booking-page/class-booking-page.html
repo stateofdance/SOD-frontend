@@ -21,12 +21,8 @@
                 </select>
                 <select name="class" id="class" [formControl]="lesson" class="border border-white rounded-xs text-white text-xl p-2 w-full lg:w-55 uppercase">
                     <option value="-1" class="uppercase bg-dark-violet">All Class Types</option>
-                    @if (coach_lessons().length > 0) {
-                        @for (lesson of coach_lessons(); track $index) {
-                            <option value="{{getLessonId(lesson)}}" class="uppercase bg-dark-violet">{{lesson}}</option>
-                        }
-                    }@else {
-                        @for (lesson of lessons(); track $index) {
+                    @for (lesson of lessons(); track $index) {
+                        @if (coach.value == '-1' || getCoach(coach.value!)?.lessons?.includes(lesson.title)) {
                             <option value="{{lesson.id}}" class="uppercase bg-dark-violet">{{lesson.title}}</option>
                         }
                     }
