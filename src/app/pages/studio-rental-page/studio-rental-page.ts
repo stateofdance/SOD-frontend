@@ -65,6 +65,11 @@ export class StudioRentalPage implements OnInit{
     this.date.nativeElement.value = '';
     this.startTime.nativeElement.value = 'none';
     this.endTime.nativeElement.value = 'none';
+
+    this.start_sched.set('none');
+    this.end_sched.set('none');
+    this.total_amount.set(0);
+    this.end_times = [];
   }
 
   findGroup(time:number) : number {
@@ -78,9 +83,15 @@ export class StudioRentalPage implements OnInit{
   }
 
   selectDate(date:string) {
-    this.selected_date =  new Date(date);
+    this.selected_date =  new Date(date)
     this.startTime.nativeElement.value = 'none';
     this.endTime.nativeElement.value = 'none';
+
+    this.start_sched.set('none');
+    this.end_sched.set('none');
+    this.total_amount.set(0);
+    this.end_times = [];
+
     this.rental_service.get_available_slots(this.selected_branch(), this.selected_date.toISOString()).then(available_slots => {
       this.start_times = [];
       this.available_scheds = available_slots;

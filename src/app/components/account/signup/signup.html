@@ -6,6 +6,9 @@
     <input type="email" [formControl]="email" name="email" id="email" placeholder="Email" class="mt-5 p-2 border border-white text-white font-open-sans focus:outline-none focus:ring-0 focus:border-gold focus:border-2">
     <app-password #password placeholder="Password" design="dark"></app-password>
     <app-password #confirm_password placeholder="Confirm Password" design="dark"></app-password>
+    <input type="text" name="contact" id="contact" placeholder="Phone Number" [formControl]="number"
+    class="mt-5 p-2 border border-white text-white font-open-sans focus:outline-none focus:ring-0 focus:border-gold focus:border-2">
+    <input #date type="date" name="date" class="mt-5 text-white border border-white p-2 w-full [&::-webkit-calendar-picker-indicator]:invert" [formControl]="birthdate">
     <label class="flex items-center gap-3 cursor-pointer group mt-5">
         <input type="checkbox" class="peer sr-only" [formControl]="use"/>
 
