@@ -22,18 +22,28 @@ export class Schedule{
   @Output() select = new EventEmitter<LessonSchedule>();
 
   clicked() {
-    if (this.dayPassed()) return;
+    if (this.grayOut()) return;
     this.select.emit(this.class());
+  }
+
+  full():boolean {
+    const isFull = this.class().students.length >= this.class().max_students;
+    return isFull;
+  }
+
+  joined():boolean {
+    const alreadyJoined = this.state.user()?.id !== undefined && 
+                          this.class().students.includes(this.state.user()!.id!);
+    return alreadyJoined;
   }
 
   dayPassed():boolean {
     const now = new Date();
-
     const isPast = this.class().schedule < now;
-    const isFull = this.class().students.length >= this.class().max_students;
-    const alreadyJoined = this.state.user()?.id !== undefined && 
-                          this.class().students.includes(this.state.user()!.id!);
+    return isPast;
+  }
 
-    return isPast || isFull || alreadyJoined;
+  grayOut():boolean {
+    return this.dayPassed() || this.full() || this.joined();
   }
 }

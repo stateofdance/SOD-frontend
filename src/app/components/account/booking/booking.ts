@@ -25,9 +25,6 @@ export class Booking implements OnInit{
         enrollment.lesson_schedule.schedule = new Date(enrollment.lesson_schedule.schedule);
         return enrollment;
       });
-      enrollments.sort((a,b) => {
-        return b.lesson_schedule.schedule.getTime() - a.lesson_schedule.schedule.getTime();
-      });
       this.enrollments.set(enrollments); 
       this.loading.set(false);
     }).catch((error) => {

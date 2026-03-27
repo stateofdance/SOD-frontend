@@ -59,7 +59,6 @@ export class ClassBookingPage implements OnInit {
   branches = signal<Branch[]>([]);
   coaches = signal<Coach[]>([]);
   lessons = signal<Class[]>([]);
-  tickets = signal<Ticket[]>([]);
   coach_lessons = signal<string[]>([]);
   finalizing_booking = false;
   changing_month = false;
@@ -266,9 +265,7 @@ export class ClassBookingPage implements OnInit {
       window.dispatchEvent(new Event('force-login'));
       return;
     }
-    this.account_service.get_tickets(this.branch.value, this.state.user()?.authToken!).then(tickets => {
-      this.tickets.set(tickets);
-      this.finalizing_booking = true;
-    });
+    
+    this.finalizing_booking = true;
   }
 }
