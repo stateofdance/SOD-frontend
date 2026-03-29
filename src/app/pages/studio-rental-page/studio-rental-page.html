@@ -7,7 +7,7 @@
             <p class="font-lexend text-white font-bold md:text-base my-5 lg:block hidden lg:text-left text-center">Please select a branch to schedule.</p>
         }
         <div class="flex flex-col w-full mr-5">
-            <input #date type="date" name="date" class="text-white border border-white p-2 rounded-lg text-xl [&::-webkit-calendar-picker-indicator]:invert" (change)="selectDate(date.value)" [min]="today.toISOString().slice(0, 10)">
+            <input #date type="date" name="date" class="text-white border border-white p-2 rounded-lg text-xl [&::-webkit-calendar-picker-indicator]:invert" (change)="selectDate(date.value); date.blur();" [min]="today.toISOString().slice(0, 10)">
             <select #startTime name="start" id="start" class="text-white border border-white p-2 rounded-lg text-xl my-5" (change)="selectStartTime(startTime.value); startTime.blur();">
                 <option value="none" class="bg-black">Select Start Time</option>
                 @for (time of start_times; track $index) {
