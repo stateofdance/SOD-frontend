@@ -1,15 +1,18 @@
 <div class="fixed top-20 left-0 w-full h-[calc(100vh-80px)] bg-black/50 flex flex-col z-50">
     <p class="text-white text-2xl font-hanson cursor-pointer self-end mr-5 mt-5" (click)="close.emit()">Cancel</p>
     <div class="flex flex-wrap w-2/3 mx-auto justify-center items-center h-fit my-auto">
-        @if (tickets().length == 0) {
+        @if (tickets().length == 0 && !loading) {
             <p class="text-center text-xl font-lexend mt-5 text-white">No tickets available. <a [routerLink]="['/packages']" class="text-gold hover:font-bold">Get tickets here.</a></p>
+        }
+        @if (loading) {
+            <p class="text-center text-xl font-lexend mt-5 text-white">Loading...</p>
         }
         @for (ticket of tickets(); track ticket.id){
             <div 
             class="p-8 bg-dark-violet text-center w-50 rounded-xl mx-5 my-3 cursor-pointer transition-colors duration-500 ease-in-out"
             (mouseenter)="hovered_ticket = ticket.id" (mouseleave)="hovered_ticket = -1" (click)="selected_ticket = ticket"
             [ngClass]="{'bg-amber-50':is_hovered(ticket), 'bg-dark-violet':!is_hovered(ticket)}">
-                <h2 class="font-lexend text-4xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(ticket), 'text-black':is_hovered(ticket)}">{{ticket.package.number_of_sessions}}</h2>
+                <h2 class="font-lexend text-4xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(ticket), 'text-black':is_hovered(ticket)}">{{ticket.package.number_of_sessions - ticket.used_sessions}}</h2>
                 <p class="font-lexend text-xl font-bold transition-colors duration-500 ease-in-out" [ngClass]="{'text-white':!is_hovered(ticket), 'text-black':is_hovered(ticket)}">Sessions</p>
             </div>
         }

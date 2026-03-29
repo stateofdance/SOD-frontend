@@ -22,13 +22,8 @@ export class Booking implements OnInit{
 
     this.service.get_enrollments(this.state.user()!.authToken!).then(enrollments => {
       enrollments.map(enrollment => {
-        enrollment.scheduled_date = new Date(enrollment.scheduled_date);
+        enrollment.lesson_schedule.schedule = new Date(enrollment.lesson_schedule.schedule);
         return enrollment;
-      });
-      enrollments.sort((a,b) => {
-        const dateA = new Date(a.scheduled_date);
-        const dateB = new Date(b.scheduled_date);
-        return dateB.getTime() - dateA.getTime();
       });
       this.enrollments.set(enrollments); 
       this.loading.set(false);

@@ -11,8 +11,8 @@
         }
         @for (enrollment of enrollments(); track $index) {
             <div class="flex flex-col text-[14px] uppercase ml-4 text-black my-5">
-                <h6 class="font-bold text-xs">{{enrollment.scheduled_date.toDateString()}} ({{enrollment.lesson_schedule.branch.name}})</h6>
-                <h5 class="font-bold">{{enrollment.lesson_schedule.start_time}} - {{enrollment.lesson_schedule.lesson.difficulty_level}}</h5>
+                <h6 class="font-bold text-xs">{{enrollment.lesson_schedule.schedule.toDateString()}} ({{enrollment.lesson_schedule.branch.name}})</h6>
+                <h5 class="font-bold">{{enrollment.lesson_schedule.schedule.toLocaleTimeString()}} - {{enrollment.lesson_schedule.lesson.difficulty_level}}</h5>
                 <div class="flex ml-3.5">
                     <ul>
                         <div class="relative flex items-center">

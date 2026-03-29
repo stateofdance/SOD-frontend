@@ -3,7 +3,6 @@ import { ClassSchedule } from '../../interfaces/class-schedule';
 import { Schedule } from '../../components/calendar/schedule/schedule';
 import { NgClass } from '@angular/common';
 import { AppState } from '../../services/app-state';
-import { ScheduleBooking } from '../../interfaces/schedule-booking';
 import { LessonService } from '../../services/lesson-service';
 import { LessonSchedule } from '../../interfaces/lesson-schedule';
 import { AccountService } from '../../services/account-service';
@@ -47,29 +46,35 @@ export class ClassBookingPage implements OnInit {
     'June', 'July', 'August', 'September', 'October',
     'November', 'December'
   ]
-  classes = signal<Array<LessonSchedule[]>>([]);
+  classes = signal<LessonSchedule[]>([]);
 
   date = new Date();
   days!:{ day: number, weekday: number }[];
   cells:Array<Date | undefined> = [];
   selected_date_mobile:Date|null = null;
-  selected_schedules:ScheduleBooking[] = [];
+  selected_schedules:LessonSchedule[] = [];
   branch = new FormControl(1);
   coach = new FormControl('-1');
   lesson = new FormControl('-1');
   branches = signal<Branch[]>([]);
   coaches = signal<Coach[]>([]);
   lessons = signal<Class[]>([]);
-  tickets = signal<Ticket[]>([]);
+  coach_lessons = signal<string[]>([]);
   finalizing_booking = false;
+  changing_month = false;
   booking = false;
 
   ngOnInit(): void {
     this.account_service.get_branches().then(branches => {
       this.branches.set(branches);
-      this.branch.setValue(branches[0].id);
-      this.lesson_service.get_schedules(branches[0].id).then(schedules => {this.classes.set(schedules);});
-      this.account_service.get_tickets(this.branch.value, this.state.user()?.authToken!).then(tickets => this.tickets.set(tickets));
+      this.branch.setValue(branches[0].id); 
+      this.lesson_service.get_schedules(branches[0].id).then(schedules => {
+        this.setLessons(schedules);
+        schedules.map(schedule => {
+          schedule.schedule = new Date(schedule.schedule);
+        })
+        this.classes.set(schedules);
+      });
       this.monthSelect.nativeElement.value = this.date.getMonth();
     }).catch((error) => {
         if (error.status === 401) {
@@ -81,15 +86,42 @@ export class ClassBookingPage implements OnInit {
           console.log(error.message);
         }
     });
+
+    this.coach.valueChanges.subscribe(coach_id => this.lesson.setValue('-1'));
     
-    this.lesson_service.get_coaches().then(coaches => this.coaches.set(coaches));
-    this.lesson_service.get_classes().then(lessons => this.lessons.set(lessons));
     this.branch.valueChanges.subscribe(branch_id => {
+      this.lesson.setValue('-1');
+      this.coach.setValue('-1');
+      this.selected_schedules = [];
       if (branch_id) {
-        this.lesson_service.get_schedules(branch_id).then(schedules => {this.classes.set(schedules);})
+        this.lesson_service.get_schedules(branch_id).then(schedules => {
+          this.setLessons(schedules);
+          schedules.map(schedule => {
+            schedule.schedule = new Date(schedule.schedule);
+          })
+          this.classes.set(schedules);
+        })
       }
     });
     this.updateCalendar();
+  }
+
+  setLessons(schedules:LessonSchedule[]) {
+    this.lessons.set([]);
+    this.coaches.set([]);
+    for (const schedule of schedules) {
+      if (!this.lessons().map(lesson => lesson.id).includes(schedule.lesson.id)) {
+        this.lessons().push(schedule.lesson);
+      }
+
+      const index = this.coaches().findIndex(coach => coach.id === schedule.coach.id)
+      if (index < 0) {
+        schedule.coach.lessons = [schedule.lesson.title];
+        this.coaches().push(schedule.coach);
+      }else {
+        this.coaches().at(index)?.lessons?.push(schedule.lesson.title);
+      }
+    }
   }
 
   updateCalendar() {
@@ -115,6 +147,11 @@ export class ClassBookingPage implements OnInit {
     }
   }
 
+  getCoach(id:string) {
+    const _id = parseInt(id);
+    return this.coaches().find(coach => coach.id == _id);
+  }
+
   payment(ticket:Ticket) {
     if (this.booking) return;
 
@@ -135,27 +172,43 @@ export class ClassBookingPage implements OnInit {
   }
 
   nextMonth() {
-    if (this.date.getMonth() == 11) {return;}
+    if (this.date.getMonth() == 11 || this.changing_month) {return;}
+    this.changing_month = true;
     this.lesson_service.get_schedules(this.branch.value!).then(schedules => {
+      this.setLessons(schedules);
+      schedules.map(schedule => {
+          schedule.schedule = new Date(schedule.schedule);
+        })
       this.date.setMonth(this.date.getMonth() + 1);
       this.monthSelect.nativeElement.value = this.date.getMonth();
       this.classes.set(schedules);
       this.updateCalendar();
+      this.changing_month = false;
     })
   }
 
   previousMonth() {
-    if (this.date.getMonth() == 0) {return;}
+    if (this.date.getMonth() == 0 || this.changing_month) {return;}
+    this.changing_month = true;
     this.lesson_service.get_schedules(this.branch.value!).then(schedules => {
+      this.setLessons(schedules);
+      schedules.map(schedule => {
+          schedule.schedule = new Date(schedule.schedule);
+        })
       this.date.setMonth(this.date.getMonth() - 1);
       this.monthSelect.nativeElement.value = this.date.getMonth();
       this.classes.set(schedules);
       this.updateCalendar();
+      this.changing_month = false;
     })
   }
 
   selectedMonth(month:string) {
     this.lesson_service.get_schedules(this.branch.value!).then(schedules => {
+      this.setLessons(schedules);
+      schedules.map(schedule => {
+          schedule.schedule = new Date(schedule.schedule);
+        })
       this.date.setMonth(parseInt(month));
       this.classes.set(schedules);
       this.updateCalendar();
@@ -165,20 +218,15 @@ export class ClassBookingPage implements OnInit {
  
   checkSelectedByDay(date:Date) : boolean {
     for (const schedule of this.selected_schedules) {
-      if (schedule.date.getTime() == date.getTime()) {
+      if (schedule.schedule.toDateString() == date.toDateString()) {
         return true;
       }
     }
     return false;
   }
 
-  checkSelectedByTime(date:Date,time:string) : boolean {
-    for (const schedule of this.selected_schedules) {
-      if (schedule.schedule.start_time == time && schedule.date.getTime() == date.getTime()) {
-        return true;
-      }
-    }
-    return false;
+  checkSelected(lesson_schedule:LessonSchedule) : boolean {
+    return this.selected_schedules.includes(lesson_schedule);
   }
 
   clickedDay(date:Date) {
@@ -201,8 +249,8 @@ export class ClassBookingPage implements OnInit {
     return this.months[parseInt(month)];
   }
 
-  clickedSchedule(schedule_booking:ScheduleBooking):void {
-    const index = this.selected_schedules.findIndex(_booking => schedule_booking.date.getTime() == _booking.date.getTime() && schedule_booking.schedule.id == _booking.schedule.id);
+  clickedSchedule(schedule_booking:LessonSchedule):void {
+    const index = this.selected_schedules.findIndex(_booking => schedule_booking.id == _booking.id);
     if (index < 0) {
       this.selected_schedules.push(schedule_booking);
       console.log(this.selected_schedules)
@@ -217,7 +265,7 @@ export class ClassBookingPage implements OnInit {
       window.dispatchEvent(new Event('force-login'));
       return;
     }
-
+    
     this.finalizing_booking = true;
   }
 }

@@ -5,7 +5,6 @@ import { environment } from '../../environments/environment';
 import { first, firstValueFrom } from 'rxjs';
 import { Class } from '../interfaces/class';
 import { LessonSchedule } from '../interfaces/lesson-schedule';
-import { ScheduleBooking } from '../interfaces/schedule-booking';
 import { Package } from '../interfaces/package';
 import { Recital } from '../interfaces/recital';
 
@@ -30,12 +29,12 @@ export class LessonService {
     return firstValueFrom(observable);
   }
 
-  async get_schedules(branch_id:number) : Promise<Array<LessonSchedule[]>> {
-    const observable = this.httpClient.get<Array<LessonSchedule[]>>(`${environment.apiURl}/lessons/schedules/${branch_id}`);
+  async get_schedules(branch_id:number) : Promise<LessonSchedule[]> {
+    const observable = this.httpClient.get<LessonSchedule[]>(`${environment.apiURl}/lessons/schedules/${branch_id}`);
     return firstValueFrom(observable);
   }
 
-  async book_enrollment(schedule:ScheduleBooking[], ticket_id:number, authToken:string): Promise<string>{
+  async book_enrollment(schedule:LessonSchedule[], ticket_id:number, authToken:string): Promise<string>{
     const observabe = this.httpClient.post<string>(`${environment.apiURl}/transactions/enroll/${ticket_id}/`, schedule,
       {headers: new HttpHeaders('').set('Authorization', `Token ${authToken}`)}
     );

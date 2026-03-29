@@ -1,21 +1,29 @@
-<div class="flex my-2" (mouseenter)="hovered.set(true)" (mouseleave)="hovered.set(false)" (click)="clicked()" [ngClass]="{'cursor-pointer': !dayPassed()}">
-    <div id="dot" class="min-w-2.5 h-2.5 border rounded-full mt-1" [ngClass]="{'bg-gold':(schedule_selected() || hovered()) && !dayPassed(), 'border-white': !section_selected(), 'border-black': section_selected()}"></div>
-    <div class="flex flex-col text-[14px] uppercase ml-4" [ngClass]="{'text-white':!section_selected() && !dayPassed(), 'text-black':section_selected(), 'text-gray-300':dayPassed()}">
-        <h5 class="font-bold">{{class().start_time}} - {{class().lesson.difficulty_level}}</h5>
+<div class="flex my-2" (mouseenter)="hovered.set(true)" (mouseleave)="hovered.set(false)" (click)="clicked()" [ngClass]="{'cursor-pointer': !grayOut()}">
+    <div id="dot" class="min-w-2.5 h-2.5 border rounded-full mt-1" [ngClass]="{'bg-gold':(schedule_selected() || hovered()) && !grayOut(), 'border-white': !section_selected(), 'border-black': section_selected()}"></div>
+    <div class="flex flex-col text-[14px] uppercase ml-4" [ngClass]="{'text-white':!section_selected() && !grayOut(), 'text-black':section_selected(), 'text-gray-300':grayOut()}">
+        <h5 class="font-bold">{{class().schedule.toLocaleTimeString()}} - {{class().lesson.difficulty_level}}</h5>
         
         <div class="flex ml-3.5">
             <ul>
                 <div class="relative flex items-center">
-                    <div class="absolute left-0 top-0 h-full w-0.5" [ngClass]="{'bg-white': !section_selected(), 'bg-black': section_selected(), 'bg-gray-300': dayPassed()}"></div>
-                    <div class="border w-2.5 h-0.5 mr-1" [ngClass]="{'bg-white': !section_selected(), 'bg-black': section_selected(), 'bg-gray-300': dayPassed()}"></div>
+                    <div class="absolute left-0 top-0 h-full w-0.5" [ngClass]="{'bg-white': !section_selected(), 'bg-black': section_selected(), 'bg-gray-300': grayOut()}"></div>
+                    <div class="border w-2.5 h-0.5 mr-1" [ngClass]="{'bg-white': !section_selected(), 'bg-black': section_selected(), 'bg-gray-300': grayOut()}"></div>
                     <li>{{class().lesson.title}}</li>
                 </div>
                 <div class="relative flex items-center">
-                    <div class="absolute left-0 top-0 h-1/2 w-0.5" [ngClass]="{'bg-white': !section_selected(), 'bg-black': section_selected(), 'bg-gray-300': dayPassed()}"></div>
-                    <div class="border w-2.5 h-0.5 mr-1" [ngClass]="{'bg-white': !section_selected(), 'bg-black': section_selected(), 'bg-gray-300': dayPassed()}"></div>
+                    <div class="absolute left-0 top-0 h-1/2 w-0.5" [ngClass]="{'bg-white': !section_selected(), 'bg-black': section_selected(), 'bg-gray-300': grayOut()}"></div>
+                    <div class="border w-2.5 h-0.5 mr-1" [ngClass]="{'bg-white': !section_selected(), 'bg-black': section_selected(), 'bg-gray-300': grayOut()}"></div>
                     <li>{{class().coach.name}}</li>
                 </div>
             </ul>
+        </div>
+        <div class="flex mt-1 flex-wrap">
+            @if (full()) {
+                <p class="py-1 px-2 bg-red-300 text-black text-xs rounded-full mx-1">Full</p>
+            }
+            @if (joined()) {
+                <p class="py-1 px-2 bg-green-300 text-black text-xs rounded-full mx-1">Joined</p>
+            }
         </div>
     </div>
     <div class="vertical-line"></div>

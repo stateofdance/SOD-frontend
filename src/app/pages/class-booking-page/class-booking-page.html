@@ -22,7 +22,9 @@
                 <select name="class" id="class" [formControl]="lesson" class="border border-white rounded-xs text-white text-xl p-2 w-full lg:w-55 uppercase">
                     <option value="-1" class="uppercase bg-dark-violet">All Class Types</option>
                     @for (lesson of lessons(); track $index) {
-                        <option value="{{lesson.id}}" class="uppercase bg-dark-violet">{{lesson.title}}</option>
+                        @if (coach.value == '-1' || getCoach(coach.value!)?.lessons?.includes(lesson.title)) {
+                            <option value="{{lesson.id}}" class="uppercase bg-dark-violet">{{lesson.title}}</option>
+                        }
                     }
                 </select>
             </div>
@@ -36,8 +38,8 @@
                         <option value="{{$index}}">{{_month}}</option>
                     }
                 </select>
-                <h2 class="font-hanson text-black text-base lg:text-3xl ml-10">2026</h2>
-            </div>
+                <h2 class="font-hanson text-black text-base lg:text-3xl ml-10">{{date.getFullYear()}}</h2>
+            </div>  
             <img src="/images/booking/next_btn.png" alt="next button" class="w-10 md:block hidden cursor-pointer" (click)="nextMonth()">
         </div>
         <div class="w-full text-white grid grid-cols-7">
@@ -54,9 +56,9 @@
                         <div class="relative p-5 bg-amber-50 border border-amber-50" (click)="clickedDay(date)">
                             @if (state.screen_width() >= 1024) {
                                 <div class="flex flex-col min-h-50 h-fit">
-                                    @for (class of classes()[date.getDay()]; track $index) {
-                                        @if (filterClass(class)) {
-                                            <app-schedule [class]="class" [date]="date" [section_selected]="true" [schedule_selected]="checkSelectedByTime(date, class.start_time)" (select)="clickedSchedule($event)"></app-schedule>
+                                    @for (class of classes(); track class.id) {
+                                        @if (filterClass(class) && class.schedule.toLocaleDateString() == date.toLocaleDateString()) {
+                                            <app-schedule [class]="class" [section_selected]="true" [schedule_selected]="checkSelected(class)" (select)="clickedSchedule($event)"></app-schedule>
                                         }
                                     }
                                 </div>
@@ -70,9 +72,9 @@
                         <div class="relative p-5 border border-amber-50" (click)="clickedDay(date)">
                             @if (state.screen_width() >= 1024) {
                                 <div class="flex flex-col min-h-50 h-fit">
-                                    @for (class of classes()[date.getDay()]; track $index) {
-                                        @if (filterClass(class)) {
-                                            <app-schedule [class]="class" [date]="date" [section_selected]="false" [schedule_selected]="checkSelectedByTime(date, class.start_time)" (select)="clickedSchedule($event)"></app-schedule>
+                                    @for (class of classes(); track $index) {
+                                        @if (filterClass(class) && class.schedule.toLocaleDateString() == date.toLocaleDateString()) {
+                                            <app-schedule [class]="class" [section_selected]="false" [schedule_selected]="checkSelected(class)" (select)="clickedSchedule($event)"></app-schedule>
                                         }
                                     }
                                 </div>
@@ -93,11 +95,11 @@
     @if (selected_date_mobile && state.screen_width() < 1024) {
         <h3 class="font-hanson bg-amber-50 w-full text-xl text-black text-center py-5">{{getMonth(monthSelect.value)}} {{selected_date_mobile.getDate()}}, 2026</h3>
         <div class="flex flex-col">
-            @for (class of classes()[selected_date_mobile.getDay()]; track $index) {
+            @for (class of classes(); track $index) {
                 <div class="w-full border border-amber-50" 
-                [ngClass]="{'bg-transparent':!checkSelectedByTime(selected_date_mobile, class.start_time), 'bg-amber-50':checkSelectedByTime(selected_date_mobile, class.start_time)}">
-                    @if (filterClass(class)) {
-                        <app-schedule [class]="class" [date]="selected_date_mobile" [section_selected]="checkSelectedByTime(selected_date_mobile, class.start_time)" [schedule_selected]="checkSelectedByTime(date, class.start_time)" (select)="clickedSchedule($event)"></app-schedule>
+                [ngClass]="{'bg-transparent':!checkSelected(class), 'bg-amber-50':checkSelected(class)}">
+                    @if (filterClass(class) && class.schedule.toLocaleDateString() == selected_date_mobile.toLocaleDateString()) {
+                        <app-schedule [class]="class" [section_selected]="checkSelected(class)" [schedule_selected]="checkSelected(class)" (select)="clickedSchedule($event)"></app-schedule>
                     }
                 </div>
             }
