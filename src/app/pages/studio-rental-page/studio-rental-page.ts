@@ -83,7 +83,11 @@ export class StudioRentalPage implements OnInit{
   }
 
   selectDate(date:string) {
-    this.selected_date =  new Date(date)
+    if (/[a-zA-Z]/.test(date)) {
+      this.selected_date = new Date(Date.parse(date));
+    }else {
+      this.selected_date = new Date(date);
+    }
     this.startTime.nativeElement.value = 'none';
     this.endTime.nativeElement.value = 'none';
 
@@ -115,6 +119,7 @@ export class StudioRentalPage implements OnInit{
   }
 
   selectStartTime(index:string) {
+    this.end_sched.set('none');
     const _index = parseInt(index);
     this.start_index.set(_index);
     const time = this.start_times.at(_index);
