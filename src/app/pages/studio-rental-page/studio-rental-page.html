@@ -10,13 +10,13 @@
             <input #date type="date" name="date" class="text-white border border-white p-2 rounded-lg text-xl [&::-webkit-calendar-picker-indicator]:invert" (change)="selectDate(date.value); date.blur();" [min]="today.toISOString().slice(0, 10)">
             <select #startTime name="start" id="start" class="text-white border border-white p-2 rounded-lg text-xl my-5" (change)="selectStartTime(startTime.value); startTime.blur();">
                 <option value="none" class="bg-black">Select Start Time</option>
-                @for (time of start_times; track $index) {
+                @for (time of start_times(); track $index) {
                     <option value="{{$index}}" class="bg-black">{{time}}</option>
                 }
             </select>
             <select #endTime name="end" id="end" class="text-white border border-white p-2 rounded-lg text-xl" (change)="selectEndTime(endTime.value); endTime.blur();" [disabled]="startTime.value == 'none'">
                 <option value="none" class="bg-black">Select End Time</option>
-                @for (time of end_times.slice(2); track $index) {
+                @for (time of end_times().slice(2); track $index) {
                     <option value="{{time}}" class="bg-black">{{time}}</option>
                 }
             </select>

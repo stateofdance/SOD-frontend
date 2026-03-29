@@ -22,8 +22,8 @@ export class StudioRentalPage implements OnInit{
   protected rental_service = inject(RentalService);
   protected state = inject(AppState);
 
-  start_times:string[] = [];
-  end_times:string[] = [];
+  start_times = signal<string[]>([]);
+  end_times = signal<string[]>([]);
   available_scheds!:Array<[number, number]>;
   today:Date;
 
@@ -69,7 +69,8 @@ export class StudioRentalPage implements OnInit{
     this.start_sched.set('none');
     this.end_sched.set('none');
     this.total_amount.set(0);
-    this.end_times = [];
+    this.start_times.set([]);
+    this.end_times.set([]);
   }
 
   findGroup(time:number) : number {
@@ -94,10 +95,10 @@ export class StudioRentalPage implements OnInit{
     this.start_sched.set('none');
     this.end_sched.set('none');
     this.total_amount.set(0);
-    this.end_times = [];
+    this.end_times.set([]);
 
     this.rental_service.get_available_slots(this.selected_branch(), this.selected_date.toISOString()).then(available_slots => {
-      this.start_times = [];
+      this.start_times.set([]);
       this.available_scheds = available_slots;
       for (let i = 8; i < 22.5; i+= 0.5) {
 
@@ -112,7 +113,7 @@ export class StudioRentalPage implements OnInit{
         const hour_display = hour <= 12 ? hour : hour - 12;
         const am_pm = hour < 12 ? 'AM' : 'PM';
 
-        this.start_times.push(`${hour_display}:${min_display} ${am_pm}`);
+        this.start_times().push(`${hour_display}:${min_display} ${am_pm}`);
       }
     });
     
@@ -123,9 +124,9 @@ export class StudioRentalPage implements OnInit{
     this.end_sched.set('none');
     const _index = parseInt(index);
     this.start_index.set(_index);
-    const time = this.start_times.at(_index);
+    const time = this.start_times().at(_index);
     if (time) {
-      this.end_times = [];
+      this.end_times.set([]);
       let am_pm = time.split(' ')[1];
       let hour_minute = time.split(' ')[0].split(':');
       const start_min = parseInt(hour_minute[1]);
@@ -142,7 +143,7 @@ export class StudioRentalPage implements OnInit{
         const min_display = min.toString().padStart(2, '0');
         const hour_display = hour <= 12 ? hour : hour - 12;
         const am_pm = hour < 12 ? 'AM' : 'PM';
-        this.end_times.push(`${hour_display}:${min_display} ${am_pm}`)
+        this.end_times().push(`${hour_display}:${min_display} ${am_pm}`)
       }
       
       this.computeTotal();
