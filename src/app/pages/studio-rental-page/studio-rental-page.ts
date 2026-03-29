@@ -83,7 +83,11 @@ export class StudioRentalPage implements OnInit{
   }
 
   selectDate(date:string) {
-    this.selected_date =  new Date(date)
+    if (/[a-zA-Z]/.test(date)) {
+      this.selected_date = new Date(Date.parse(date));
+    }else {
+      this.selected_date = new Date(date);
+    }
     this.startTime.nativeElement.value = 'none';
     this.endTime.nativeElement.value = 'none';
 
