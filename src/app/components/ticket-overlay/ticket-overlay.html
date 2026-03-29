@@ -1,6 +1,6 @@
 <div class="fixed top-20 left-0 w-full h-[calc(100vh-80px)] bg-black/50 flex flex-col z-50">
     <p class="text-white text-2xl font-hanson cursor-pointer self-end mr-5 mt-5" (click)="close.emit()">Cancel</p>
-    <div class="flex flex-wrap w-2/3 mx-auto justify-center items-center h-fit my-auto">
+    <div class="flex flex-wrap w-2/3 mx-auto justify-center items-center h-full overflow-y-auto">
         @if (tickets().length == 0 && !loading) {
             <p class="text-center text-xl font-lexend mt-5 text-white">No tickets available. <a [routerLink]="['/packages']" class="text-gold hover:font-bold">Get tickets here.</a></p>
         }

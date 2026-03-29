@@ -1,48 +1,139 @@
-<div class="h-fit p-2 md:px-10 pt-35 bg-black-violet flex flex-col">
-    <h1 class="text-white font-hanson text-5xl text-center">Book a <span class="text-gold">Class</span></h1>
+<div class="h-fit min-h-screen p-2 md:px-10 pt-35 bg-black-violet flex flex-col">
+    <h1 class="text-white font-hanson text-5xl text-center">
+        Book a <span class="text-gold">Class</span>
+    </h1>
 
     @if (finalizing_booking) {
-        <app-ticket-overlay [branch]="branch.value!" (close)="finalizing_booking = false" (book)="payment($event)"></app-ticket-overlay>
+        <app-ticket-overlay
+            [branch]="branch.value!"
+            (close)="finalizing_booking = false"
+            (book)="payment($event)">
+        </app-ticket-overlay>
     }
 
     <div class="form mt-15">
         <div class="flex items-center justify-between lg:flex-row flex-col">
-            <div class="flex lg:flex-row flex-col lg:w-fit w-full">
-                <select name="branch" id="branch" [formControl]="branch" class="border border-white rounded-xs text-white text-xl p-2 w-full lg:w-55 uppercase">
-                    @for (branch of branches(); track $index) {
-                    <option value="{{branch.id}}" class="uppercase bg-dark-violet">{{branch.name}}</option>
-                    }
-                </select>
-                <select name="coach" id="coach" [formControl]="coach" class="border border-white rounded-xs text-white text-xl p-2 w-full lg:w-55 my-5 lg:my-0 lg:mx-5 uppercase">
-                    <option value="-1" class="uppercase bg-dark-violet">All Coaches</option>
-                    @for (coach of coaches(); track $index) {
-                        <option value="{{coach.id}}" class="uppercase bg-dark-violet">{{coach.name}}</option>
-                    }
-                </select>
-                <select name="class" id="class" [formControl]="lesson" class="border border-white rounded-xs text-white text-xl p-2 w-full lg:w-55 uppercase">
-                    <option value="-1" class="uppercase bg-dark-violet">All Class Types</option>
-                    @for (lesson of lessons(); track $index) {
-                        @if (coach.value == '-1' || getCoach(coach.value!)?.lessons?.includes(lesson.title)) {
-                            <option value="{{lesson.id}}" class="uppercase bg-dark-violet">{{lesson.title}}</option>
+            <div class="flex lg:flex-row flex-col lg:w-fit w-full gap-0 lg:gap-5">
+
+                <!-- Branch Select -->
+                <div class="relative w-full lg:w-55 group">
+                    <select
+                        name="branch"
+                        id="branch"
+                        [formControl]="branch"
+                        (change)="onSelectBlur($event)"
+                        class="appearance-none border border-white rounded-xs text-white text-xl p-2 pr-10 w-full uppercase bg-transparent transition-all duration-200 hover:border-gold focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold"
+                    >
+                        @for (branch of branches(); track $index) {
+                            <option value="{{branch.id}}" class="uppercase bg-dark-violet">
+                                {{branch.name}}
+                            </option>
                         }
-                    }
-                </select>
+                    </select>
+
+                    <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white transition-transform duration-300 group-focus-within:rotate-180">
+                        ▼
+                    </div>
+                </div>
+
+                <!-- Coach Select -->
+                <div class="relative w-full lg:w-55 group my-5 lg:my-0">
+                    <select
+                        name="coach"
+                        id="coach"
+                        [formControl]="coach"
+                        (change)="onSelectBlur($event)"
+                        class="appearance-none border border-white rounded-xs text-white text-xl p-2 pr-10 w-full uppercase bg-transparent transition-all duration-200 hover:border-gold focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold"
+                    >
+                        <option value="-1" class="uppercase bg-dark-violet">All Coaches</option>
+                        @for (coach of coaches(); track $index) {
+                            <option value="{{coach.id}}" class="uppercase bg-dark-violet">
+                                {{coach.name}}
+                            </option>
+                        }
+                    </select>
+
+                    <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white transition-transform duration-300 group-focus-within:rotate-180">
+                        ▼
+                    </div>
+                </div>
+
+                <!-- Class Select -->
+                <div class="relative w-full lg:w-55 group">
+                    <select
+                        name="class"
+                        id="class"
+                        [formControl]="lesson"
+                        (change)="onSelectBlur($event)"
+                        class="appearance-none border border-white rounded-xs text-white text-xl p-2 pr-10 w-full uppercase bg-transparent transition-all duration-200 hover:border-gold focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold"
+                    >
+                        <option value="-1" class="uppercase bg-dark-violet">All Class Types</option>
+                        @for (lesson of lessons(); track $index) {
+                            @if (coach.value == '-1' || getCoach(coach.value!)?.lessons?.includes(lesson.title)) {
+                                <option value="{{lesson.id}}" class="uppercase bg-dark-violet">
+                                    {{lesson.title}}
+                                </option>
+                            }
+                        }
+                    </select>
+
+                    <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white transition-transform duration-300 group-focus-within:rotate-180">
+                        ▼
+                    </div>
+                </div>
             </div>
-            <h3 class="font-lexend text-white text-xl lg:mt-0 mt-10">*EACH SESSION LASTS 1.5 HRS</h3>
+
+            <h3 class="font-lexend text-white text-xl lg:mt-0 mt-10">
+                *EACH SESSION LASTS 1.5 HRS
+            </h3>
         </div>
-        <div class="flex p-3 bg-amber-50 justify-center md:justify-between items-center mt-10">
-            <img src="/images/booking/next_btn.png" alt="next button" class="w-10 transform rotate-180 md:block hidden cursor-pointer" (click)="previousMonth()">
-            <div class="flex items-center">
-                <select #monthSelect name="month" id="month" class="font-hanson text-black text-base lg:text-3xl" (change)="selectedMonth(monthSelect.value)">
+        <!-- MONTH HEADER -->
+        <div class="flex p-3 bg-amber-50 justify-between items-center mt-10 ">
+            <button
+                class="w-10 h-10 flex items-center justify-center text-black text-2xl font-bold cursor-pointer"
+                (click)="previousMonth()">
+                        <img
+                            src="/images/booking/next_btn.png"
+                            alt="previous month"
+                            class="w-10 transform rotate-180  cursor-pointer"
+                            (click)="previousMonth()"
+                        >
+            </button>
+
+            <div class="flex items-center gap-3 mx-auto">
+                <select
+                    #monthSelect
+                    name="month"
+                    id="month"
+                    class="font-hanson text-black text-lg lg:text-3xl bg-transparent outline-none"
+                    (change)="selectedMonth(monthSelect.value)">
                     @for (_month of months; track $index) {
                         <option value="{{$index}}">{{_month}}</option>
                     }
                 </select>
-                <h2 class="font-hanson text-black text-base lg:text-3xl ml-10">{{date.getFullYear()}}</h2>
-            </div>  
-            <img src="/images/booking/next_btn.png" alt="next button" class="w-10 md:block hidden cursor-pointer" (click)="nextMonth()">
+
+                <h2 class="font-hanson text-black text-lg lg:text-3xl">
+                    {{ (state.screen_width() < 1024 && selected_date_mobile ? selected_date_mobile : date).getFullYear() }}
+                </h2>
+            </div>
+
+            <button
+                class="w-10 h-10 flex items-center justify-center text-black text-2xl font-bold cursor-pointer"
+                (click)="nextMonth()">
+                
+                    <img
+                        src="/images/booking/next_btn.png"
+                        alt="next month"
+                        class="w-10 cursor-pointer"
+                        (click)="nextMonth()"
+                    >
+
+            </button>
+
         </div>
-        <div class="w-full text-white grid grid-cols-7">
+
+        <!-- DESKTOP CALENDAR -->
+        <div class="hidden lg:grid w-full text-white grid-cols-7">
             <h3 class="py-3 text-base lg:text-xl text-center font-bold border border-amber-50">Sun</h3>
             <h3 class="py-3 text-base lg:text-xl text-center font-bold border border-amber-50">Mon</h3>
             <h3 class="py-3 text-base lg:text-xl text-center font-bold border border-amber-50">Tue</h3>
@@ -50,67 +141,137 @@
             <h3 class="py-3 text-base lg:text-xl text-center font-bold border border-amber-50">Thur</h3>
             <h3 class="py-3 text-base lg:text-xl text-center font-bold border border-amber-50">Fri</h3>
             <h3 class="py-3 text-base lg:text-xl text-center font-bold border border-amber-50">Sat</h3>
+
             @for (date of cells; track $index) {
                 @if (date) {
-                    @if (checkSelectedByDay(date)){
+                    @if (checkSelectedByDay(date)) {
                         <div class="relative p-5 bg-amber-50 border border-amber-50" (click)="clickedDay(date)">
-                            @if (state.screen_width() >= 1024) {
-                                <div class="flex flex-col min-h-50 h-fit">
-                                    @for (class of classes(); track class.id) {
-                                        @if (filterClass(class) && class.schedule.toLocaleDateString() == date.toLocaleDateString()) {
-                                            <app-schedule [class]="class" [section_selected]="true" [schedule_selected]="checkSelected(class)" (select)="clickedSchedule($event)"></app-schedule>
-                                        }
+                            <div class="flex flex-col min-h-50 h-fit">
+                                @for (class of classes(); track class.id) {
+                                    @if (filterClass(class) && class.schedule.toLocaleDateString() == date.toLocaleDateString()) {
+                                        <app-schedule
+                                            [class]="class"
+                                            [section_selected]="true"
+                                            [schedule_selected]="checkSelected(class)"
+                                            (select)="clickedSchedule($event)">
+                                        </app-schedule>
                                     }
-                                </div>
-                            }
-                            <h5 
-                            class="font-lexend text-base lg:text-4xl font-bold lg:bottom-5 lg:right-5 lg:p-0 md:px-5 py-5 text-center lg:text-right text-black"
-                            >{{date.getDate()}}</h5>
-                        
+                                }
+                            </div>
+
+                            <h5 class="font-lexend text-4xl font-bold lg:bottom-5 lg:right-5 lg:p-0 text-right text-black">
+                                {{date.getDate()}}
+                            </h5>
                         </div>
-                    }@else {
+                    } @else {
                         <div class="relative p-5 border border-amber-50" (click)="clickedDay(date)">
-                            @if (state.screen_width() >= 1024) {
-                                <div class="flex flex-col min-h-50 h-fit">
-                                    @for (class of classes(); track $index) {
-                                        @if (filterClass(class) && class.schedule.toLocaleDateString() == date.toLocaleDateString()) {
-                                            <app-schedule [class]="class" [section_selected]="false" [schedule_selected]="checkSelected(class)" (select)="clickedSchedule($event)"></app-schedule>
-                                        }
+                            <div class="flex flex-col min-h-50 h-fit">
+                                @for (class of classes(); track class.id) {
+                                    @if (filterClass(class) && class.schedule.toLocaleDateString() == date.toLocaleDateString()) {
+                                        <app-schedule
+                                            [class]="class"
+                                            [section_selected]="false"
+                                            [schedule_selected]="checkSelected(class)"
+                                            (select)="clickedSchedule($event)">
+                                        </app-schedule>
                                     }
-                                </div>
-                            }
-                            <h5 
-                            class="font-lexend text-base lg:text-4xl font-bold lg:bottom-5 lg:right-5 lg:p-0 md:px-5 py-5 text-center lg:text-right text-amber-50"
-                            >{{date.getDate()}}</h5>
-                        
+                                }
+                            </div>
+
+                            <h5 class="font-lexend text-4xl font-bold lg:bottom-5 lg:right-5 lg:p-0 text-right text-amber-50">
+                                {{date.getDate()}}
+                            </h5>
                         </div>
                     }
-                }@else {
-                    <td></td>
+                } @else {
+                    <div class="border border-amber-50 min-h-50"></div>
                 }
             }
         </div>
-    </div>
 
-    @if (selected_date_mobile && state.screen_width() < 1024) {
-        <h3 class="font-hanson bg-amber-50 w-full text-xl text-black text-center py-5">{{getMonth(monthSelect.value)}} {{selected_date_mobile.getDate()}}, 2026</h3>
-        <div class="flex flex-col">
-            @for (class of classes(); track $index) {
-                <div class="w-full border border-amber-50" 
-                [ngClass]="{'bg-transparent':!checkSelected(class), 'bg-amber-50':checkSelected(class)}">
-                    @if (filterClass(class) && class.schedule.toLocaleDateString() == selected_date_mobile.toLocaleDateString()) {
-                        <app-schedule [class]="class" [section_selected]="checkSelected(class)" [schedule_selected]="checkSelected(class)" (select)="clickedSchedule($event)"></app-schedule>
-                    }
+        <!-- MOBILE LAYOUT -->
+        <div class="lg:hidden mt-4">
+            <div
+                #mobileDatesScroller
+                class="flex gap-2 mb-4 overflow-x-auto whitespace-nowrap scrollbar-hide select-none touch-pan-x"
+                (mousedown)="startDatesDrag($event)"
+                (mousemove)="onDatesDrag($event)"
+                (mouseup)="endDatesDrag()"
+                (mouseleave)="endDatesDrag()"
+                (touchstart)="startDatesDrag($event)"
+                (touchmove)="onDatesDrag($event)"
+                (touchend)="endDatesDrag()"
+            >
+                @for (day of getVisibleMobileDates(); track day.getDate()) {
+                    <button
+                        type="button"
+                        class="shrink-0 min-w-[72px] flex flex-col items-center justify-center rounded-3xl py-3 px-2 border transition cursor-pointer"
+                        [attr.data-day]="day.getDate()"
+                        [ngClass]="{
+                            'bg-violet text-white border-violet': isSameDate(selected_date_mobile, day),
+                            'bg-transparent text-white border-transparent': !isSameDate(selected_date_mobile, day)
+                        }"
+                        (click)="selectMobileDate(day)"
+                    >
+                        <span class="text-sm opacity-80">{{ weekdayShort(day) }}</span>
+                        <span class="text-2xl font-bold">{{ day.getDate() }}</span>
+
+                        @if (hasSchedules(day) && !isSameDate(selected_date_mobile, day)) {
+                            <span class="mt-1 w-1.5 h-1.5 rounded-full bg-gold"></span>
+                        }
+                    </button>
+                }
+            </div>
+
+            @if (selected_date_mobile) {
+                <div class="border-t border-b border-white/20 py-4 mb-4">
+                    <h3 class="text-white text-2xl font-bold text-center">
+                        {{ selected_date_mobile.toLocaleDateString('en-US', {
+                            weekday: 'long',
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric'
+                        }) }}
+                    </h3>
                 </div>
             }
-        </div>
-    }
 
-    <div class="flex justify-end mt-10 items-center lg:flex-row flex-col">
-        <h4 class="font-lexend text-gold text-2xl uppercase lg:mr-10 w-full lg:w-fit font-bold lg:text-left text-center ">{{selected_schedules.length}} Sessions Selected</h4>
-        <button 
-        class="bg-white text-dark-violet text-xl p-2 w-65 font-eurostile rounded-full font-bold lg:mx-0 mx-auto lg:mt-0 mt-5 cursor-pointer"
-        (click)="finalizedBooking()"
-        >Proceed to Enrollment</button>
+            <div class="flex flex-col gap-3">
+                @if (selected_date_mobile && getSchedulesByDate(selected_date_mobile).length > 0) {
+                    @for (class of getSchedulesByDate(selected_date_mobile); track class.id) {
+                        <div
+                            class="rounded-3xl border px-4 py-4 transition"
+                            [ngClass]="{
+                                'bg-amber-50 border-amber-50 text-black': checkSelected(class),
+                                'bg-transparent border-white/20 text-white': !checkSelected(class)
+                            }"
+                        >
+                            <app-schedule
+                                [class]="class"
+                                [section_selected]="checkSelected(class)"
+                                [schedule_selected]="checkSelected(class)"
+                                (select)="clickedSchedule($event)">
+                            </app-schedule>
+                        </div>
+                    }
+                } @else {
+                    <div class="rounded-3xl border border-white/20 p-6 text-center text-white/70">
+                        No classes available for this day.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-end mt-10 items-center lg:flex-row flex-col mb-10">
+        <h4 class="font-lexend text-gold text-2xl uppercase lg:mr-10 w-full lg:w-fit font-bold lg:text-left text-center">
+            {{selected_schedules.length}} Sessions Selected
+        </h4>
+
+        <button
+            class="bg-white text-dark-violet text-xl p-2 w-65  rounded-full font-bold lg:mx-0 mx-auto lg:mt-0 mt-5 cursor-pointer"
+            (click)="finalizedBooking()">
+            Proceed to Enrollment
+        </button>
     </div>
 </div>

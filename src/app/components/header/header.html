@@ -1,87 +1,199 @@
 @if (state.screen_width() >= 1024) {
-    <div class="navigation fixed w-full p-5 z-60" [ngClass]="{'scrolled': isScrolled || getCurrentPath().length > 2 || show_all()}">
+    <div
+        class="navigation fixed w-full p-5 z-60"
+        [ngClass]="{'scrolled': isScrolled || getCurrentPath().length > 2 || show_all()}"
+    >
         <div class="flex mx-5 justify-between">
             <div class="hidden flex-col w-fit md:flex">
                 <div class="h-11 w-fit flex">
-                    <a routerLink="/" class="my-auto"><img src="/images/header_logo.png" alt="SOD-Brand-Logo" class="min-w-70"></a>
+                    <a routerLink="/" class="my-auto" (click)="closeAllMenus()">
+                        <img src="/images/header_logo.png" alt="SOD-Brand-Logo" class="min-w-70">
+                    </a>
                 </div>
-                <p class="drop-down h-full w-80 text-white mt-5 text-justify font-open-sans text-sm", [ngClass]="{'show-all':show_all()}">
+
+                <p
+                    class="drop-down h-full w-80 text-white mt-5 text-justify font-open-sans text-sm"
+                    [ngClass]="{'show-all': show_all()}"
+                >
                     At State of Dance, we don’t just teach choreography; we shape character, build confidence, and celebrate the elegance of transformation. We don’t just teach movement—we inspire transformation.
                 </p>
             </div>
+
             <div class="flex w-fit">
                 <div class="nav-bar flex">
                     <div class="flex flex-col mr-1 w-35 relative h-full text-white">
-                        <div class="flex cursor-pointer items-center h-11 xl:visible invisible" (click)="classes_show.set(!classes_show())">
+                        <div
+                            class="flex cursor-pointer items-center h-11 xl:visible invisible"
+                            (click)="toggleClasses()"
+                        >
                             <p class="font-eurostile font-bold text-base p-2 my-auto">CLASSES</p>
-                            <img src="/images/drop-down_icon.png" alt="drop down" class="w-2.5" [ngClass]="{'show': classes_show(), 'show-all': show_all()}">
+                            <img
+                                src="/images/drop-down_icon.png"
+                                alt="drop down"
+                                class="w-2.5"
+                                [ngClass]="{'show': classes_show(), 'show-all': show_all()}"
+                            >
                         </div>
-                        <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':classes_show(), 'scrolled':isScrolled || getCurrentPath().length > 2, 'show-all':show_all()}">
+
+                        <ul
+                            class="drop-down navigation p-2 font-open-sans text-sm"
+                            [ngClass]="{
+                                'show': classes_show(),
+                                'scrolled': isScrolled || getCurrentPath().length > 2,
+                                'show-all': show_all()
+                            }"
+                        >
                             <p class="uppercase font-eurostile font-bold text-base xl:hidden block">Classes</p>
-                            <a routerLink="/types-classes" fragment="types-classes"><li class="p-0.5 link" (click)="hideAll()">Types of Classes</li></a>
-                            <a routerLink="/" fragment="project-underground"><li class="p-0.5 link" (click)="hideAll()">Project Underground</li></a>
-                            <a routerLink="/coaches"><p class="uppercase font-eurostile font-bold text-base xl:hidden block" (click)="hideAll()">Coaches</p></a>
+                            <a routerLink="/types-classes" fragment="types-classes">
+                                <li class="p-0.5 link" (click)="hideAll()">Types of Classes</li>
+                            </a>
+                            <a routerLink="/" fragment="project-underground">
+                                <li class="p-0.5 link" (click)="hideAll()">Project Underground</li>
+                            </a>
+                            <a routerLink="/coaches">
+                                <p class="uppercase font-eurostile font-bold text-base xl:hidden block" (click)="hideAll()">
+                                    Coaches
+                                </p>
+                            </a>
                         </ul>
                     </div>
-                    <a routerLink="/coaches" class="h-11 flex"><p class="font-eurostile text-white font-bold text-base p-2 mx-1 w-35 my-auto xl:block hidden" (click)="hideAll()">COACHES</p></a>
+
+                    <a routerLink="/coaches" class="h-11 flex">
+                        <p
+                            class="font-eurostile text-white font-bold text-base p-2 mx-1 w-35 my-auto xl:block hidden"
+                            (click)="hideAll()"
+                        >
+                            COACHES
+                        </p>
+                    </a>
+
                     <div class="flex flex-col mx-1 w-35 relative text-white h-full">
-                        <div class="flex cursor-pointer items-center h-11 xl:visible invisible" (click)="events_show.set(!events_show())">
+                        <div
+                            class="flex cursor-pointer items-center h-11 xl:visible invisible"
+                            (click)="toggleEvents()"
+                        >
                             <p class="font-eurostile font-bold text-base p-2 my-auto">EVENTS</p>
-                            <img src="/images/drop-down_icon.png" alt="drop down" class="w-2.5" [ngClass]="{'show': events_show(), 'show-all': show_all()}">
+                            <img
+                                src="/images/drop-down_icon.png"
+                                alt="drop down"
+                                class="w-2.5"
+                                [ngClass]="{'show': events_show(), 'show-all': show_all()}"
+                            >
                         </div>
-                        <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':events_show(), 'scrolled':isScrolled || getCurrentPath().length > 2, 'show-all':show_all()}">
+
+                        <ul
+                            class="drop-down navigation p-2 font-open-sans text-sm"
+                            [ngClass]="{
+                                'show': events_show(),
+                                'scrolled': isScrolled || getCurrentPath().length > 2,
+                                'show-all': show_all()
+                            }"
+                        >
                             <p class="uppercase font-eurostile font-bold text-base xl:hidden block">EVENTS</p>
-                            <a routerLink="/performances"><li class="p-0.5 link" (click)="hideAll()">Dancer Events Profile</li></a>
-                            <a routerLink="/events"><li class="p-0.5 link" (click)="hideAll()">School Events</li></a>
-                            <a routerLink="/merch"><p class="uppercase font-eurostile font-bold text-base xl:hidden block" (click)="hideAll()">Merch</p></a>
+                            <a routerLink="/performances">
+                                <li class="p-0.5 link" (click)="hideAll()">Dancer Events Profile</li>
+                            </a>
+                            <a routerLink="/events">
+                                <li class="p-0.5 link" (click)="hideAll()">School Events</li>
+                            </a>
+                            <a routerLink="/merch">
+                                <p class="uppercase font-eurostile font-bold text-base xl:hidden block" (click)="hideAll()">
+                                    Merch
+                                </p>
+                            </a>
                         </ul>
                     </div>
-                    <a routerLink="/merch" class="h-11 flex"><p class="font-eurostile text-white font-bold text-base p-2 ml-1 w-35 my-auto xl:block hidden" (click)="hideAll()">MERCH</p></a>
-                    
+
+                    <a routerLink="/merch" class="h-11 flex">
+                        <p
+                            class="font-eurostile text-white font-bold text-base p-2 ml-1 w-35 my-auto xl:block hidden"
+                            (click)="hideAll()"
+                        >
+                            MERCH
+                        </p>
+                    </a>
                 </div>
+
                 <div class="flex">
                     <div class="hidden flex-col w-fit relative text-white lg:flex">
-                        <button class="font-eurostile font-bold text-base p-1 border border-white w-35 h-11 cursor-pointer" (click)="bookings_show.set(!bookings_show())">BOOKING</button>
-                        <ul class="drop-down navigation p-2 font-open-sans text-sm" [ngClass]="{'show':bookings_show(), 'scrolled':isScrolled || getCurrentPath().length > 2, 'show-all':show_all()}">
-                            <a routerLink="/class-booking"><li class="p-0.5 link" (click)="hideAll()">Book a Class</li></a>
-                            <a routerLink="/packages"><li class="p-0.5 link" (click)="hideAll()">Buy a Ticket</li></a>
-                            <a routerLink="/studio-rental"><li class="p-0.5 link" (click)="hideAll()">Rent our Studio</li></a>
+                        <button
+                            class="font-eurostile font-bold text-base p-1 border border-white w-35 h-11 cursor-pointer"
+                            (click)="toggleBookings()"
+                        >
+                            BOOKING
+                        </button>
+
+                        <ul
+                            class="drop-down navigation p-2 font-open-sans text-sm"
+                            [ngClass]="{
+                                'show': bookings_show(),
+                                'scrolled': isScrolled || getCurrentPath().length > 2,
+                                'show-all': show_all()
+                            }"
+                        >
+                            <a routerLink="/class-booking">
+                                <li class="p-0.5 link" (click)="hideAll()">Book a Class</li>
+                            </a>
+                            <a routerLink="/packages">
+                                <li class="p-0.5 link" (click)="hideAll()">Buy a Ticket</li>
+                            </a>
+                            <a routerLink="/studio-rental">
+                                <li class="p-0.5 link" (click)="hideAll()">Rent our Studio</li>
+                            </a>
                         </ul>
                     </div>
+
                     <div class="flex h-11 items-center">
-                        <img src="{{profile_img()}}" alt="profile icon" class="min-w-8 h-8 cursor-pointer ml-5" (click)="hideAll(); profileClicked();">
-                        <button class="font-eurostile text-white font-bold text-lg p-1 w-10 h-10 cursor-pointer ml-5" (click)="extendHeader()"><img src="{{drawer_img()}}" alt="drawer icon" class="w-full"></button>
+                        <img
+                            [src]="profile_img()"
+                            alt="profile icon"
+                            class="min-w-8 h-8 cursor-pointer ml-5"
+                            (click)="hideAll(); profileClicked();"
+                        >
+
+                        <button
+                            class="font-eurostile text-white font-bold text-lg p-1 w-10 h-10 cursor-pointer ml-5"
+                            (click)="extendHeader()"
+                        >
+                            <img [src]="drawerImg" alt="drawer icon" class="w-full">
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-}@else {
-
-        
-    <div class="navigation fixed w-full px-3 py-5 z-60"
-        [ngClass]="{'scrolled': isScrolled || getCurrentPath().length > 2 || show_all()}">
-
+} @else {
+    <div
+        class="navigation fixed w-full px-3 py-5 z-60"
+        [ngClass]="{'scrolled': isScrolled || getCurrentPath().length > 2 || show_all()}"
+    >
         <div class="flex justify-between items-center w-full">
             <a routerLink="/" (click)="hideAll()">
                 <img src="/images/header_logo.png" alt="SOD-Brand-Logo" class="min-w-60 w-60">
             </a>
 
             <div class="flex h-11 items-center w-fit">
-                <img src="{{profile_img()}}" alt="profile icon"
+                <img
+                    [src]="profile_img()"
+                    alt="profile icon"
                     class="min-w-8 h-8 cursor-pointer ml-5"
-                    (click)="profileClicked()">
+                    (click)="profileClicked()"
+                >
 
-                <img src="{{drawer_img()}}"
+                <img
+                    [src]="drawerImg"
                     alt="drawer icon"
                     class="w-7 h-7 lg:w-10 lg:h-10 cursor-pointer ml-5"
-                    (click)="extendHeader()">
+                    (click)="extendHeader()"
+                >
             </div>
         </div>
 
-        <div class="flex-col min-h-screen text-white scrollable-div"
-            [ngClass]="{'flex': show_all(), 'hidden': !show_all()}">
-
+        <div
+            #scrollableDiv
+            class="flex-col min-h-screen text-white scrollable-div"
+            [ngClass]="{'flex': show_all(), 'hidden': !show_all()}"
+        >
             <p class="text-white text-justify font-open-sans text-sm m-5">
                 At State of Dance, we don’t just teach choreography; we shape character,
                 build confidence, and celebrate the elegance of transformation.
@@ -89,115 +201,142 @@
 
             <hr class="w-full bg-white h-0.5">
 
-            <!-- Classes -->
             <h2 class="font-eurostile font-bold text-3xl m-3">Classes</h2>
             <hr class="w-full bg-white h-0.5">
 
             <ul class="p-2 font-open-sans text-base ml-5 my-1 space-y-2">
-
                 <li>
-                    <a routerLink="/types-classes" fragment="types-classes"
-                    class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95">
-                    Types of Classes
+                    <a
+                        routerLink="/types-classes"
+                        fragment="types-classes"
+                        class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95"
+                        (click)="hideAll()"
+                    >
+                        Types of Classes
                     </a>
                 </li>
 
                 <li>
-                    <a routerLink="/" fragment="project-underground"
-                    class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95">
-                    Project Underground
+                    <a
+                        routerLink="/"
+                        fragment="project-underground"
+                        class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95"
+                        (click)="hideAll()"
+                    >
+                        Project Underground
                     </a>
                 </li>
-
             </ul>
 
             <hr class="w-full bg-white h-0.5">
 
-            <!-- Coaches -->
-            <a routerLink="/coaches"
-            class="block px-3 py-2 rounded-lg transition active:bg-violet/40 active:scale-95">
+            <a
+                routerLink="/coaches"
+                class="block px-3 py-2 rounded-lg transition active:bg-violet/40 active:scale-95"
+                (click)="hideAll()"
+            >
                 <h2 class="font-eurostile font-bold text-3xl">Coaches</h2>
             </a>
 
             <hr class="w-full bg-white h-0.5">
 
-            <!-- Events -->
             <h2 class="font-eurostile font-bold text-3xl m-3">Events</h2>
             <hr class="w-full bg-white h-0.5">
 
             <ul class="p-2 font-open-sans text-base ml-5 my-1 space-y-2">
-
                 <li>
-                    <a routerLink="/performances"
-                    class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95">
-                    Dancer Events Profile
+                    <a
+                        routerLink="/performances"
+                        class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95"
+                        (click)="hideAll()"
+                    >
+                        Dancer Events Profile
                     </a>
                 </li>
 
                 <li>
-                    <a routerLink="/events"
-                    class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95">
-                    School Events
+                    <a
+                        routerLink="/events"
+                        class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95"
+                        (click)="hideAll()"
+                    >
+                        School Events
                     </a>
                 </li>
-
             </ul>
 
             <hr class="w-full bg-white h-0.5">
 
-            <!-- Merch -->
-            <a routerLink="/merch"
-            class="block px-3 py-2 rounded-lg transition active:bg-violet/40 active:scale-95">
+            <a
+                routerLink="/merch"
+                class="block px-3 py-2 rounded-lg transition active:bg-violet/40 active:scale-95"
+                (click)="hideAll()"
+            >
                 <h2 class="font-eurostile font-bold text-3xl">Merch</h2>
             </a>
 
             <hr class="w-full bg-white h-0.5">
 
-            <!-- Book a Class -->
-            <a routerLink="/class-booking"
-            class="block px-3 py-2 rounded-lg transition active:bg-violet/40 active:scale-95">
-                <h2 class="font-eurostile font-bold text-3xl"> Bookings </h2>
+            <a
+                routerLink="/class-booking"
+                class="block px-3 py-2 rounded-lg transition active:bg-violet/40 active:scale-95"
+                (click)="hideAll()"
+            >
+                <h2 class="font-eurostile font-bold text-3xl">Bookings</h2>
             </a>
 
             <hr class="w-full bg-white h-0.5">
 
-            <!-- Booking Options -->
             <ul class="p-2 font-open-sans text-base ml-5 my-1 space-y-3">
-
                 <li>
-                    <a routerLink="/class-booking"
-                    class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95">
-                    Book a Class
+                    <a
+                        routerLink="/class-booking"
+                        class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95"
+                        (click)="hideAll()"
+                    >
+                        Book a Class
                     </a>
                 </li>
 
                 <li>
-                    <a routerLink="/packages"
-                    class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95">
-                    Buy a Ticket 
+                    <a
+                        routerLink="/packages"
+                        class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95"
+                        (click)="hideAll()"
+                    >
+                        Buy a Ticket
                     </a>
                 </li>
 
                 <li>
-                    <a routerLink="/studio-rental"
-                    class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95">
-                    Rent our Studio
+                    <a
+                        routerLink="/studio-rental"
+                        class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95"
+                        (click)="hideAll()"
+                    >
+                        Rent our Studio
                     </a>
                 </li>
 
                 <li>
-                    <a routerLink=""
-                    class="block p-10    rounded-lg transition active:bg-violet/40 active:scale-95">
-                    
-                    </a>
+                    <a
+                        routerLink=""
+                        class="block p-10 rounded-lg transition active:bg-violet/40 active:scale-95"
+                        (click)="hideAll()"
+                    ></a>
                 </li>
             </ul>
-
         </div>
     </div>
 }
 
-
-<div class="profile fixed w-full md:w-80 border-2 border-black top-20 h-[calc(100vh-5rem)] right-0 z-50" [ngClass]="{'block': sidebar_show(), 'hidden': !sidebar_show()}">
-    <router-outlet name="sidebar" (activate)="sidebar_show.set(true)" (deactivate)="sidebar_show.set(false)"></router-outlet>
+<div
+    class="profile fixed w-full md:w-80 border-2 border-black top-20 h-[calc(100vh-5rem)] right-0 z-50"
+    [ngClass]="{'block': sidebar_show(), 'hidden': !sidebar_show()}"
+>
+    <router-outlet
+        name="sidebar"
+        (activate)="sidebar_show.set(true)"
+        (deactivate)="sidebar_show.set(false)"
+    ></router-outlet>
 </div>
