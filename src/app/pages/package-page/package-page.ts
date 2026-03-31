@@ -24,7 +24,6 @@ export class PackagePage implements OnInit{
   selected_package:number = -1;
   hovered_package:number = -1;
   hovered_section:string = '';
-  section:string = '';
   paying = false;
 
   branch = new FormControl(1);
@@ -65,24 +64,62 @@ export class PackagePage implements OnInit{
     });
   }
   
-  set_hover(package_id:number, section:string) {
+  set_hover(package_id:number) {
     this.hovered_package = package_id;
-    this.hovered_section = section;
-  }
-
-  clicked_recital(recital:Recital) {
-    if (this.recital_is_full(recital)) return;
-    
-    this.selected_package = recital.id; 
-    this.section = 'recitals';
   }
 
   recital_is_full(recital: Recital):Boolean {
-    return recital.students.length >= recital.max_students || recital.students.includes(this.state.user()?.id!);
+    return recital.students.length >= recital.max_students;
+  }
+  
+  recital_is_joined(recital:Recital):Boolean {
+    return recital.students.includes(this.state.user()?.id!);
   }
 
-  is_hovered(package_id:number, section:string):boolean {
-    return (package_id == this.hovered_package && section == this.hovered_section) || (package_id == this.selected_package && this.section == section);
+  is_hovered(package_id:number):boolean {
+    return package_id == this.hovered_package || package_id == this.selected_package;
+  }
+
+  paymentRecital(recital:Recital) {
+    if (this.paying) return;
+
+    const user = this.state.user();
+    const token = user?.authToken;
+
+    if (!user || !token) {
+      window.dispatchEvent(new Event('force-login'));
+      return;
+    }
+
+    this.paying = true;
+
+    if (recital.students.length >= recital.max_students) {
+      alert('The recital is already full! Pick a different recital');
+      this.paying = false;
+      return;
+    }
+
+    const newWindow = window.open('about:blank', '_blank');
+
+    this.service.book_recital(recital.id, token)
+      .then(checkout_url => {
+        if (newWindow) {
+          newWindow.location.href = checkout_url;
+        }
+      })
+      .finally(() => {
+        this.paying = false;
+      })
+      .catch((error) => {
+        if (error.status === 401) {
+          console.log('Unauthorized: token is invalid or expired. Logging out...');
+          localStorage.removeItem('authToken');
+          this.state.user.set(null);
+          window.dispatchEvent(new Event('force-login'));
+        } else {
+          console.log(error.message);
+        }
+      });
   }
 
   payment() {
@@ -103,58 +140,27 @@ export class PackagePage implements OnInit{
 
     this.paying = true;
 
-    if (this.section == 'packages') {
-      const newWindow = window.open('about:blank', '_blank');
+    const newWindow = window.open('about:blank', '_blank');
 
-      this.service.order_ticket(this.selected_package, token)
-        .then(checkout_url => {
-          if (newWindow) {
-            newWindow.location.href = checkout_url;
-          }
-        })
-        .finally(() => {
-          this.paying = false;
-        })
-        .catch((error) => {
-          if (error.status === 401) {
-            console.log('Unauthorized: token is invalid or expired. Logging out...');
-            localStorage.removeItem('authToken');
-            this.state.user.set(null);
-            window.dispatchEvent(new Event('force-login'));
-          } else {
-            console.log(error.message);
-          }
-        });
-    } else {
-      for (const recital of this.recitals()) {
-        if (recital.id == this.selected_package && recital.students.length >= recital.max_students) {
-          alert('The recital is already full! Pick a different recital');
-          this.paying = false;
-          return;
+    this.service.order_ticket(this.selected_package, token)
+      .then(checkout_url => {
+        if (newWindow) {
+          newWindow.location.href = checkout_url;
         }
-      }
-      const newWindow = window.open('about:blank', '_blank');
-
-      this.service.book_recital(this.selected_package, token)
-        .then(checkout_url => {
-          if (newWindow) {
-            newWindow.location.href = checkout_url;
-          }
-        })
-        .finally(() => {
-          this.paying = false;
-        })
-        .catch((error) => {
-          if (error.status === 401) {
-            console.log('Unauthorized: token is invalid or expired. Logging out...');
-            localStorage.removeItem('authToken');
-            this.state.user.set(null);
-            window.dispatchEvent(new Event('force-login'));
-          } else {
-            console.log(error.message);
-          }
-        });
-    }
+      })
+      .finally(() => {
+        this.paying = false;
+      })
+      .catch((error) => {
+        if (error.status === 401) {
+          console.log('Unauthorized: token is invalid or expired. Logging out...');
+          localStorage.removeItem('authToken');
+          this.state.user.set(null);
+          window.dispatchEvent(new Event('force-login'));
+        } else {
+          console.log(error.message);
+        }
+      });
   }
 
 }

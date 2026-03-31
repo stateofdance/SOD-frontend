@@ -39,7 +39,7 @@ export class FAQsPage {
 
   bookingQuestions = [
     { question: 'How do I book a class?', answer: 'You can book a class by visiting our booking page and selecting your desired class and time.' },
-    { question: 'What is the cancellation policy?', answer: 'Classes can be canceled up to 24 hours before the scheduled time. After that, a cancellation fee may apply.' },
+    { question: 'What is the cancellation policy?', answer: 'Classes can be canceled up to 24 hours before the scheduled time. Late cancellations are considered consumed sessions.' },
     { question: 'Can I reschedule my class?', answer: 'Yes, you can reschedule your class with at least 24 hours notice. Please contact our support team to make arrangements.' },
     { question: 'Do you offer discounts for group bookings?', answer: 'Yes, we offer discounts for group bookings. Please contact us directly for more details on group rates.' }
   ];

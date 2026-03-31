@@ -140,6 +140,9 @@
                             <a routerLink="/studio-rental">
                                 <li class="p-0.5 link" (click)="hideAll()">Rent our Studio</li>
                             </a>
+                            <a routerLink="/faqs">
+                                <li class="p-0.5 link" (click)="hideAll()">FAQs</li>
+                            </a>
                         </ul>
                     </div>
 
@@ -315,6 +318,16 @@
                         (click)="hideAll()"
                     >
                         Rent our Studio
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        routerLink="/faqs"
+                        class="block p-2 rounded-lg transition active:bg-violet/40 active:scale-95"
+                        (click)="hideAll()"
+                    >
+                        FAQs
                     </a>
                 </li>
 

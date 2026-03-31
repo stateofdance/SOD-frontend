@@ -1,14 +1,14 @@
 
-<div class="min-h-screen pt-35 md:px-15 bg-black flex lg:flex-row flex-col-reverse">
+<div class="max-w-screen  min-h-screen pt-30 lg:pt-35 md:px-15 bg-black flex lg:flex-row flex-col-reverse">
     <div class="flex flex-col lg:sticky w-full lg:w-120 lg:mr-5 lg:top-30 left-0 h-fit lg:mt-0 mt-10">
         <h1 class="font-hanson text-white font-bold text-3xl lg:block hidden md:text-6xl lg:text-left text-center">Rent our <span class="text-gold">Studio</span></h1>
         <p class="font-lexend text-white md:text-base my-5 lg:block hidden lg:text-left text-center">Your space to move, create, and inspire.</p>
-        @if (selected_branch() == -1) {
-            <p class="font-lexend text-white font-bold md:text-base my-5 lg:block hidden lg:text-left text-center">Please select a branch to schedule.</p>
-        }
-        <div class="flex flex-col w-full mr-5">
+
+        <div class="flex flex-col w-full px-5 lg:px-0">
+            
             <input #date type="date" name="date" class="text-white border border-white p-2 rounded-lg text-xl [&::-webkit-calendar-picker-indicator]:invert" (change)="selectDate(date.value); date.blur();" [min]="today.toISOString().slice(0, 10)">
-            <select #startTime name="start" id="start" class="text-white border border-white p-2 rounded-lg text-xl my-5" (change)="selectStartTime(startTime.value); startTime.blur();">
+            
+            <select #startTime name="start" id="start" class="text-white border border-white p-2 rounded-lg text-xl my-5" (click)="selectStartTime(startTime.value)">
                 <option value="none" class="bg-black">Select Start Time</option>
                 @for (time of start_times(); track $index) {
                     <option value="{{$index}}" class="bg-black">{{time}}</option>
@@ -21,20 +21,24 @@
                 }
             </select>
         </div>
-        <div class="flex items-center mt-5">
+        <div class="flex items-center mt-5 px-5 lg:px-0">
             <p class="font-lexend font-bold text-white text-xl">Total: </p>
             <p class="font-lexend font-bold text-gold text-xl ml-2">P {{total_amount() | number:'1.2-2'}}</p>
         </div>
-
-        <button class="mt-10 h-14 font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-full bg-violet uppercase cursor-pointer 
-                    transition-all duration-200 ease-in-out 
-                    hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:bg-gold active:scale-95"
-            (click)="payment()">
-            PROCEED TO PAYMENT
-        </button>
+        <div class="px-5 lg:px-0"> 
+            <button class="mt-10 h-14 font-eurostile text-white font-bold p-1.5 border border-white rounded-full w-full bg-violet uppercase cursor-pointer 
+                        transition-all duration-200 ease-in-out 
+                        hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:bg-gold active:scale-95"
+                (click)="payment()">
+                PROCEED TO PAYMENT
+            </button>
+        </div>
     </div>
     @if (!viewing_branch()) {
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full items-center">
+            @if (selected_branch() == -1) {
+                <p class="font-lexend text-white font-bold md:text-base my-5  lg:text-left text-center"> Please select a branch to schedule.</p>
+            }
             @for (branch of branches(); track branch.id) {
                 <div class="relative w-full h-90 mb-5 overflow-hidden cursor-pointer border"
                 (mouseenter)="hovered_branch.set(branch.id)" (mouseleave)="hovered_branch.set(-1)"
