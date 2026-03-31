@@ -1,4 +1,4 @@
-import { afterNextRender, Component, ElementRef, HostListener, inject, input, NgZone, OnDestroy, OnInit, Signal, signal, viewChild, viewChildren } from '@angular/core';
+import { afterNextRender, Component, ElementRef, EventEmitter, HostListener, inject, input, NgZone, OnDestroy, OnInit, Output, Signal, signal, viewChild, viewChildren } from '@angular/core';
 import { Coach } from '../../interfaces/coach';
 import { NgClass } from "@angular/common";
 import { RouterLink } from "@angular/router";
@@ -21,6 +21,14 @@ export class SlideCarousel implements OnInit, OnDestroy {
   private animationFrameId: number | null = null;
   private ngZone = inject(NgZone);
   private currentScroll = 0;
+  
+  private startX = 0;
+  private startScrollY = 0;
+  private isSwiping = false;
+
+  // Adjust this to make the scroll feel faster or slower. 
+  // 1 = 1px scroll per 1px swipe. 2 = twice as fast, etc.
+  private scrollSensitivity = 1.2; 
 
   translateX = signal<string>('translateX(120rem)');
   sectionScrollProgress = input.required<Signal<number>>();
@@ -45,6 +53,42 @@ export class SlideCarousel implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  getClientX(event: MouseEvent | TouchEvent) {
+    if ('touches' in event) {
+      return event.touches[0].clientX;
+    }
+    return event.clientX;
+  }
+  
+  onPointerDown(event: MouseEvent | TouchEvent): void {
+    this.isSwiping = true;
+    this.startX = this.getClientX(event);
+    this.startScrollY = window.scrollY || document.documentElement.scrollTop;
+  }
+
+  onPointerMove(event: MouseEvent | TouchEvent): void {
+    if (!this.isSwiping) return;
+
+    // Prevent default to stop text highlighting/selection while dragging on desktop
+    event.preventDefault(); 
+
+    const currentX = this.getClientX(event);
+    const deltaX = currentX - this.startX;
+
+    const newScrollY = this.startScrollY + (deltaX * -this.scrollSensitivity);
+
+    window.scrollTo({
+      top: newScrollY,
+      left: 0,
+      behavior: 'auto'
+    });
+  }
+
+  onPointerUp(): void {
+    // Reset the swiping state when the finger leaves the screen
+    this.isSwiping = false;
   }
   
   animate() {

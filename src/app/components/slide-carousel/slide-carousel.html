@@ -1,4 +1,13 @@
-<div class="w-full h-full flex overflow-x-hidden">
+<div class="w-full h-full flex overflow-x-hidden touch-pan-y select-none"
+    (touchstart)="onPointerDown($event)" 
+    (touchmove)="onPointerMove($event)"
+    (touchend)="onPointerUp()"
+    
+    (mousedown)="onPointerDown($event)"
+    (mousemove)="onPointerMove($event)"
+    (mouseup)="onPointerUp()"
+    (mouseleave)="onPointerUp()"
+>
     <div  #targetZone class="absolute left-1/2 -translate-x-1/2 h-full w-1/3"></div>
     <div #moving class="relative will-change-transform flex my-auto px-20 left-7/10 h-fit">
         @for (coach of coaches(); track coach; let i = $index) {
