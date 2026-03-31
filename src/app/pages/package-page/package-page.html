@@ -41,10 +41,10 @@
                                 <div class="absolute flex w-full bottom-0 left-0 p-3">
                                     <div class="flex flex-wrap w-full items-center">
                                         @if (recital_is_joined(recital)) {
-                                            <p class="text-center py-1 px-4 bg-green-300 text-black text-xs rounded-full my-1">Joined</p>
+                                            <p class="text-center py-1 px-4 bg-green-300 text-black text-xs rounded-full mx-1">Joined</p>
                                         }
                                         @if (recital_is_full(recital)) {
-                                            <p class="text-center py-1 px-4 bg-red-300 text-black text-xs rounded-full my-1">Full</p>
+                                            <p class="text-center py-1 px-4 bg-red-300 text-black text-xs rounded-full mx-1">Full</p>
                                         }
                                     </div>
                                     @if (!recital_is_joined(recital) && !recital_is_full(recital)){
