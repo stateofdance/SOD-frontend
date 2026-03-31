@@ -204,9 +204,17 @@ export class StudioRentalPage implements OnInit{
       alert('Please complete the start and end time of your rent.');
       return;
     }
+
     this.paying = true;
+
+    const newWindow = window.open('about:blank', '_blank');
+
     this.rental_service.rent_studio(this.selected_branch(), this.selected_date, this.start_sched(), this.end_sched(), this.state.user()!.authToken!)
-      .then(checkoutUrl => window.open(checkoutUrl)).finally(() => {
+      .then(checkoutUrl => {
+        if (newWindow) {
+          newWindow.location.href = checkoutUrl;
+        }
+      }).finally(() => {
         this.paying = false;
       }).catch((error) => {
           if (error.status === 401) {
