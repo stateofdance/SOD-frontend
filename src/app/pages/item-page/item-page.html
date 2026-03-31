@@ -1,7 +1,7 @@
 <div class="min-h-screen flex pt-30 justify-center lg:flex-row flex-col">
     <div class="flex w-full lg:w-1/2 p-10">
         <div class="hidden lg:flex flex-col w-40 mr-5">
-            @for (image_link of item()!.image_links; track $index) {
+            @for (image_link of item()!.image_links.slice(0, 4); track $index) {
                 <div class="relative mb-5">
                     @if (current_index() != $index) {
                         <div class="bg-black absolute w-full h-full opacity-40"></div>
