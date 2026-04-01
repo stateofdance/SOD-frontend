@@ -6,7 +6,7 @@
 
     @for (performance of performances(); track performance.id) {
         @if ($index % 2 === 0) {
-            <div class="flex w-full mt-20 lg:flex-row flex-col lg:mb-0 mb-15">
+            <div class="flex w-full lg:flex-row flex-col lg:my-0 my-15">
                 <div class="left mx-auto lg:mx-0 w-4/5 lg:w-1/2 relative" [matTooltip]="'Click to view performance'" (mouseenter)="playVideo($index)" (mouseleave)="pauseVideo($index)">
                     <a href="https://www.facebook.com/reel/1266975665446247" target="_blank">
                         <video #videoPlayer [muted]="'mute'" loop class="absolute inset-0 object-cover hidden w-full h-full" [ngClass]="{'show':showVideo[$index]}">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         }@else {
-            <div class="flex w-full mt-20 lg:flex-row flex-col-reverse lg:my-0 my-15">
+            <div class="flex w-full lg:flex-row flex-col-reverse lg:my-0 my-15">
                 <div class="left w-full lg:w-1/2 flex lg:mt-0 mt-5">
                     <div class="content m-auto w-2/3 lg:text-right text-center">
                         <h3 class="text-white font-lexend text-4xl font-bold">{{performance.name}}</h3>
