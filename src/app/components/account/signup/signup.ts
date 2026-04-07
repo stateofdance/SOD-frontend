@@ -51,7 +51,16 @@ export class Signup {
         birthdate:this.birthdate.value
       };
 
-      this.service.register(user).then(data => this.router.navigate(['', {outlets:{sidebar: 'login'}}]));
+      this.service.register(user).then(data => this.router.navigate(['', {outlets:{sidebar: 'login'}}]))
+      .catch(error => {
+        if (error.status == 400) {
+          if (error.error && error.error.email) {
+            alert('Email already in use');
+          }
+        } else {
+          alert('An error occurred while creating your account. Please try again later.');
+        }
+      });
     }
 
   }
