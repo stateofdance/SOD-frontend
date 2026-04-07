@@ -51,7 +51,10 @@ export class Signup {
         birthdate:this.birthdate.value
       };
 
-      this.service.register(user).then(data => this.router.navigate(['', {outlets:{sidebar: 'login'}}]))
+      this.service.register(user).then(data => {
+        alert('Account created successfully! Please log in to continue.');
+        this.router.navigate(['', {outlets:{sidebar: 'login'}}]);
+      })
       .catch(error => {
         if (error.status == 400) {
           if (error.error && error.error.email) {

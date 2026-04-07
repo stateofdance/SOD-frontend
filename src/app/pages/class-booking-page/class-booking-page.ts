@@ -276,7 +276,10 @@ export class ClassBookingPage implements OnInit {
         ticket.id,
         this.state.user()?.authToken!
       )
-      .then(() => this.router.navigate(['/']))
+      .then(() => {
+        alert('Enrollment successful!');
+        this.router.navigate(['/']);
+      })
       .finally(() => {
         this.booking = false;
       });

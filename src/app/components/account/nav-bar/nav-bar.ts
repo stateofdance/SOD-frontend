@@ -15,6 +15,7 @@ export class NavBar {
   logout() {
     localStorage.removeItem('authToken');
     this.state.set_user(null);
+    alert('Logged out successfully!');
     this.router.navigate(['', {outlets:{sidebar:null}}])
   }
 }

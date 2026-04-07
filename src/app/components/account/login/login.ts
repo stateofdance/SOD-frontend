@@ -27,6 +27,7 @@ export class Login {
       this.account_service.get_user(response.token).then(user => {
         user.authToken = response.token;
         this.state.set_user(user);
+        alert('Logged in successfully!');
         this.router.navigate(['', {outlets:{sidebar:null}}]);
       });
       
