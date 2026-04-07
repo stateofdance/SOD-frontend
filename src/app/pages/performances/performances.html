@@ -8,7 +8,7 @@
         @if ($index % 2 === 0) {
             <div class="flex w-full lg:flex-row flex-col lg:my-0 my-15">
                 <div class="left mx-auto lg:mx-0 w-4/5 lg:w-1/2 relative" [matTooltip]="'Click to view performance'" (mouseenter)="playVideo($index)" (mouseleave)="pauseVideo($index)">
-                    <a href="https://www.facebook.com/reel/1266975665446247" target="_blank">
+                    <a href="{{performance.forward_link}}" target="_blank">
                         <video #videoPlayer [muted]="'mute'" loop class="absolute inset-0 object-cover hidden w-full h-full" [ngClass]="{'show':showVideo[$index]}">
                             <source src="{{performance.preview}}" type="video/mp4">
                         </video>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="right mx-auto lg:mx-0 w-4/5 lg:w-1/2 relative" [matTooltip]="'Click to view performance'" (mouseenter)="playVideo($index)" (mouseleave)="pauseVideo($index)">
-                    <a href="https://www.facebook.com/reel/1498700931217570" target="_blank">
+                    <a href="{{performance.forward_link}}" target="_blank">
                         <video #videoPlayer [muted]="'mute'" loop class="absolute inset-0 object-cover hidden w-full h-full" [ngClass]="{'show':showVideo[$index]}">
                             <source src="{{performance.preview}}" type="video/mp4">
                         </video>
