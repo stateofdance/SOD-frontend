@@ -33,7 +33,7 @@ export class PackagePage implements OnInit{
   ngOnInit(): void {
     this.service.get_packages(this.branch.value!).then(packages => {
       this.packages.set(packages);
-      this.packages().map((value) => {value.duration = value.duration.split(" ")[0]});
+      this.packages().map((value) => {value.duration = value.duration.split(" ")[0]; return value;});
       this.packages().sort((a, b) => a.number_of_sessions - b.number_of_sessions);
     });
     this.service.get_recitals(this.branch.value!).then(recitals => {
