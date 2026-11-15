@@ -30,10 +30,10 @@
             class="hover:bg-amber-100 hover:text-black bg-transparent border border-white text-white font-eurostile font-bold text-base uppercase rounded-full w-70 mx-auto p-2 mt-10 mb-20 cursor-pointer"
             (click)="payment()">Proceed
         </button>
-        <h1 class="text-center text-white font-jost font-extrabold text-4xl mb-4"> Recitals </h1>
+        <h1 class="text-center text-white font-jost font-extrabold text-4xl mb-4"> Recitals, Events and Special Classes </h1>
         <div class="flex flex-wrap w-2/3 mx-auto justify-center items-center h-fit my-auto mb-10">
                 @if (recitals().length == 0) {
-                    <h1 class="mt-20 text-center text-white font-jost font-extrabold text-lg mb-4">No Recitals</h1>
+                    <h1 class="mt-20 text-center text-white font-jost font-extrabold text-lg mb-4">No Recitals, Events, or Special Classes</h1>
                 }@else {
                     @for (recital of recitals(); track recital.id){
                         <div class="border rounded-lg text-center w-100 h-[100] mx-5 my-3">

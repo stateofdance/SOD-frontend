@@ -19,6 +19,8 @@ import { Performances } from './pages/performances/performances';
 import { TypesClassesPage } from './pages/class-typesofclass-page/class-types-classes-page';
 import { FAQsPage } from './pages/faqs-page/faqs-page';
 import { EventsDetailsPage } from './pages/events-details/event-details';
+import { SuccessBuy } from './pages/success-buy/success-buy';
+import { SuccessMerch } from './pages/success-merch/success-merch';
 
 export const routes: Routes = [
     { path:'', component:LandingPage, title:'State of Dance' },
@@ -33,6 +35,8 @@ export const routes: Routes = [
     { path:'studio-rental', component:StudioRentalPage, title:'Studio Rental' },
     { path:'class-booking', component:ClassBookingPage, title:'Class Booking'},
     { path:'packages', component:PackagePage, title:'Packages'},
+    { path:'success-buy', component:SuccessBuy, title:'Thank You!'},
+    { path:'success-merch', component:SuccessMerch, title:'Thank You!'},
     { path:'login', component:Login, title:'Login', outlet:'sidebar'},
     { path:'sign-up', component:Signup, title:'Sign Up', outlet:'sidebar'},
     { path:'profile', component:Profile, title:'Profile', outlet:'sidebar'},
